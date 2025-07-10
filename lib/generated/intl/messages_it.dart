@@ -1,5 +1,9 @@
 // ignore: unused_import
+
+// Package imports:
 import 'package:intl/intl.dart' as intl;
+
+// Project imports:
 import 'messages.dart';
 
 // ignore_for_file: type=lint
@@ -26,11 +30,10 @@ class PaywallLocalizationsIt extends PaywallLocalizations {
   String get cancelAtAnyTime => 'Annulla in qualsiasi momento';
 
   @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String get chooseYourPlan => 'Choose Your Plan';
+
+  @override
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return 'Ti verranno addebitati $price dopo $freeTrialDay giorni $invoiceDuration fino alla cancellazione.';
   }
 
@@ -45,6 +48,12 @@ class PaywallLocalizationsIt extends PaywallLocalizations {
   }
 
   @override
+  String get continueBtn => 'Continue';
+
+  @override
+  String get enableFreeTrial => 'Enable Free Trial';
+
+  @override
   String get exclusiveFeatures => 'Funzionalità Esclusive';
 
   @override
@@ -56,15 +65,10 @@ class PaywallLocalizationsIt extends PaywallLocalizations {
   }
 
   @override
-  String get freeTrialDesc =>
-      'Aumenta la tua creatività e ottieni accesso illimitato con un abbonamento premium';
+  String get freeTrialDesc => 'Aumenta la tua creatività e ottieni accesso illimitato con un abbonamento premium';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '$freeTrialDays giorni gratis, poi $priceString/$periodInvoiceStr';
   }
 
@@ -75,8 +79,7 @@ class PaywallLocalizationsIt extends PaywallLocalizations {
   String get freeTrialProperty1Small => 'Attiva facilmente con un clic';
 
   @override
-  String get freeTrialProperty2Big =>
-      'Oggi: Sblocca tutte le funzionalità immediatamente';
+  String get freeTrialProperty2Big => 'Oggi: Sblocca tutte le funzionalità immediatamente';
 
   @override
   String get freeTrialProperty2Small => 'Accedi a tutte le funzionalità ora';
@@ -85,8 +88,7 @@ class PaywallLocalizationsIt extends PaywallLocalizations {
   String get freeTrialProperty3Big => 'Promemoria fine prova';
 
   @override
-  String get freeTrialProperty3Small =>
-      'Ti invieremo una notifica quando la tua prova terminerà';
+  String get freeTrialProperty3Small => 'Ti invieremo una notifica quando la tua prova terminerà';
 
   @override
   String get freeTrialProperty4Big => 'Goditi download illimitati';
@@ -95,12 +97,10 @@ class PaywallLocalizationsIt extends PaywallLocalizations {
   String get freeTrialProperty4Small => 'Facile da usare e personalizzare';
 
   @override
-  String get freeTrialReminder =>
-      'Ricordami prima che la prova gratuita finisca';
+  String get freeTrialReminder => 'Ricordami prima che la prova gratuita finisca';
 
   @override
-  String get getUnlimitedAccess =>
-      'Ottieni accesso illimitato a tutte le funzionalità!';
+  String get getUnlimitedAccess => 'Ottieni accesso illimitato a tutte le funzionalità!';
 
   @override
   String get hdQuality => 'Qualità HD';
@@ -112,6 +112,18 @@ class PaywallLocalizationsIt extends PaywallLocalizations {
   String get monthly => 'Mensile';
 
   @override
+  String get notSureYet => 'Not Sure Yet?';
+
+  @override
+  String weekFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks weeks free trial', one: '1 week free trial');
+    return '$_temp0';
+  }
+
+  @override
+  String get otherPlans => 'Other plans';
+
+  @override
   String get perWeek => ' / settimana';
 
   @override
@@ -121,6 +133,9 @@ class PaywallLocalizationsIt extends PaywallLocalizations {
 
   @override
   String get popular => 'Popolare';
+
+  @override
+  String get restorePurchases => 'Restore Purchases';
 
   @override
   String get save => 'Salva';
@@ -138,12 +153,20 @@ class PaywallLocalizationsIt extends PaywallLocalizations {
   String get startFreeTrial => 'Inizia la prova gratuita';
 
   @override
+  String thenPerWeek(String price) {
+    return 'then \$$price/week';
+  }
+
+  @override
   String trialDays(int days) {
     return 'Prova di $days giorni';
   }
 
   @override
   String get unlimitedDownload => 'Download illimitati';
+
+  @override
+  String get unlockFullPower => 'Unlock Full Power';
 
   @override
   String get upgradeNow => 'Aggiorna ora';
@@ -159,4 +182,9 @@ class PaywallLocalizationsIt extends PaywallLocalizations {
 
   @override
   String get yearly => 'Annuale';
+
+  @override
+  String yearlyPrice(String price) {
+    return '\$$price/year';
+  }
 }

@@ -1,6 +1,7 @@
 name: gui_paywall_example
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: 'none' 
+
 version: 1.0.0+1
 
 environment:
@@ -17,12 +18,14 @@ dependencies:
     path: ../
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  flutter_gen_runner:
-  import_sorter: ^4.6.0
-  intl_utils: ^2.8.11
+  flutter_lints: ^5.0.0
+
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
+

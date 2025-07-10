@@ -1,10 +1,15 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+// Package imports:
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+// Project imports:
 import 'messages_ar.dart';
 import 'messages_ca.dart';
 import 'messages_cs.dart';
@@ -92,20 +97,15 @@ import 'messages_zh.dart';
 /// be consistent with the languages listed in the PaywallLocalizations.supportedLocales
 /// property.
 abstract class PaywallLocalizations {
-  PaywallLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  PaywallLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
   static PaywallLocalizations? of(BuildContext context) {
-    return Localizations.of<PaywallLocalizations>(
-      context,
-      PaywallLocalizations,
-    );
+    return Localizations.of<PaywallLocalizations>(context, PaywallLocalizations);
   }
 
-  static const LocalizationsDelegate<PaywallLocalizations> delegate =
-      _PaywallLocalizationsDelegate();
+  static const LocalizationsDelegate<PaywallLocalizations> delegate = _PaywallLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -117,13 +117,12 @@ abstract class PaywallLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
@@ -193,15 +192,17 @@ abstract class PaywallLocalizations {
   /// **'Cancel at any time'**
   String get cancelAtAnyTime;
 
+  /// Title for plan selection screen
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Your Plan'**
+  String get chooseYourPlan;
+
   ///
   ///
   /// In en, this message translates to:
   /// **'You will pay {price} after {freeTrialDay} days {invoiceDuration} until it cancel'**
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  );
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration);
 
   ///
   ///
@@ -214,6 +215,18 @@ abstract class PaywallLocalizations {
   /// In en, this message translates to:
   /// **'Auto-renews for {price} {invoiceDuration} until cancelled'**
   String chargingInfoStandart(String price, String invoiceDuration);
+
+  /// Continue button text
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueBtn;
+
+  /// Text to enable free trial
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Free Trial'**
+  String get enableFreeTrial;
 
   ///
   ///
@@ -243,11 +256,7 @@ abstract class PaywallLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Free {freeTrialDays} days then {priceString}/{periodInvoiceStr}'**
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  );
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr);
 
   ///
   ///
@@ -327,6 +336,24 @@ abstract class PaywallLocalizations {
   /// **'Monthly'**
   String get monthly;
 
+  /// Asks user if he is not sure to but subscription yet
+  ///
+  /// In en, this message translates to:
+  /// **'Not Sure Yet?'**
+  String get notSureYet;
+
+  /// Text showing free trial duration in weeks
+  ///
+  /// In en, this message translates to:
+  /// **'{weeks, plural, =1{1 week free trial} other{{weeks} weeks free trial}}'**
+  String weekFreeTrial(int weeks);
+
+  /// Link to see other subscription plans
+  ///
+  /// In en, this message translates to:
+  /// **'Other plans'**
+  String get otherPlans;
+
   /// per week suffix for pricing
   ///
   /// In en, this message translates to:
@@ -344,6 +371,12 @@ abstract class PaywallLocalizations {
   /// In en, this message translates to:
   /// **'Popular'**
   String get popular;
+
+  /// Button to restore previous purchases
+  ///
+  /// In en, this message translates to:
+  /// **'Restore Purchases'**
+  String get restorePurchases;
 
   /// to save the image
   ///
@@ -375,6 +408,12 @@ abstract class PaywallLocalizations {
   /// **'Start Free Trial'**
   String get startFreeTrial;
 
+  /// Price per week after free trial
+  ///
+  /// In en, this message translates to:
+  /// **'then \${price}/week'**
+  String thenPerWeek(String price);
+
   /// trial option with number of days
   ///
   /// In en, this message translates to:
@@ -386,6 +425,12 @@ abstract class PaywallLocalizations {
   /// In en, this message translates to:
   /// **'Unlimited Download'**
   String get unlimitedDownload;
+
+  /// Subtitle for plan selection
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock Full Power'**
+  String get unlockFullPower;
 
   ///
   ///
@@ -416,17 +461,20 @@ abstract class PaywallLocalizations {
   /// In en, this message translates to:
   /// **'Yearly'**
   String get yearly;
+
+  /// Yearly price display
+  ///
+  /// In en, this message translates to:
+  /// **'\${price}/year'**
+  String yearlyPrice(String price);
 }
 
-class _PaywallLocalizationsDelegate
-    extends LocalizationsDelegate<PaywallLocalizations> {
+class _PaywallLocalizationsDelegate extends LocalizationsDelegate<PaywallLocalizations> {
   const _PaywallLocalizationsDelegate();
 
   @override
   Future<PaywallLocalizations> load(Locale locale) {
-    return SynchronousFuture<PaywallLocalizations>(
-      lookupPaywallLocalizations(locale),
-    );
+    return SynchronousFuture<PaywallLocalizations>(lookupPaywallLocalizations(locale));
   }
 
   @override

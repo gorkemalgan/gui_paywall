@@ -1,0 +1,4 @@
+# melos_managed_dependency_overrides: gui_paywall
+dependency_overrides:
+  gui_paywall:
+    path: ..

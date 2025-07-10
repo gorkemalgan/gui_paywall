@@ -6,9 +6,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 // Project imports:
 import 'package:gui_paywall/src/context_extensions.dart';
-import '../generated/assets.gen.dart';
-import '../gui_paywall.dart';
-import 'my_localizations.dart';
+import '../../generated/assets.gen.dart';
+import '../../gui_paywall.dart';
+import '../my_localizations.dart';
 
 // Local imports:
 

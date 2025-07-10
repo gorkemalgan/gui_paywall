@@ -1,5 +1,9 @@
 // ignore: unused_import
+
+// Package imports:
 import 'package:intl/intl.dart' as intl;
+
+// Project imports:
 import 'messages.dart';
 
 // ignore_for_file: type=lint
@@ -26,11 +30,10 @@ class PaywallLocalizationsPl extends PaywallLocalizations {
   String get cancelAtAnyTime => 'Anuluj w dowolnym momencie';
 
   @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String get chooseYourPlan => 'Choose Your Plan';
+
+  @override
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return 'Obciążymy Cię $price po $freeTrialDay dniach $invoiceDuration, dopóki nie anulujesz.';
   }
 
@@ -45,6 +48,12 @@ class PaywallLocalizationsPl extends PaywallLocalizations {
   }
 
   @override
+  String get continueBtn => 'Continue';
+
+  @override
+  String get enableFreeTrial => 'Enable Free Trial';
+
+  @override
   String get exclusiveFeatures => 'Ekskluzywne funkcje';
 
   @override
@@ -56,40 +65,30 @@ class PaywallLocalizationsPl extends PaywallLocalizations {
   }
 
   @override
-  String get freeTrialDesc =>
-      'Zwiększ swoją kreatywność i uzyskaj nieograniczony dostęp dzięki członkostwu premium';
+  String get freeTrialDesc => 'Zwiększ swoją kreatywność i uzyskaj nieograniczony dostęp dzięki członkostwu premium';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '$freeTrialDays dni za darmo, a następnie $priceString/$periodInvoiceStr';
   }
 
   @override
-  String get freeTrialProperty1Big =>
-      'Skorzystaj z bezpłatnego okresu próbnego';
+  String get freeTrialProperty1Big => 'Skorzystaj z bezpłatnego okresu próbnego';
 
   @override
   String get freeTrialProperty1Small => 'Łatwo aktywuj jednym kliknięciem';
 
   @override
-  String get freeTrialProperty2Big =>
-      'Dzisiaj: natychmiast odblokuj wszystkie funkcje';
+  String get freeTrialProperty2Big => 'Dzisiaj: natychmiast odblokuj wszystkie funkcje';
 
   @override
-  String get freeTrialProperty2Small =>
-      'Uzyskaj dostęp do wszystkich funkcji już teraz';
+  String get freeTrialProperty2Small => 'Uzyskaj dostęp do wszystkich funkcji już teraz';
 
   @override
-  String get freeTrialProperty3Big =>
-      'Przypomnienie o zakończeniu okresu próbnego';
+  String get freeTrialProperty3Big => 'Przypomnienie o zakończeniu okresu próbnego';
 
   @override
-  String get freeTrialProperty3Small =>
-      'Po zakończeniu okresu próbnego wyślemy Ci powiadomienie';
+  String get freeTrialProperty3Small => 'Po zakończeniu okresu próbnego wyślemy Ci powiadomienie';
 
   @override
   String get freeTrialProperty4Big => 'Ciesz się nieograniczoną liczbą pobrań';
@@ -98,12 +97,10 @@ class PaywallLocalizationsPl extends PaywallLocalizations {
   String get freeTrialProperty4Small => 'Łatwy w użyciu i dostosowywaniu';
 
   @override
-  String get freeTrialReminder =>
-      'Przypomnij mi przed wygaśnięciem bezpłatnego okresu próbnego';
+  String get freeTrialReminder => 'Przypomnij mi przed wygaśnięciem bezpłatnego okresu próbnego';
 
   @override
-  String get getUnlimitedAccess =>
-      'Uzyskaj nieograniczony dostęp do wszystkich funkcji!';
+  String get getUnlimitedAccess => 'Uzyskaj nieograniczony dostęp do wszystkich funkcji!';
 
   @override
   String get hdQuality => 'Jakość HD';
@@ -115,6 +112,18 @@ class PaywallLocalizationsPl extends PaywallLocalizations {
   String get monthly => 'Miesięcznie';
 
   @override
+  String get notSureYet => 'Not Sure Yet?';
+
+  @override
+  String weekFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks weeks free trial', one: '1 week free trial');
+    return '$_temp0';
+  }
+
+  @override
+  String get otherPlans => 'Other plans';
+
+  @override
   String get perWeek => ' / tydzień';
 
   @override
@@ -124,6 +133,9 @@ class PaywallLocalizationsPl extends PaywallLocalizations {
 
   @override
   String get popular => 'Popularny';
+
+  @override
+  String get restorePurchases => 'Restore Purchases';
 
   @override
   String get save => 'Ratować';
@@ -141,12 +153,20 @@ class PaywallLocalizationsPl extends PaywallLocalizations {
   String get startFreeTrial => 'Rozpocznij darmowy okres próbny';
 
   @override
+  String thenPerWeek(String price) {
+    return 'then \$$price/week';
+  }
+
+  @override
   String trialDays(int days) {
     return '$days dni próbnych';
   }
 
   @override
   String get unlimitedDownload => 'Nieograniczone pobieranie';
+
+  @override
+  String get unlockFullPower => 'Unlock Full Power';
 
   @override
   String get upgradeNow => 'Ulepsz teraz';
@@ -162,4 +182,9 @@ class PaywallLocalizationsPl extends PaywallLocalizations {
 
   @override
   String get yearly => 'Rocznie';
+
+  @override
+  String yearlyPrice(String price) {
+    return '\$$price/year';
+  }
 }

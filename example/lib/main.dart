@@ -91,11 +91,22 @@ class PaywallListScreen extends StatelessWidget {
               _buildPaywallButton(
                 context,
                 'Free Trial Paywall',
-                () => PaywallFreeTrial(paywallConfig, userComments: const {'comments': [
-
+                () => PaywallFreeTrial(
+                  paywallConfig,
+                  userComments: const {
+                    'comments': [
+                      {'name': 'John Doe', 'comment': 'Amazing app! The premium features are worth it.', 'rating': 5},
+                      {'name': 'Jane Smith', 'comment': 'Love the AI features. Highly recommended!', 'rating': 5},
                     ],
-                  }, features: const {'features': [ ],
-                  }),
+                  },
+                  features: const {
+                    'features': [
+                      {'title': 'AI Enhancement', 'description': 'Enhance your photos with AI'},
+                      {'title': 'Remove Background', 'description': 'Remove backgrounds instantly'},
+                      {'title': 'Filters & Effects', 'description': '100+ premium filters'},
+                    ],
+                  },
+                ),
               ),
               const SizedBox(height: 16),
               _buildPaywallButton(
@@ -121,6 +132,8 @@ class PaywallListScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(height: 16),
+              _buildPaywallButton(context, 'Plan Screen', () => PlanScreen(paywall: paywallConfig, image: Image.asset('assets/images/woman.jpeg'))),
             ],
           ),
         ),
@@ -128,11 +141,11 @@ class PaywallListScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildPaywallButton(BuildContext context, String title, Widget Function() onPressed) {
+  Widget _buildPaywallButton(BuildContext context, String title, Widget Function() destinationBuilder) {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => onPressed())),
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => destinationBuilder())),
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

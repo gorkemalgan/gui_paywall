@@ -1,5 +1,9 @@
 // ignore: unused_import
+
+// Package imports:
 import 'package:intl/intl.dart' as intl;
+
+// Project imports:
 import 'messages.dart';
 
 // ignore_for_file: type=lint
@@ -26,11 +30,10 @@ class PaywallLocalizationsId extends PaywallLocalizations {
   String get cancelAtAnyTime => 'Batalkan kapan saja';
 
   @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String get chooseYourPlan => 'Choose Your Plan';
+
+  @override
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return 'Anda akan dikenai biaya $price setelah $freeTrialDay hari $invoiceDuration sampai dibatalkan.';
   }
 
@@ -45,6 +48,12 @@ class PaywallLocalizationsId extends PaywallLocalizations {
   }
 
   @override
+  String get continueBtn => 'Continue';
+
+  @override
+  String get enableFreeTrial => 'Enable Free Trial';
+
+  @override
   String get exclusiveFeatures => 'Fitur Eksklusif';
 
   @override
@@ -56,15 +65,10 @@ class PaywallLocalizationsId extends PaywallLocalizations {
   }
 
   @override
-  String get freeTrialDesc =>
-      'Tingkatkan kreativitas Anda dan dapatkan akses tanpa batas dengan langganan premium';
+  String get freeTrialDesc => 'Tingkatkan kreativitas Anda dan dapatkan akses tanpa batas dengan langganan premium';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '$freeTrialDays hari gratis lalu $priceString/$periodInvoiceStr';
   }
 
@@ -84,8 +88,7 @@ class PaywallLocalizationsId extends PaywallLocalizations {
   String get freeTrialProperty3Big => 'Pengingat akhir percobaan';
 
   @override
-  String get freeTrialProperty3Small =>
-      'Kami akan mengirimkan pemberitahuan saat percobaan Anda berakhir';
+  String get freeTrialProperty3Small => 'Kami akan mengirimkan pemberitahuan saat percobaan Anda berakhir';
 
   @override
   String get freeTrialProperty4Big => 'Nikmati unduhan tanpa batas';
@@ -94,12 +97,10 @@ class PaywallLocalizationsId extends PaywallLocalizations {
   String get freeTrialProperty4Small => 'Mudah digunakan dan disesuaikan';
 
   @override
-  String get freeTrialReminder =>
-      'Ingatkan saya sebelum percobaan gratis berakhir';
+  String get freeTrialReminder => 'Ingatkan saya sebelum percobaan gratis berakhir';
 
   @override
-  String get getUnlimitedAccess =>
-      'Dapatkan akses tak terbatas ke semua fitur!';
+  String get getUnlimitedAccess => 'Dapatkan akses tak terbatas ke semua fitur!';
 
   @override
   String get hdQuality => 'Kualitas HD';
@@ -111,6 +112,18 @@ class PaywallLocalizationsId extends PaywallLocalizations {
   String get monthly => 'Bulanan';
 
   @override
+  String get notSureYet => 'Not Sure Yet?';
+
+  @override
+  String weekFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks weeks free trial', one: '1 week free trial');
+    return '$_temp0';
+  }
+
+  @override
+  String get otherPlans => 'Other plans';
+
+  @override
   String get perWeek => ' / minggu';
 
   @override
@@ -120,6 +133,9 @@ class PaywallLocalizationsId extends PaywallLocalizations {
 
   @override
   String get popular => 'Populer';
+
+  @override
+  String get restorePurchases => 'Restore Purchases';
 
   @override
   String get save => 'Simpan';
@@ -137,12 +153,20 @@ class PaywallLocalizationsId extends PaywallLocalizations {
   String get startFreeTrial => 'Mulai Percobaan Gratis';
 
   @override
+  String thenPerWeek(String price) {
+    return 'then \$$price/week';
+  }
+
+  @override
   String trialDays(int days) {
     return 'Uji coba $days hari';
   }
 
   @override
   String get unlimitedDownload => 'Unduhan tanpa batas';
+
+  @override
+  String get unlockFullPower => 'Unlock Full Power';
 
   @override
   String get upgradeNow => 'Tingkatkan Sekarang';
@@ -158,4 +182,9 @@ class PaywallLocalizationsId extends PaywallLocalizations {
 
   @override
   String get yearly => 'Tahunan';
+
+  @override
+  String yearlyPrice(String price) {
+    return '\$$price/year';
+  }
 }

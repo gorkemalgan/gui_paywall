@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 // Project imports:
-import '../gui_paywall.dart';
-import 'context_extensions.dart';
+import '../../gui_paywall.dart';
+import '../context_extensions.dart';
 
 // Local imports:
 

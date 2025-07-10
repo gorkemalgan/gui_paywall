@@ -31,6 +31,11 @@
     "description": "",
     "context": "free trial page"
   },
+  "chooseYourPlan": "Choose Your Plan",
+  "@chooseYourPlan": {
+    "description": "Title for plan selection screen",
+    "context": "plan screen"
+  },
   "chargingInfoFreeTrial": "You will pay {price} after {freeTrialDay} days {invoiceDuration} until it cancel",
   "@chargingInfoFreeTrial": {
     "description": "",
@@ -75,6 +80,16 @@
         "example": "invoice weekly"
       }
     }
+  },
+  "continueBtn": "Continue",
+  "@continueBtn": {
+    "description": "Continue button text",
+    "context": "generic"
+  },
+  "enableFreeTrial": "Enable Free Trial",
+  "@enableFreeTrial": {
+    "description": "Text to enable free trial",
+    "context": "plan screen"
   },
   "exclusiveFeatures": "Exclusive Features",
   "@exclusiveFeatures": {
@@ -186,6 +201,27 @@
     "description": "monthly subscription period",
     "context": "paywall"
   },
+  "notSureYet": "Not Sure Yet?",
+  "@notSureYet": {
+    "description": "Asks user if he is not sure to but subscription yet",
+    "context": "paywall"
+  },
+  "weekFreeTrial": "{weeks, plural, =1{1 week free trial} other{{weeks} weeks free trial}}",
+  "@weekFreeTrial": {
+    "description": "Text showing free trial duration in weeks",
+    "context": "plan screen",
+    "placeholders": {
+      "weeks": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "otherPlans": "Other plans",
+  "@otherPlans": {
+    "description": "Link to see other subscription plans",
+    "context": "plan screen"
+  },
   "perWeek": " / week",
   "@perWeek": {
     "description": "per week suffix for pricing",
@@ -205,6 +241,11 @@
   "popular": "Popular",
   "@popular": {
     "description": "to show popular options",
+    "context": "generic"
+  },
+  "restorePurchases": "Restore Purchases",
+  "@restorePurchases":{
+    "description": "Button to restore previous purchases",
     "context": "generic"
   },
   "save": "Save",
@@ -232,6 +273,17 @@
     "description": "to start free trial for premium subscription",
     "context": "paywall"
   },
+  "thenPerWeek": "then ${price}/week",
+  "@thenPerWeek": {
+    "description": "Price per week after free trial",
+    "context": "plan screen",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "9.99"
+      }
+    }
+  },
   "trialDays": "{days} Day Trial",
   "@trialDays": {
     "description": "trial option with number of days",
@@ -247,6 +299,11 @@
   "@unlimitedDownload": {
     "description": "",
     "context": "free trial page"
+  },
+  "unlockFullPower": "Unlock Full Power",
+  "@unlockFullPower": {
+    "description": "Subtitle for plan selection",
+    "context": "plan screen"
   },
   "upgradeNow": "Upgrade now!",
   "@upgradeNow": {
@@ -272,5 +329,16 @@
   "@yearly": {
     "description": "yearly subscription period",
     "context": "paywall"
+  },
+  "yearlyPrice": "${price}/year",
+  "@yearlyPrice": {
+    "description": "Yearly price display",
+    "context": "plan screen",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "$59.99"
+      }
+    }
   }
 }

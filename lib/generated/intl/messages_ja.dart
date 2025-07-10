@@ -1,5 +1,9 @@
 // ignore: unused_import
+
+// Package imports:
 import 'package:intl/intl.dart' as intl;
+
+// Project imports:
 import 'messages.dart';
 
 // ignore_for_file: type=lint
@@ -26,11 +30,10 @@ class PaywallLocalizationsJa extends PaywallLocalizations {
   String get cancelAtAnyTime => 'いつでもキャンセル可能';
 
   @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String get chooseYourPlan => 'Choose Your Plan';
+
+  @override
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return '$freeTrialDay日後に$priceが請求されます $invoiceDurationまで自動更新が行われます。';
   }
 
@@ -43,6 +46,12 @@ class PaywallLocalizationsJa extends PaywallLocalizations {
   String chargingInfoStandart(String price, String invoiceDuration) {
     return '$priceの定期購入が$invoiceDurationごとに自動更新されます。';
   }
+
+  @override
+  String get continueBtn => 'Continue';
+
+  @override
+  String get enableFreeTrial => 'Enable Free Trial';
 
   @override
   String get exclusiveFeatures => '独占機能';
@@ -59,11 +68,7 @@ class PaywallLocalizationsJa extends PaywallLocalizations {
   String get freeTrialDesc => '創造性を高め、プレミアムサブスクリプションで無制限のアクセスを獲得しましょう';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '$freeTrialDays日間無料、その後$priceString/$periodInvoiceStr';
   }
 
@@ -107,6 +112,18 @@ class PaywallLocalizationsJa extends PaywallLocalizations {
   String get monthly => '月額';
 
   @override
+  String get notSureYet => 'Not Sure Yet?';
+
+  @override
+  String weekFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks weeks free trial', one: '1 week free trial');
+    return '$_temp0';
+  }
+
+  @override
+  String get otherPlans => 'Other plans';
+
+  @override
   String get perWeek => ' / 週';
 
   @override
@@ -116,6 +133,9 @@ class PaywallLocalizationsJa extends PaywallLocalizations {
 
   @override
   String get popular => '人気';
+
+  @override
+  String get restorePurchases => 'Restore Purchases';
 
   @override
   String get save => '保存';
@@ -133,12 +153,20 @@ class PaywallLocalizationsJa extends PaywallLocalizations {
   String get startFreeTrial => '無料トライアルを開始';
 
   @override
+  String thenPerWeek(String price) {
+    return 'then \$$price/week';
+  }
+
+  @override
   String trialDays(int days) {
     return '$days日間のトライアル';
   }
 
   @override
   String get unlimitedDownload => '無制限のダウンロード';
+
+  @override
+  String get unlockFullPower => 'Unlock Full Power';
 
   @override
   String get upgradeNow => '今すぐアップグレード';
@@ -154,4 +182,9 @@ class PaywallLocalizationsJa extends PaywallLocalizations {
 
   @override
   String get yearly => '年額';
+
+  @override
+  String yearlyPrice(String price) {
+    return '\$$price/year';
+  }
 }

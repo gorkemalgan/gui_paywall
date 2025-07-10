@@ -1,5 +1,9 @@
 // ignore: unused_import
+
+// Package imports:
 import 'package:intl/intl.dart' as intl;
+
+// Project imports:
 import 'messages.dart';
 
 // ignore_for_file: type=lint
@@ -26,11 +30,10 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
   String get cancelAtAnyTime => 'يمكنك الإلغاء في أي وقت';
 
   @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String get chooseYourPlan => 'Choose Your Plan';
+
+  @override
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return 'سيتم خصم $price بعد $freeTrialDay أيام $invoiceDuration حتى يتم الإلغاء.';
   }
 
@@ -45,6 +48,12 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
   }
 
   @override
+  String get continueBtn => 'Continue';
+
+  @override
+  String get enableFreeTrial => 'Enable Free Trial';
+
+  @override
   String get exclusiveFeatures => 'ميزات حصرية';
 
   @override
@@ -56,15 +65,10 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
   }
 
   @override
-  String get freeTrialDesc =>
-      'عزز إبداعك واحصل على وصول غير محدود مع عضوية بريميوم';
+  String get freeTrialDesc => 'عزز إبداعك واحصل على وصول غير محدود مع عضوية بريميوم';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '$freeTrialDays يومًا مجانيًا، ثم $priceString/$periodInvoiceStr';
   }
 
@@ -108,6 +112,18 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
   String get monthly => 'شهري';
 
   @override
+  String get notSureYet => 'Not Sure Yet?';
+
+  @override
+  String weekFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks weeks free trial', one: '1 week free trial');
+    return '$_temp0';
+  }
+
+  @override
+  String get otherPlans => 'Other plans';
+
+  @override
   String get perWeek => ' / أسبوع';
 
   @override
@@ -117,6 +133,9 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
 
   @override
   String get popular => 'شائع';
+
+  @override
+  String get restorePurchases => 'Restore Purchases';
 
   @override
   String get save => 'حفظ';
@@ -134,12 +153,20 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
   String get startFreeTrial => 'ابدأ التجربة المجانية';
 
   @override
+  String thenPerWeek(String price) {
+    return 'then \$$price/week';
+  }
+
+  @override
   String trialDays(int days) {
     return 'تجربة لمدة $days يومًا';
   }
 
   @override
   String get unlimitedDownload => 'تنزيل غير محدود';
+
+  @override
+  String get unlockFullPower => 'Unlock Full Power';
 
   @override
   String get upgradeNow => 'قم بالترقية الآن';
@@ -155,4 +182,9 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
 
   @override
   String get yearly => 'سنوي';
+
+  @override
+  String yearlyPrice(String price) {
+    return '\$$price/year';
+  }
 }

@@ -1,5 +1,9 @@
 // ignore: unused_import
+
+// Package imports:
 import 'package:intl/intl.dart' as intl;
+
+// Project imports:
 import 'messages.dart';
 
 // ignore_for_file: type=lint
@@ -26,11 +30,10 @@ class PaywallLocalizationsCs extends PaywallLocalizations {
   String get cancelAtAnyTime => 'Kdykoli můžete zrušit';
 
   @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String get chooseYourPlan => 'Choose Your Plan';
+
+  @override
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return 'Bude vám účtováno $price po $freeTrialDay dnech $invoiceDuration než zrušíte.';
   }
 
@@ -45,6 +48,12 @@ class PaywallLocalizationsCs extends PaywallLocalizations {
   }
 
   @override
+  String get continueBtn => 'Continue';
+
+  @override
+  String get enableFreeTrial => 'Enable Free Trial';
+
+  @override
   String get exclusiveFeatures => 'Exkluzivní funkce';
 
   @override
@@ -56,15 +65,10 @@ class PaywallLocalizationsCs extends PaywallLocalizations {
   }
 
   @override
-  String get freeTrialDesc =>
-      'Zvyšte svou kreativitu a získejte neomezený přístup s prémiovým členstvím';
+  String get freeTrialDesc => 'Zvyšte svou kreativitu a získejte neomezený přístup s prémiovým členstvím';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return 'Zdarma $freeTrialDays dní, poté $priceString/$periodInvoiceStr';
   }
 
@@ -84,8 +88,7 @@ class PaywallLocalizationsCs extends PaywallLocalizations {
   String get freeTrialProperty3Big => 'Připomenutí konce zkušebního období';
 
   @override
-  String get freeTrialProperty3Small =>
-      'Pošleme vám upozornění, až vaše zkušební období skončí';
+  String get freeTrialProperty3Small => 'Pošleme vám upozornění, až vaše zkušební období skončí';
 
   @override
   String get freeTrialProperty4Big => 'Užijte si neomezené stahování';
@@ -94,12 +97,10 @@ class PaywallLocalizationsCs extends PaywallLocalizations {
   String get freeTrialProperty4Small => 'Snadné použití a přizpůsobení';
 
   @override
-  String get freeTrialReminder =>
-      'Připomeňte mi před vypršením zkušební doby zdarma';
+  String get freeTrialReminder => 'Připomeňte mi před vypršením zkušební doby zdarma';
 
   @override
-  String get getUnlimitedAccess =>
-      'Získejte neomezený přístup ke všem funkcím!';
+  String get getUnlimitedAccess => 'Získejte neomezený přístup ke všem funkcím!';
 
   @override
   String get hdQuality => 'HD kvalita';
@@ -111,6 +112,18 @@ class PaywallLocalizationsCs extends PaywallLocalizations {
   String get monthly => 'Měsíčně';
 
   @override
+  String get notSureYet => 'Not Sure Yet?';
+
+  @override
+  String weekFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks weeks free trial', one: '1 week free trial');
+    return '$_temp0';
+  }
+
+  @override
+  String get otherPlans => 'Other plans';
+
+  @override
   String get perWeek => ' / týden';
 
   @override
@@ -120,6 +133,9 @@ class PaywallLocalizationsCs extends PaywallLocalizations {
 
   @override
   String get popular => 'Populární';
+
+  @override
+  String get restorePurchases => 'Restore Purchases';
 
   @override
   String get save => 'Uložit';
@@ -137,12 +153,20 @@ class PaywallLocalizationsCs extends PaywallLocalizations {
   String get startFreeTrial => 'Začít bezplatnou zkušební verzi';
 
   @override
+  String thenPerWeek(String price) {
+    return 'then \$$price/week';
+  }
+
+  @override
   String trialDays(int days) {
     return '$days denní zkušební verze';
   }
 
   @override
   String get unlimitedDownload => 'Neomezené stahování';
+
+  @override
+  String get unlockFullPower => 'Unlock Full Power';
 
   @override
   String get upgradeNow => 'Upgradovat nyní';
@@ -158,4 +182,9 @@ class PaywallLocalizationsCs extends PaywallLocalizations {
 
   @override
   String get yearly => 'Ročně';
+
+  @override
+  String yearlyPrice(String price) {
+    return '\$$price/year';
+  }
 }

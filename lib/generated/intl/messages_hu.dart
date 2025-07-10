@@ -1,5 +1,9 @@
 // ignore: unused_import
+
+// Package imports:
 import 'package:intl/intl.dart' as intl;
+
+// Project imports:
 import 'messages.dart';
 
 // ignore_for_file: type=lint
@@ -26,11 +30,10 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   String get cancelAtAnyTime => 'Bármikor lemondhatja';
 
   @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String get chooseYourPlan => 'Choose Your Plan';
+
+  @override
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return '$freeTrialDay nap után számlázunk $price összeget $invoiceDuration-ig, amíg le nem mondod.';
   }
 
@@ -45,6 +48,12 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   }
 
   @override
+  String get continueBtn => 'Continue';
+
+  @override
+  String get enableFreeTrial => 'Enable Free Trial';
+
+  @override
   String get exclusiveFeatures => 'Exkluzív funkciók';
 
   @override
@@ -56,15 +65,10 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   }
 
   @override
-  String get freeTrialDesc =>
-      'Növelje kreativitását, és kapjon korlátlan hozzáférést prémium tagsággal';
+  String get freeTrialDesc => 'Növelje kreativitását, és kapjon korlátlan hozzáférést prémium tagsággal';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '$freeTrialDays napig ingyenes, utána $priceString/$periodInvoiceStr';
   }
 
@@ -72,23 +76,19 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   String get freeTrialProperty1Big => 'Használja ki ingyenes próbaidőszakát';
 
   @override
-  String get freeTrialProperty1Small =>
-      'Egyszerűen aktiválhatja egy kattintással';
+  String get freeTrialProperty1Small => 'Egyszerűen aktiválhatja egy kattintással';
 
   @override
-  String get freeTrialProperty2Big =>
-      'Ma: Azonnal oldja fel az összes funkciót';
+  String get freeTrialProperty2Big => 'Ma: Azonnal oldja fel az összes funkciót';
 
   @override
-  String get freeTrialProperty2Small =>
-      'Férjen hozzá az összes funkcióhoz most';
+  String get freeTrialProperty2Small => 'Férjen hozzá az összes funkcióhoz most';
 
   @override
   String get freeTrialProperty3Big => 'Próbaidőszak végi emlékeztető';
 
   @override
-  String get freeTrialProperty3Small =>
-      'Értesítést küldünk, amikor a próbaidőszak lejár';
+  String get freeTrialProperty3Small => 'Értesítést küldünk, amikor a próbaidőszak lejár';
 
   @override
   String get freeTrialProperty4Big => 'Élvezze a korlátlan letöltéseket';
@@ -112,6 +112,18 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   String get monthly => 'Havi';
 
   @override
+  String get notSureYet => 'Not Sure Yet?';
+
+  @override
+  String weekFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks weeks free trial', one: '1 week free trial');
+    return '$_temp0';
+  }
+
+  @override
+  String get otherPlans => 'Other plans';
+
+  @override
   String get perWeek => ' / hét';
 
   @override
@@ -121,6 +133,9 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
 
   @override
   String get popular => 'Népszerű';
+
+  @override
+  String get restorePurchases => 'Restore Purchases';
 
   @override
   String get save => 'Mentés';
@@ -138,12 +153,20 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   String get startFreeTrial => 'Ingyenes próba indítása';
 
   @override
+  String thenPerWeek(String price) {
+    return 'then \$$price/week';
+  }
+
+  @override
   String trialDays(int days) {
     return '$days napos próba';
   }
 
   @override
   String get unlimitedDownload => 'Korlátlan letöltés';
+
+  @override
+  String get unlockFullPower => 'Unlock Full Power';
 
   @override
   String get upgradeNow => 'Frissítés most';
@@ -159,4 +182,9 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
 
   @override
   String get yearly => 'Éves';
+
+  @override
+  String yearlyPrice(String price) {
+    return '\$$price/year';
+  }
 }

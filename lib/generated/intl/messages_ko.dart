@@ -1,5 +1,9 @@
 // ignore: unused_import
+
+// Package imports:
 import 'package:intl/intl.dart' as intl;
+
+// Project imports:
 import 'messages.dart';
 
 // ignore_for_file: type=lint
@@ -26,11 +30,10 @@ class PaywallLocalizationsKo extends PaywallLocalizations {
   String get cancelAtAnyTime => '언제든지 취소';
 
   @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String get chooseYourPlan => 'Choose Your Plan';
+
+  @override
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return '$freeTrialDay일 후 $price 결제 $invoiceDuration까지 자동 갱신됩니다.';
   }
 
@@ -43,6 +46,12 @@ class PaywallLocalizationsKo extends PaywallLocalizations {
   String chargingInfoStandart(String price, String invoiceDuration) {
     return '$price $invoiceDuration마다 자동 갱신됩니다.';
   }
+
+  @override
+  String get continueBtn => 'Continue';
+
+  @override
+  String get enableFreeTrial => 'Enable Free Trial';
 
   @override
   String get exclusiveFeatures => '독점 기능';
@@ -59,11 +68,7 @@ class PaywallLocalizationsKo extends PaywallLocalizations {
   String get freeTrialDesc => '창의력을 향상시키고 프리미엄 멤버십으로 무제한 액세스하세요';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '무료 $freeTrialDays일 후 $priceString/$periodInvoiceStr';
   }
 
@@ -107,6 +112,18 @@ class PaywallLocalizationsKo extends PaywallLocalizations {
   String get monthly => '월간';
 
   @override
+  String get notSureYet => 'Not Sure Yet?';
+
+  @override
+  String weekFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks weeks free trial', one: '1 week free trial');
+    return '$_temp0';
+  }
+
+  @override
+  String get otherPlans => 'Other plans';
+
+  @override
   String get perWeek => ' / 주';
 
   @override
@@ -116,6 +133,9 @@ class PaywallLocalizationsKo extends PaywallLocalizations {
 
   @override
   String get popular => '인기';
+
+  @override
+  String get restorePurchases => 'Restore Purchases';
 
   @override
   String get save => '저장';
@@ -133,12 +153,20 @@ class PaywallLocalizationsKo extends PaywallLocalizations {
   String get startFreeTrial => '무료 체험 시작';
 
   @override
+  String thenPerWeek(String price) {
+    return 'then \$$price/week';
+  }
+
+  @override
   String trialDays(int days) {
     return '$days일 체험';
   }
 
   @override
   String get unlimitedDownload => '무제한 다운로드';
+
+  @override
+  String get unlockFullPower => 'Unlock Full Power';
 
   @override
   String get upgradeNow => '지금 업그레이드';
@@ -154,4 +182,9 @@ class PaywallLocalizationsKo extends PaywallLocalizations {
 
   @override
   String get yearly => '연간';
+
+  @override
+  String yearlyPrice(String price) {
+    return '\$$price/year';
+  }
 }
