@@ -1,0 +1,276 @@
+{
+  "@@locale": "en",
+  "adFree": "Ad Free",
+  "@adFree": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "appOverview": "App Overview",
+  "@appOverview": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "appPro": "{appName} Pro",
+  "@appPro": {
+    "description": "product name for premium version",
+    "context": "paywall",
+    "placeholders": {
+      "appName": {
+        "type": "String",
+        "example": "Pixvibe"
+      }
+    }
+  },
+  "bestOffer": "BEST OFFER",
+  "@bestOffer": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "cancelAtAnyTime": "Cancel at any time",
+  "@cancelAtAnyTime": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "chargingInfoFreeTrial": "You will pay {price} after {freeTrialDay} days {invoiceDuration} until it cancel",
+  "@chargingInfoFreeTrial": {
+    "description": "",
+    "context": "paywall",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "39.99"
+      },
+      "freeTrialDay": {
+        "type": "String",
+        "example": "7"
+      },
+      "invoiceDuration": {
+        "type": "String",
+        "example": "7"
+      }
+    }
+  },
+  "chargingInfoLifeTime": "Pay {price} once for lifetime access. No extra charges or subscriptions.",
+  "@chargingInfoLifeTime": {
+    "description": "",
+    "context": "paywall",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "39.99"
+      }
+    }
+  },
+  "chargingInfoStandart": "Auto-renews for {price} {invoiceDuration} until cancelled",
+  "@chargingInfoStandart": {
+    "description": "",
+    "context": "paywall",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "39.99"
+      },
+      "invoiceDuration": {
+        "type": "String",
+        "example": "invoice weekly"
+      }
+    }
+  },
+  "exclusiveFeatures": "Exclusive Features",
+  "@exclusiveFeatures": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "free": "Free",
+  "@free": {
+    "description": "free price label",
+    "context": "paywall"
+  },
+  "freeTrialDaysFree": "{numDays} days FREE",
+  "@freeTrialDaysFree": {
+    "description": "",
+    "context": "free trial page",
+    "placeholders": {
+      "numDays": {
+        "type": "String",
+        "example": "3"
+      }
+    }
+  },
+  "freeTrialDesc": "Enhance your creativity and get unlimited access with a premium membership",
+  "@freeTrialDesc": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "freeTrialPriceInfoText": "Free {freeTrialDays} days then {priceString}/{periodInvoiceStr}",
+  "@freeTrialPriceInfoText": {
+    "description": "free trial price information",
+    "context": "",
+    "placeholders": {
+      "freeTrialDays": {
+        "description": "free trial days",
+        "type": "String"
+      },
+      "priceString": {
+        "description": "price",
+        "type": "String"
+      },
+      "periodInvoiceStr": {
+        "description": "period invoice",
+        "type": "String"
+      }
+    }
+  },
+  "freeTrialProperty1Big": "Use Your Free Trial Period",
+  "@freeTrialProperty1Big": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "freeTrialProperty1Small": "Easily activate with one click",
+  "@freeTrialProperty1Small": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "freeTrialProperty2Big": "Today: Instantly unlock all features",
+  "@freeTrialProperty2Big": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "freeTrialProperty2Small": "Access all features now",
+  "@freeTrialProperty2Small": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "freeTrialProperty3Big": "Reminder end of trial",
+  "@freeTrialProperty3Big": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "freeTrialProperty3Small": "We will send you a notification when your trial ends",
+  "@freeTrialProperty3Small": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "freeTrialProperty4Big": "Enjoy unlimited downloads",
+  "@freeTrialProperty4Big": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "freeTrialProperty4Small": "Easy to use and customize",
+  "@freeTrialProperty4Small": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "freeTrialReminder": "Remind me before the free trial expires",
+  "@freeTrialReminder": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "getUnlimitedAccess": "Get unlimited access to all features!",
+  "@getUnlimitedAccess": {
+    "description": "subtitle for premium features",
+    "context": "paywall"
+  },
+  "hdQuality": "HD Quality",
+  "@hdQuality": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "lifetime": "Lifetime",
+  "@lifetime": {
+    "description": "lifetime subscription period",
+    "context": "paywall"
+  },
+  "monthly": "Monthly",
+  "@monthly": {
+    "description": "monthly subscription period",
+    "context": "paywall"
+  },
+  "perWeek": " / week",
+  "@perWeek": {
+    "description": "per week suffix for pricing",
+    "context": "paywall"
+  },
+  "percentOff": "{percent}% OFF",
+  "@percentOff": {
+    "description": "discount percentage badge",
+    "context": "paywall",
+    "placeholders": {
+      "percent": {
+        "type": "int",
+        "example": "50"
+      }
+    }
+  },
+  "popular": "Popular",
+  "@popular": {
+    "description": "to show popular options",
+    "context": "generic"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "to save the image",
+    "context": "generic"
+  },
+  "seeAllOptions": "See All Options",
+  "@seeAllOptions": {
+    "description": "to see all options",
+    "context": "paywall"
+  },
+  "seeOtherOptions": "See other options",
+  "@seeOtherOptions": {
+    "description": "button to see more subscription options",
+    "context": "paywall"
+  },
+  "shortTerm": "SHORT TERM",
+  "@shortTerm": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "startFreeTrial": "Start Free Trial",
+  "@startFreeTrial": {
+    "description": "to start free trial for premium subscription",
+    "context": "paywall"
+  },
+  "trialDays": "{days} Day Trial",
+  "@trialDays": {
+    "description": "trial option with number of days",
+    "context": "paywall",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "unlimitedDownload": "Unlimited Download",
+  "@unlimitedDownload": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "upgradeNow": "Upgrade now!",
+  "@upgradeNow": {
+    "description": "",
+    "context": "paywall buttons"
+  },
+  "userReviews": "User Reviews",
+  "@userReviews": {
+    "description": "",
+    "context": "free trial page"
+  },
+  "week": "Week",
+  "@week": {
+    "description": "week as a time unit",
+    "context": "paywall"
+  },
+  "weekly": "Weekly",
+  "@weekly": {
+    "description": "weekly subscription period",
+    "context": "paywall"
+  },
+  "yearly": "Yearly",
+  "@yearly": {
+    "description": "yearly subscription period",
+    "context": "paywall"
+  }
+}

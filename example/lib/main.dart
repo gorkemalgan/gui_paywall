@@ -1,0 +1,144 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:gui_paywall/gui_paywall.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'GUI Paywall Example',
+      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple), useMaterial3: true),
+      localizationsDelegates: const [
+        PaywallLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('en')],
+      home: const PaywallListScreen(),
+    );
+  }
+}
+
+class PaywallListScreen extends StatelessWidget {
+  const PaywallListScreen({super.key});
+
+  PaywallConfig _createMockPaywallConfig() {
+    final products = [
+      const PaywallProduct(
+        storeId: 'weekly_sub',
+        price: 4.99,
+        currency: 'USD',
+        priceString: '\$4.99',
+        period: ProductPeriod.weekly,
+        title: 'Weekly Premium',
+        description: 'Get premium access for 1 week',
+      ),
+      const PaywallProduct(
+        storeId: 'monthly_sub',
+        price: 9.99,
+        currency: 'USD',
+        priceString: '\$9.99',
+        period: ProductPeriod.monthly,
+        title: 'Monthly Premium',
+        description: 'Get premium access for 1 month',
+        freeTrialDays: 3,
+      ),
+      const PaywallProduct(
+        storeId: 'yearly_sub',
+        price: 49.99,
+        currency: 'USD',
+        priceString: '\$49.99',
+        period: ProductPeriod.yearly,
+        title: 'Yearly Premium',
+        description: 'Best value - Save 58%!',
+        freeTrialDays: 7,
+      ),
+    ];
+
+    return PaywallConfig(
+      products: products,
+      onPurchase: (product) async {
+        debugPrint('Purchasing ${product.storeId}');
+        await Future.delayed(const Duration(seconds: 2));
+        return true;
+      },
+      processUI: <T>(action) async => await action(),
+      isPro: () => false,
+      onClose: () => debugPrint('Paywall closed'),
+      singleDisplayProduct: 1,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final paywallConfig = _createMockPaywallConfig();
+
+    return Scaffold(
+      appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary, title: const Text('Paywall Examples')),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _buildPaywallButton(
+                context,
+                'Free Trial Paywall',
+                () => PaywallFreeTrial(paywallConfig, userComments: const {'comments': [
+
+                    ],
+                  }, features: const {'features': [ ],
+                  }),
+              ),
+              const SizedBox(height: 16),
+              _buildPaywallButton(
+                context,
+                'Paywall 3',
+                () => Paywall3(
+                  paywallConfig,
+                  video: Container(
+                    color: Colors.blue.shade100,
+                    child: const Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.play_circle_outline, size: 80, color: Colors.blue),
+                          SizedBox(height: 16),
+                          Text(
+                            'Demo Video',
+                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPaywallButton(BuildContext context, String title, Widget Function() onPressed) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => onPressed())),
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+        child: Text(title, style: const TextStyle(fontSize: 16)),
+      ),
+    );
+  }
+}
