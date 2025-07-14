@@ -26,6 +26,11 @@
     "description": "",
     "context": "free trial page"
   },
+  "bestValue": "BEST VALUE",
+  "@bestValue": {
+    "description": "Badge for the yearly plan",
+    "context": "plan screen"
+  },
   "cancelAtAnyTime": "Cancel at any time",
   "@cancelAtAnyTime": {
     "description": "",
@@ -300,7 +305,7 @@
     "description": "",
     "context": "free trial page"
   },
-  "unlockFullPower": "Unlock Full Power",
+  "unlockFullPower": "Unlock the full power of Remini-the ultimate  AI Photo Enhancer.",
   "@unlockFullPower": {
     "description": "Subtitle for plan selection",
     "context": "plan screen"
