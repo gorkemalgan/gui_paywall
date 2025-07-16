@@ -40,5 +40,7 @@
   "userReviews": "Κριτικές Χρηστών",
   "week": "Εβδομάδα",
   "weekly": "Εβδομαδιαία",
-  "yearly": "Ετήσια"
+  "yearly": "Ετήσια",
+  "weekFreeTrial": "{weeks, plural, =1{1 week free trial} other{{weeks} weeks free trial}}",
+  "unlockFullPower": "Unlock the full power of Remini-the ultimate  AI Photo Enhancer."
 }

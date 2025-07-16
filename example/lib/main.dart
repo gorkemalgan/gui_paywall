@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gui_paywall/gui_paywall.dart';
 import 'package:gui_paywall/src/context_extensions.dart';
+import 'package:gui_paywall/src/paywalls/plan_screen_2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -180,6 +181,13 @@ class PaywallListScreen extends StatelessWidget {
                 'Plan Screen',
                 () =>
                     PlanScreen(image: Image.asset('assets/images/woman.jpeg')),
+              ),
+              const SizedBox(height: 16),
+              _buildPaywallButton(
+                context,
+                'Plan Screen 2',
+                () =>
+                    PlanScreen2(image: Image.asset('assets/images/woman.jpeg')),
               ),
             ],
           ),

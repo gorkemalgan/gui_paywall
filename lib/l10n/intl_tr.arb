@@ -40,5 +40,7 @@
   "userReviews": "Kullanıcı Yorumları",
   "week": "Hafta",
   "weekly": "Haftalık",
-  "yearly": "Yıllık"
+  "yearly": "Yıllık",
+  "weekFreeTrial": "{weeks, plural, =1{1 week free trial} other{{weeks} weeks free trial}}",
+  "unlockFullPower": "Unlock the full power of Remini-the ultimate  AI Photo Enhancer."
 }
