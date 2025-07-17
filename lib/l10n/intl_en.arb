@@ -429,38 +429,5 @@
         "example": "$59.99"
       }
     }
-  },
-  "trialUserCount": "{count} people have used the 7-day Trial in the last",
-  "@trialUserCount": {
-    "description": "Shows how many people used the 7-day trial recently",
-    "placeholders": {
-      "count": {"type": "String", "example": "2,342"}
-    }
-  },
-  "trialUsedInLastHours": "{hours} hours",
-  "@trialUsedInLastHours": {
-    "description": "Shows the time window for recent trial usage",
-    "placeholders": {
-      "hours": {"type": "String", "example": "24"}
-    }
-  },
-  "sevenDayFullAccess": "7-Day Full Access",
-  "@sevenDayFullAccess": {
-    "description": "Title for the 7-day full access plan option"
-  },
-  "mostPopular": "MOST POPULAR",
-  "@mostPopular": {
-    "description": "Label for the most popular plan option"
-  },
-  "monthlyAccess": "Monthly Access",
-  "@monthlyAccess": {
-    "description": "Title for the monthly access plan option"
-  },
-  "priceWithCurrency": " 24{price}",
-  "@priceWithCurrency": {
-    "description": "Displays price with currency symbol",
-    "placeholders": {
-      "price": {"type": "String", "example": "0.49"}
-    }
   }
 }
