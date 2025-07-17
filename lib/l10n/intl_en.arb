@@ -429,6 +429,7 @@
         "example": "$59.99"
       }
     }
+<<<<<<< HEAD
   },
   "trialUserCountInLastHours": "{count} people have used the 7-day Trial in the last {hours} hours",
   "@trialUserCountInLastHours": {
@@ -449,5 +450,7 @@
   "monthlyAccess": "Monthly Access",
   "@monthlyAccess": {
     "description": "Title for the monthly access plan option"
+=======
+>>>>>>> main
   }
 }
