@@ -6,7 +6,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 // Project imports:
 import 'package:gui_paywall/src/extensions.dart';
-import '../../generated/assets.gen.dart';
+// import '../../generated/assets.gen.dart'; // kaldırıldı
 import '../../gui_paywall.dart';
 import '../my_localizations.dart';
 import '../widgets/fitted_text.dart';
@@ -100,7 +100,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> with PaywallSanityC
     return Scaffold(
       body: Stack(
         children: [
-          Positioned.fill(child: PaywallAssets.freeTrial.background.image(fit: BoxFit.fill)),
+          Positioned.fill(child: Image.asset('assets/free_trial/background.jpg', fit: BoxFit.fill)),
           SingleChildScrollView(
             child: SizedBox(
               height: size.height,
@@ -178,19 +178,19 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> with PaywallSanityC
             textAlign: TextAlign.start,
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-          premiumPropertyListTile(image: PaywallAssets.freeTrial.premiumDownloadIcon.image(), title: context.localizations.unlimitedDownload),
+          premiumPropertyListTile(image: Image.asset('assets/free_trial/premium_download_icon.png'), title: context.localizations.unlimitedDownload),
           AnimatedContainer(
             duration: Duration(milliseconds: _animationDurationMs),
             curve: Curves.ease,
             height: !activatePremiumList ? 0 : MediaQuery.of(context).size.height * 0.025,
           ),
-          premiumPropertyListTile(image: PaywallAssets.freeTrial.premiumHdIcon.image(), title: context.localizations.hdQuality),
+          premiumPropertyListTile(image: Image.asset('assets/free_trial/premium_hd_icon.png'), title: context.localizations.hdQuality),
           AnimatedContainer(
             duration: Duration(milliseconds: _animationDurationMs),
             curve: Curves.ease,
             height: !activatePremiumList ? 0 : MediaQuery.of(context).size.height * 0.025,
           ),
-          premiumPropertyListTile(image: PaywallAssets.freeTrial.premiumNoAddsIcon.image(), title: context.localizations.adFree),
+          premiumPropertyListTile(image: Image.asset('assets/free_trial/premium_no_adds_icon.png'), title: context.localizations.adFree),
         ],
       ),
     ),
@@ -218,7 +218,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> with PaywallSanityC
             height: MediaQuery.of(context).size.height * 0.06,
             width: MediaQuery.of(context).size.width * 0.3,
             decoration: BoxDecoration(
-              image: DecorationImage(image: PaywallAssets.freeTrial.aotd.provider(), fit: BoxFit.contain),
+              image: DecorationImage(image: AssetImage('assets/free_trial/AOTD.png'), fit: BoxFit.contain),
             ),
           ),
           Row(
@@ -226,7 +226,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> with PaywallSanityC
             children: [
               Container(
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: PaywallAssets.freeTrial.rating.provider(), fit: BoxFit.cover),
+                  image: DecorationImage(image: AssetImage('assets/free_trial/rating.png'), fit: BoxFit.cover),
                 ),
                 height: MediaQuery.of(context).size.height * 0.016,
                 width: MediaQuery.of(context).size.width * 0.2,
@@ -439,25 +439,25 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> with PaywallSanityC
     children: [
       verticalPadding(),
       getPropertyListTile(
-        PaywallAssets.freeTrial.propertyCheckIcon.image(),
+        Image.asset('assets/free_trial/property_check_icon.png'),
         context.localizations.freeTrialProperty1Big,
         context.localizations.freeTrialProperty1Small,
         0,
       ),
       getPropertyListTile(
-        PaywallAssets.freeTrial.propertyLockIcon.image(),
+        Image.asset('assets/free_trial/property_lock_icon.png'),
         context.localizations.freeTrialProperty2Big,
         context.localizations.freeTrialProperty2Small,
         1,
       ),
       getPropertyListTile(
-        PaywallAssets.freeTrial.propertyNotificationIcon.image(),
+        Image.asset('assets/free_trial/property_notification_icon.png'),
         context.localizations.freeTrialProperty3Big,
         context.localizations.freeTrialProperty3Small,
         2,
       ),
       getPropertyListTile(
-        PaywallAssets.freeTrial.propertyPremiumIcon.image(),
+        Image.asset('assets/free_trial/property_premium_icon.png'),
         context.localizations.freeTrialProperty4Big,
         context.localizations.freeTrialProperty4Small,
         3,
