@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
 class PaywallListScreen extends StatelessWidget {
   const PaywallListScreen({super.key});
 
-  PaywallConfig _createMockPaywallConfig(BuildContext context) {
-    final products = [
+  PaywallConfig _createMockPaywallConfig(BuildContext context) => PaywallConfig(
+    products: [
       PaywallProduct(
         storeId: 'not_sure',
         price: 0,
@@ -74,21 +74,17 @@ class PaywallListScreen extends StatelessWidget {
         description: 'Best value - Save 58%!',
         freeTrialDays: 7,
       ),
-    ];
-
-    return PaywallConfig(
-      products: products,
-      onPurchase: (product) async {
-        debugPrint('Purchasing 24{product.storeId}');
-        await Future.delayed(const Duration(seconds: 2));
-        return true;
-      },
-      processUI: <T>(action) async => await action(),
-      isPro: () => false,
-      onClose: () => debugPrint('Paywall closed'),
-      singleDisplayProduct: 1,
-    );
-  }
+    ],
+    onPurchase: (product) async {
+      debugPrint('Purchasing ${product.storeId}');
+      await Future.delayed(const Duration(seconds: 2));
+      return true;
+    },
+    processUI: <T>(action) async => await action(),
+    isPro: () => false,
+    onClose: () => debugPrint('Paywall closed'),
+    singleDisplayProduct: 1,
+  );
 
   @override
   Widget build(BuildContext context) {

@@ -310,6 +310,11 @@
     "description": "Subtitle for plan selection",
     "context": "plan screen"
   },
+  "startEditing": "Start Editing See Magic Happen",
+  "@startEditing": {
+    "description": "Short action text for starting editing",
+    "context": "plan screen or button"
+  },
   "upgradeNow": "Upgrade now!",
   "@upgradeNow": {
     "description": "",
@@ -344,6 +349,59 @@
         "type": "String",
         "example": "$59.99"
       }
+    }
+  },
+  "startEditingSeeMagicHappen": "Start Editing\nSee Magic Happen",
+  "@startEditingSeeMagicHappen": {
+    "description": "Main title for plan screen 2"
+  },
+  "noCommitmentsCancelAnytime": "No commitments, cancel anytime",
+  "@noCommitmentsCancelAnytime": {
+    "description": "Subtitle for plan screen 2"
+  },
+  "trialUsedInfo": "{people} people have used the 7-day Trial in the last 24 hours!",
+  "@trialUsedInfo": {
+    "description": "Shows how many people used the trial in the last 24 hours",
+    "placeholders": {
+      "people": {}
+    }
+  },
+  "sevenDayFullAccess": "7-Day Full Access",
+  "@sevenDayFullAccess": {
+    "description": "Title for 7-day plan option"
+  },
+  "mostPopular": "MOST POPULAR",
+  "@mostPopular": {
+    "description": "Badge for most popular plan"
+  },
+  "priceWithCurrency": "${price}",
+  "@priceWithCurrency": {
+    "description": "Shows price with currency symbol",
+    "placeholders": {
+      "price": {}
+    }
+  },
+  "monthlyAccess": "Monthly Access",
+  "@monthlyAccess": {
+    "description": "Title for monthly plan option"
+  },
+  "savePercent": "SAVE {percent}%",
+  "@savePercent": {
+    "description": "Shows how much percent is saved",
+    "placeholders": {
+      "percent": {}
+    }
+  },
+  "continueText": "Continue",
+  "@continueText": {
+    "description": "Continue button text"
+  },
+  "trialDisclaimer": "Billed ${trialPrice} for 7-day trial, then ${weeklyPrice}/week auto-renewal.\nRequest a refund if you’re not 100% satisfied",
+  "@trialDisclaimer": {
+    "description": "Disclaimer for trial and weekly renewal",
+    "placeholders": {
+      "trialPrice": {},
+      "weeklyPrice": {}
     }
   }
 }
