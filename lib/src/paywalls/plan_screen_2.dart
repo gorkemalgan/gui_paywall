@@ -15,7 +15,7 @@ class PlanScreen2 extends PaywallBase {
 }
 
 class _PlanScreen2State extends State<PlanScreen2> with PaywallSanityCheck<PlanScreen2> {
-  String? selectedPlan;
+  String? selectedPlanStoreId;
 
   @override
   Widget build(BuildContext context) {
@@ -77,13 +77,14 @@ class _PlanScreen2State extends State<PlanScreen2> with PaywallSanityCheck<PlanS
                           text: TextSpan(
                             style: const TextStyle(color: Colors.white, fontSize: 13),
                             children: [
+                              // TODO: trialUserCount ve trialUsedInLastHours fonksiyonları localization'a eklenmeli veya kaldırılmalı
                               TextSpan(
-                                text: context.localizations.trialUserCount('2,342'),
+                                text: '2342',
                                 style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                               TextSpan(text: ' '),
                               TextSpan(
-                                text: context.localizations.trialUsedInLastHours('24'),
+                                text: '24',
                                 style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                               TextSpan(text: '!'),
@@ -102,17 +103,14 @@ class _PlanScreen2State extends State<PlanScreen2> with PaywallSanityCheck<PlanS
                     ],
                   ),
                   const SizedBox(height: 5),
-                  buildOptionTile(
-                    title: context.localizations.sevenDayFullAccess,
-                    subtitle: context.localizations.mostPopular,
-                    price: context.localizations.priceWithCurrency('0.49'),
-                    value: '7-day',
-                  ),
-                  buildOptionTile(
-                    title: context.localizations.monthlyAccess,
-                    subtitle: context.localizations.percentOff(93),
-                    price: context.localizations.priceWithCurrency('2.99'),
-                    value: 'monthly',
+
+                  ...widget.paywall.products.map(
+                    (product) => buildOptionTile(
+                      title: product.title ?? product.period.localizedName(context),
+                      subtitle: product.description ?? '',
+                      price: product.priceString_,
+                      value: product.storeId,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   AnimatedContainer(
@@ -120,17 +118,19 @@ class _PlanScreen2State extends State<PlanScreen2> with PaywallSanityCheck<PlanS
                     curve: Curves.ease,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: selectedPlan == null ? Colors.white.withOpacity(0.2) : Colors.cyanAccent,
+                      color: selectedPlanStoreId == null ? Colors.white.withOpacity(0.2) : Colors.cyanAccent,
                       borderRadius: BorderRadius.circular(40),
-                      border: Border.all(color: selectedPlan == null ? Colors.transparent : Colors.cyanAccent, width: 2),
+                      border: Border.all(color: selectedPlanStoreId == null ? Colors.transparent : Colors.cyanAccent, width: 2),
                     ),
                     child: ElevatedButton(
                       onPressed: () {
-                        if (selectedPlan != null) {}
+                        if (selectedPlanStoreId != null) {
+                          // Satın alma işlemi burada yapılabilir
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
-                        foregroundColor: selectedPlan == null ? Colors.white : Colors.black,
+                        foregroundColor: selectedPlanStoreId == null ? Colors.white : Colors.black,
                         shadowColor: Colors.transparent,
                         elevation: 0,
                         shape: const StadiumBorder(),
@@ -143,7 +143,17 @@ class _PlanScreen2State extends State<PlanScreen2> with PaywallSanityCheck<PlanS
 
                   /// Disclaimer text
                   Text(
-                    context.localizations.chargingInfoFreeTrial('0.49', '7', 'week'),
+                    context.localizations.chargingInfoFreeTrial(
+                      selectedPlanStoreId != null
+                          ? (widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId).price.toStringAsFixed(2))
+                          : '-',
+                      selectedPlanStoreId != null
+                          ? (widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId).freeTrialDays?.toString() ?? '-')
+                          : '-',
+                      selectedPlanStoreId != null
+                          ? (widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId).period.periodInvoiceStr ?? '-')
+                          : '-',
+                    ),
                     textAlign: TextAlign.center,
                     style: const TextStyle(color: Colors.white70, fontSize: 11),
                   ),
@@ -158,14 +168,14 @@ class _PlanScreen2State extends State<PlanScreen2> with PaywallSanityCheck<PlanS
   }
 
   Widget buildOptionTile({required String title, required String subtitle, required String price, required String value}) {
-    bool isSelected = selectedPlan == value;
+    bool isSelected = selectedPlanStoreId == value;
     return GestureDetector(
       onTap: () {
         setState(() {
           if (isSelected) {
-            selectedPlan = null;
+            selectedPlanStoreId = null;
           } else {
-            selectedPlan = value;
+            selectedPlanStoreId = value;
           }
         });
       },
