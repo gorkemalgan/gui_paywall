@@ -23,17 +23,13 @@ class PaywallLocalizationsSk extends PaywallLocalizations {
   String get bestOffer => 'NAJLEPŠIA PONUKA';
 
   @override
+  String get bestValue => 'NAJLEPŠIA HODNOTA';
+
+  @override
   String get cancelAtAnyTime => 'Zrušiť kedykoľvek';
 
   @override
-  String get chooseYourPlan => 'Choose Your Plan';
-
-  @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return 'Bude vám účtované $price po $freeTrialDay dňoch $invoiceDuration až do zrušenia.';
   }
 
@@ -48,10 +44,19 @@ class PaywallLocalizationsSk extends PaywallLocalizations {
   }
 
   @override
-  String get continueBtn => 'Continue';
+  String get chooseYourPlan => 'Vyberte si plán';
 
   @override
-  String get enableFreeTrial => 'Enable Free Trial';
+  String get continueBtn => 'Pokračovať';
+
+  @override
+  String daysFreeTrial(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days dní skúšobnej verzie zdarma', one: '1 deň skúšobnej verzie zdarma');
+    return '$_temp0';
+  }
+
+  @override
+  String get enableFreeTrial => 'Aktivovať bezplatnú skúšobnú verziu';
 
   @override
   String get exclusiveFeatures => 'Exkluzívne funkcie';
@@ -65,15 +70,10 @@ class PaywallLocalizationsSk extends PaywallLocalizations {
   }
 
   @override
-  String get freeTrialDesc =>
-      'Zvýšte svoju kreativitu a získajte neobmedzený prístup s prémiovým členstvom';
+  String get freeTrialDesc => 'Zvýšte svoju kreativitu a získajte neobmedzený prístup s prémiovým členstvom';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '$freeTrialDays dní zdarma, potom $priceString/$periodInvoiceStr';
   }
 
@@ -87,15 +87,13 @@ class PaywallLocalizationsSk extends PaywallLocalizations {
   String get freeTrialProperty2Big => 'Dnes: Okamžite odomknite všetky funkcie';
 
   @override
-  String get freeTrialProperty2Small =>
-      'Získajte prístup ku všetkým funkciám teraz';
+  String get freeTrialProperty2Small => 'Získajte prístup ku všetkým funkciám teraz';
 
   @override
   String get freeTrialProperty3Big => 'Pripomenutie konca skúšobného obdobia';
 
   @override
-  String get freeTrialProperty3Small =>
-      'Po skončení skúšobného obdobia vám pošleme upozornenie';
+  String get freeTrialProperty3Small => 'Po skončení skúšobného obdobia vám pošleme upozornenie';
 
   @override
   String get freeTrialProperty4Big => 'Užite si neobmedzené sťahovanie';
@@ -104,12 +102,10 @@ class PaywallLocalizationsSk extends PaywallLocalizations {
   String get freeTrialProperty4Small => 'Jednoduché použitie a prispôsobenie';
 
   @override
-  String get freeTrialReminder =>
-      'Pripomeňte mi pred vypršaním platnosti bezplatnej skúšobnej verzie';
+  String get freeTrialReminder => 'Pripomeňte mi pred vypršaním platnosti bezplatnej skúšobnej verzie';
 
   @override
-  String get getUnlimitedAccess =>
-      'Získajte neobmedzený prístup ku všetkým funkciám!';
+  String get getUnlimitedAccess => 'Získajte neobmedzený prístup ku všetkým funkciám!';
 
   @override
   String get hdQuality => 'HD kvalita';
@@ -121,21 +117,32 @@ class PaywallLocalizationsSk extends PaywallLocalizations {
   String get monthly => 'Mesačné';
 
   @override
-  String get notSureYet => 'Not Sure Yet?';
-
-  @override
-  String weekFreeTrial(int weeks) {
-    String _temp0 = intl.Intl.pluralLogic(
-      weeks,
-      locale: localeName,
-      other: '$weeks weeks free trial',
-      one: '1 week free trial',
-    );
-    return '$_temp0';
+  String monthlyPrice(String price) {
+    return '$price/mesiac';
   }
 
   @override
-  String get otherPlans => 'Other plans';
+  String get notSureYet => 'Stále si nie ste istí?';
+
+  @override
+  String get otherPlans => 'Iné plány';
+
+  @override
+  String get paymentAgreement =>
+      'Predplatné sa automaticky obnovia, pokiaľ automatické obnovenie nie je vypnuté najmenej 24 hodín pred koncom aktuálneho obdobia.Váš účet bude účtovaný podľa vášho plánu obnovy do 24 hodín pred koncom bežného obdobia.V nastaveniach účtu môžete spravovať alebo vypnúť automatické obnovenie kedykoľvek po zakúpení.';
+
+  @override
+  String get paymentAgreementFreeTrial =>
+      'Platba bude účtovaná na váš účet na konci bezplatného skúšobného obdobia.Počas bezplatného skúšobného obdobia môžete kedykoľvek zrušiť a nebudú sa uplatňovať žiadne poplatky.';
+
+  @override
+  String get paymentFailed => 'Platba zlyhala';
+
+  @override
+  String get paymentInfoPending => 'Vaša platba je čakajúca, prosím, počkajte. Ak máte problémy, kontaktujte nás na contact@everpixel.org.';
+
+  @override
+  String get paymentInfoTitle => 'Platobné informácie';
 
   @override
   String get perWeek => ' / týždeň';
@@ -149,7 +156,13 @@ class PaywallLocalizationsSk extends PaywallLocalizations {
   String get popular => 'Populárne';
 
   @override
-  String get restorePurchases => 'Restore Purchases';
+  String get privacyPolicy => 'Zásady ochrany osobných údajov';
+
+  @override
+  String get restore => 'Obnoviť';
+
+  @override
+  String get restorePurchases => 'Obnoviť nákupy';
 
   @override
   String get save => 'Uložiť';
@@ -167,8 +180,11 @@ class PaywallLocalizationsSk extends PaywallLocalizations {
   String get startFreeTrial => 'Začnite bezplatnú skúšobnú verziu';
 
   @override
+  String get termsOfUse => 'Podmienky používania';
+
+  @override
   String thenPerWeek(String price) {
-    return 'then \$$price/week';
+    return 'potom $price/týždeň';
   }
 
   @override
@@ -180,7 +196,12 @@ class PaywallLocalizationsSk extends PaywallLocalizations {
   String get unlimitedDownload => 'Neobmedzené sťahovanie';
 
   @override
-  String get unlockFullPower => 'Unlock Full Power';
+  String get unlockFullPower => 'Odomknite všetky funkcie';
+
+  @override
+  String unlockFullPowerDescription(String appName) {
+    return 'Odomkni plnú silu $appName – najlepší AI editor aplikácia.';
+  }
 
   @override
   String get upgradeNow => 'Inovovať teraz';
@@ -195,10 +216,31 @@ class PaywallLocalizationsSk extends PaywallLocalizations {
   String get weekly => 'Týždenné';
 
   @override
+  String weeklyPrice(String price) {
+    return '$price/týždeň';
+  }
+
+  @override
+  String weeksFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(
+      weeks,
+      locale: localeName,
+      other: '$weeks týždňov skúšobnej verzie zdarma',
+      one: '1 týždeň skúšobnej verzie zdarma',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get yearly => 'Ročné';
 
   @override
   String yearlyPrice(String price) {
-    return '\$$price/year';
+    return '$price/rok';
+  }
+
+  @override
+  String trialUserCountText(String userCount, String hours) {
+    return '$userCount people started a trial in the last $hours hours!';
   }
 }

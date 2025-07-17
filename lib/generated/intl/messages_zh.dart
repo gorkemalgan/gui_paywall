@@ -23,17 +23,13 @@ class PaywallLocalizationsZh extends PaywallLocalizations {
   String get bestOffer => '最佳报价';
 
   @override
+  String get bestValue => '超值優惠';
+
+  @override
   String get cancelAtAnyTime => '随时取消';
 
   @override
-  String get chooseYourPlan => 'Choose Your Plan';
-
-  @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return '$freeTrialDay天后收取$price，$invoiceDuration内自动续订，直到取消为止。';
   }
 
@@ -48,10 +44,19 @@ class PaywallLocalizationsZh extends PaywallLocalizations {
   }
 
   @override
-  String get continueBtn => 'Continue';
+  String get chooseYourPlan => '选择您的计划';
 
   @override
-  String get enableFreeTrial => 'Enable Free Trial';
+  String get continueBtn => '继续';
+
+  @override
+  String daysFreeTrial(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days天免费试用', one: '1天免费试用');
+    return '$_temp0';
+  }
+
+  @override
+  String get enableFreeTrial => '启用免费试用';
 
   @override
   String get exclusiveFeatures => '独家特色';
@@ -68,11 +73,7 @@ class PaywallLocalizationsZh extends PaywallLocalizations {
   String get freeTrialDesc => '增强您的创造力并通过高级会员资格获得无限制的访问权限';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '免费试用$freeTrialDays天，然后$priceString/$periodInvoiceStr';
   }
 
@@ -116,21 +117,30 @@ class PaywallLocalizationsZh extends PaywallLocalizations {
   String get monthly => '每月';
 
   @override
-  String get notSureYet => 'Not Sure Yet?';
-
-  @override
-  String weekFreeTrial(int weeks) {
-    String _temp0 = intl.Intl.pluralLogic(
-      weeks,
-      locale: localeName,
-      other: '$weeks weeks free trial',
-      one: '1 week free trial',
-    );
-    return '$_temp0';
+  String monthlyPrice(String price) {
+    return '$price/月';
   }
 
   @override
-  String get otherPlans => 'Other plans';
+  String get notSureYet => '还不确定？';
+
+  @override
+  String get otherPlans => '其他计划';
+
+  @override
+  String get paymentAgreement => '除非自动续订至少在本期结束前24小时关闭，否则订阅将自动续订。您的帐户将根据您当前期限结束前24小时内续订计划收取费用。您可以在购买后的任何时候在帐户设置中管理或关闭自动续订。';
+
+  @override
+  String get paymentAgreementFreeTrial => '在免费试用期结束时，将向您的帐户收取付款。您可以在免费试用期内任何时间取消，并且不会收取任何费用。';
+
+  @override
+  String get paymentFailed => '支付失败';
+
+  @override
+  String get paymentInfoPending => '您的付款正在处理中，请稍候。如果遇到任何问题，请联系 contact@everpixel.org。';
+
+  @override
+  String get paymentInfoTitle => '付款信息';
 
   @override
   String get perWeek => ' / 週';
@@ -144,7 +154,13 @@ class PaywallLocalizationsZh extends PaywallLocalizations {
   String get popular => '受欢迎的';
 
   @override
-  String get restorePurchases => 'Restore Purchases';
+  String get privacyPolicy => '隐私政策';
+
+  @override
+  String get restore => '恢复';
+
+  @override
+  String get restorePurchases => '恢复购买';
 
   @override
   String get save => '节省';
@@ -162,8 +178,11 @@ class PaywallLocalizationsZh extends PaywallLocalizations {
   String get startFreeTrial => '开启免费体验';
 
   @override
+  String get termsOfUse => '使用条款';
+
+  @override
   String thenPerWeek(String price) {
-    return 'then \$$price/week';
+    return '之后 $price/周';
   }
 
   @override
@@ -175,7 +194,12 @@ class PaywallLocalizationsZh extends PaywallLocalizations {
   String get unlimitedDownload => '无限下载';
 
   @override
-  String get unlockFullPower => 'Unlock Full Power';
+  String get unlockFullPower => '解锁全部功能';
+
+  @override
+  String unlockFullPowerDescription(String appName) {
+    return '解鎖 $appName 的全部功能，體驗終極 AI 編輯應用程式。';
+  }
 
   @override
   String get upgradeNow => '立即升级';
@@ -190,11 +214,27 @@ class PaywallLocalizationsZh extends PaywallLocalizations {
   String get weekly => '每周';
 
   @override
+  String weeklyPrice(String price) {
+    return '$price/周';
+  }
+
+  @override
+  String weeksFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks周免费试用', one: '1周免费试用');
+    return '$_temp0';
+  }
+
+  @override
   String get yearly => '每年';
 
   @override
   String yearlyPrice(String price) {
-    return '\$$price/year';
+    return '$price/年';
+  }
+
+  @override
+  String trialUserCountText(String userCount, String hours) {
+    return '$userCount people started a trial in the last $hours hours!';
   }
 }
 
@@ -217,14 +257,13 @@ class PaywallLocalizationsZhHans extends PaywallLocalizationsZh {
   String get bestOffer => '最佳报价';
 
   @override
+  String get bestValue => '超值推荐';
+
+  @override
   String get cancelAtAnyTime => '随时取消';
 
   @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return '$freeTrialDay天后收取$price，$invoiceDuration内自动续订，直到取消为止。';
   }
 
@@ -237,6 +276,21 @@ class PaywallLocalizationsZhHans extends PaywallLocalizationsZh {
   String chargingInfoStandart(String price, String invoiceDuration) {
     return '$price续订，$invoiceDuration自动续订，直到取消。';
   }
+
+  @override
+  String get chooseYourPlan => '选择您的计划';
+
+  @override
+  String get continueBtn => '继续';
+
+  @override
+  String daysFreeTrial(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days天免费试用', one: '1天免费试用');
+    return '$_temp0';
+  }
+
+  @override
+  String get enableFreeTrial => '启用免费试用';
 
   @override
   String get exclusiveFeatures => '独家特色';
@@ -253,11 +307,7 @@ class PaywallLocalizationsZhHans extends PaywallLocalizationsZh {
   String get freeTrialDesc => '增强您的创造力并通过高级会员资格获得无限制的访问权限';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '免费试用$freeTrialDays天，然后$priceString/$periodInvoiceStr';
   }
 
@@ -301,6 +351,32 @@ class PaywallLocalizationsZhHans extends PaywallLocalizationsZh {
   String get monthly => '每月';
 
   @override
+  String monthlyPrice(String price) {
+    return '$price/月';
+  }
+
+  @override
+  String get notSureYet => '还不确定？';
+
+  @override
+  String get otherPlans => '其他计划';
+
+  @override
+  String get paymentAgreement => '除非自动续订至少在本期结束前24小时关闭，否则订阅将自动续订。您的帐户将根据您当前期限结束前24小时内续订计划收取费用。您可以在购买后的任何时候在帐户设置中管理或关闭自动续订。';
+
+  @override
+  String get paymentAgreementFreeTrial => '在免费试用期结束时，将向您的帐户收取付款。您可以在免费试用期内任何时间取消，并且不会收取任何费用。';
+
+  @override
+  String get paymentFailed => '支付失败';
+
+  @override
+  String get paymentInfoPending => '您的付款正在处理中，请稍候。如果遇到任何问题，请通过 contact@everpixel.org 联系我们。';
+
+  @override
+  String get paymentInfoTitle => '付款信息';
+
+  @override
   String get perWeek => ' / 周';
 
   @override
@@ -310,6 +386,15 @@ class PaywallLocalizationsZhHans extends PaywallLocalizationsZh {
 
   @override
   String get popular => '受欢迎的';
+
+  @override
+  String get privacyPolicy => '隐私政策';
+
+  @override
+  String get restore => '恢复';
+
+  @override
+  String get restorePurchases => '恢复购买';
 
   @override
   String get save => '节省';
@@ -327,12 +412,28 @@ class PaywallLocalizationsZhHans extends PaywallLocalizationsZh {
   String get startFreeTrial => '开启免费体验';
 
   @override
+  String get termsOfUse => '使用条款';
+
+  @override
+  String thenPerWeek(String price) {
+    return '之后每周 $price';
+  }
+
+  @override
   String trialDays(int days) {
     return '$days天试用';
   }
 
   @override
   String get unlimitedDownload => '无限下载';
+
+  @override
+  String get unlockFullPower => '解锁全部功能';
+
+  @override
+  String unlockFullPowerDescription(String appName) {
+    return '解锁 $appName 的全部功能，尽享终极 AI 编辑体验。';
+  }
 
   @override
   String get upgradeNow => '立即升级';
@@ -347,7 +448,23 @@ class PaywallLocalizationsZhHans extends PaywallLocalizationsZh {
   String get weekly => '每周';
 
   @override
+  String weeklyPrice(String price) {
+    return '$price/周';
+  }
+
+  @override
+  String weeksFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks周免费试用', one: '1周免费试用');
+    return '$_temp0';
+  }
+
+  @override
   String get yearly => '每年';
+
+  @override
+  String yearlyPrice(String price) {
+    return '$price/年';
+  }
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -369,14 +486,13 @@ class PaywallLocalizationsZhHant extends PaywallLocalizationsZh {
   String get bestOffer => '最佳報價';
 
   @override
+  String get bestValue => '超值推薦';
+
+  @override
   String get cancelAtAnyTime => '隨時取消';
 
   @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return '$freeTrialDay天後將收取$price，$invoiceDuration內自動續訂，直到取消為止。';
   }
 
@@ -389,6 +505,21 @@ class PaywallLocalizationsZhHant extends PaywallLocalizationsZh {
   String chargingInfoStandart(String price, String invoiceDuration) {
     return '$price續訂，$invoiceDuration內自動續訂，直到取消。';
   }
+
+  @override
+  String get chooseYourPlan => '選擇您的方案';
+
+  @override
+  String get continueBtn => '繼續';
+
+  @override
+  String daysFreeTrial(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days天免費試用', one: '1天免費試用');
+    return '$_temp0';
+  }
+
+  @override
+  String get enableFreeTrial => '啟用免費試用';
 
   @override
   String get exclusiveFeatures => '獨家特色';
@@ -405,11 +536,7 @@ class PaywallLocalizationsZhHant extends PaywallLocalizationsZh {
   String get freeTrialDesc => '增強您的創造力並透過高級會員資格獲得無限的存取權限';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '免費試用$freeTrialDays天，然後$priceString/$periodInvoiceStr';
   }
 
@@ -453,6 +580,32 @@ class PaywallLocalizationsZhHant extends PaywallLocalizationsZh {
   String get monthly => '每月';
 
   @override
+  String monthlyPrice(String price) {
+    return '$price/月';
+  }
+
+  @override
+  String get notSureYet => '還不確定？';
+
+  @override
+  String get otherPlans => '其他方案';
+
+  @override
+  String get paymentAgreement => '除非在當前週期結束前至少 24 小時關閉自動續訂，否則訂閱將自動續訂。您的帳戶將在本期結束前 24 小時內根據您的續訂計劃收取費用。購買後，您可以隨時在帳戶設定中管理或關閉自動續訂。';
+
+  @override
+  String get paymentAgreementFreeTrial => '免費試用期結束時，我們將從您的帳戶中扣款。您可以在免費試用期內隨時取消，並且不會收取任何費用。';
+
+  @override
+  String get paymentFailed => '支付失敗';
+
+  @override
+  String get paymentInfoPending => '您的付款正在處理中，請稍候。如果遇到任何問題，請聯絡 contact@everpixel.org。';
+
+  @override
+  String get paymentInfoTitle => '付款資訊';
+
+  @override
   String get perWeek => ' / 週';
 
   @override
@@ -462,6 +615,15 @@ class PaywallLocalizationsZhHant extends PaywallLocalizationsZh {
 
   @override
   String get popular => '受歡迎的';
+
+  @override
+  String get privacyPolicy => '隱私權政策';
+
+  @override
+  String get restore => '恢復';
+
+  @override
+  String get restorePurchases => '恢復購買';
 
   @override
   String get save => '節省';
@@ -479,12 +641,28 @@ class PaywallLocalizationsZhHant extends PaywallLocalizationsZh {
   String get startFreeTrial => '開始免費試用';
 
   @override
+  String get termsOfUse => '使用條款';
+
+  @override
+  String thenPerWeek(String price) {
+    return '然後每週 $price';
+  }
+
+  @override
   String trialDays(int days) {
     return '$days天試用';
   }
 
   @override
   String get unlimitedDownload => '無限下載';
+
+  @override
+  String get unlockFullPower => '解鎖全部功能';
+
+  @override
+  String unlockFullPowerDescription(String appName) {
+    return '解鎖 $appName 的完整功能 – 終極 AI 編輯應用程式。';
+  }
 
   @override
   String get upgradeNow => '立即升級';
@@ -499,5 +677,21 @@ class PaywallLocalizationsZhHant extends PaywallLocalizationsZh {
   String get weekly => '每週';
 
   @override
+  String weeklyPrice(String price) {
+    return '$price/週';
+  }
+
+  @override
+  String weeksFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks週免費試用', one: '1週免費試用');
+    return '$_temp0';
+  }
+
+  @override
   String get yearly => '每年';
+
+  @override
+  String yearlyPrice(String price) {
+    return '$price/年';
+  }
 }

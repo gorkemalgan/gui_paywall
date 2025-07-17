@@ -23,17 +23,13 @@ class PaywallLocalizationsHi extends PaywallLocalizations {
   String get bestOffer => 'सर्वश्रेष्ठ ऑफर';
 
   @override
+  String get bestValue => 'सर्वोत्तम मूल्य';
+
+  @override
   String get cancelAtAnyTime => 'किसी भी समय रद्द करें';
 
   @override
-  String get chooseYourPlan => 'Choose Your Plan';
-
-  @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return '$freeTrialDay दिनों के बाद $price भुगतान किया जाएगा $invoiceDuration तक या रद्द होने तक।';
   }
 
@@ -48,10 +44,19 @@ class PaywallLocalizationsHi extends PaywallLocalizations {
   }
 
   @override
-  String get continueBtn => 'Continue';
+  String get chooseYourPlan => 'अपनी योजना चुनें';
 
   @override
-  String get enableFreeTrial => 'Enable Free Trial';
+  String get continueBtn => 'जारी रखें';
+
+  @override
+  String daysFreeTrial(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days दिन का मुफ्त ट्रायल', one: '1 दिन का मुफ्त ट्रायल');
+    return '$_temp0';
+  }
+
+  @override
+  String get enableFreeTrial => 'नि:शुल्क परीक्षण सक्षम करें';
 
   @override
   String get exclusiveFeatures => 'विशेष सुविधाएँ';
@@ -65,15 +70,10 @@ class PaywallLocalizationsHi extends PaywallLocalizations {
   }
 
   @override
-  String get freeTrialDesc =>
-      'अपनी रचनात्मकता बढ़ाएँ और प्रीमियम सदस्यता के साथ असीमित पहुंच प्राप्त करें';
+  String get freeTrialDesc => 'अपनी रचनात्मकता बढ़ाएँ और प्रीमियम सदस्यता के साथ असीमित पहुंच प्राप्त करें';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '$freeTrialDays दिन निःशुल्क, फिर $priceString/$periodInvoiceStr';
   }
 
@@ -93,8 +93,7 @@ class PaywallLocalizationsHi extends PaywallLocalizations {
   String get freeTrialProperty3Big => 'ट्रायल समाप्ति की याद दिलाएं';
 
   @override
-  String get freeTrialProperty3Small =>
-      'जब आपका ट्रायल समाप्त होगा तो हम आपको एक अधिसूचना भेजेंगे';
+  String get freeTrialProperty3Small => 'जब आपका ट्रायल समाप्त होगा तो हम आपको एक अधिसूचना भेजेंगे';
 
   @override
   String get freeTrialProperty4Big => 'असीमित डाउनलोड का आनंद लें';
@@ -103,8 +102,7 @@ class PaywallLocalizationsHi extends PaywallLocalizations {
   String get freeTrialProperty4Small => 'उपयोग और अनुकूलित करने में आसान';
 
   @override
-  String get freeTrialReminder =>
-      'मुफ्त ट्रायल समाप्त होने से पहले मुझे याद दिलाएं';
+  String get freeTrialReminder => 'मुफ्त ट्रायल समाप्त होने से पहले मुझे याद दिलाएं';
 
   @override
   String get getUnlimitedAccess => 'सभी सुविधाओं तक असीमित पहुंच पाएं!';
@@ -119,21 +117,33 @@ class PaywallLocalizationsHi extends PaywallLocalizations {
   String get monthly => 'मासिक';
 
   @override
-  String get notSureYet => 'Not Sure Yet?';
-
-  @override
-  String weekFreeTrial(int weeks) {
-    String _temp0 = intl.Intl.pluralLogic(
-      weeks,
-      locale: localeName,
-      other: '$weeks weeks free trial',
-      one: '1 week free trial',
-    );
-    return '$_temp0';
+  String monthlyPrice(String price) {
+    return '$price/माह';
   }
 
   @override
-  String get otherPlans => 'Other plans';
+  String get notSureYet => 'अभी तक सुनिश्चित नहीं हैं?';
+
+  @override
+  String get otherPlans => 'अन्य योजनाएं';
+
+  @override
+  String get paymentAgreement =>
+      'सदस्यताएँ स्वतः नवीनीकृत हो जाएँगी जब तक कि ऑटो-नवीनीकरण वर्तमान अवधि के अंत से कम से कम 24 घंटे पहले बंद नहीं किया जाता है। आपका खाता नवीनीकरण के लिए वर्तमान अवधि के अंत से 24 घंटे पहले आपके प्लान के अनुसार चार्ज किया जाएगा। आप खरीद के बाद किसी भी समय अपने खाता सेटिंग्स में ऑटो-नवीनीकरण को प्रबंधित या बंद कर सकते हैं।';
+
+  @override
+  String get paymentAgreementFreeTrial =>
+      'भुगतान मुफ़्त ट्रायल अवधि के अंत में आपके खाते में लिया जाएगा। आप मुफ़्त ट्रायल अवधि के दौरान किसी भी समय रद्द कर सकते हैं और कोई शुल्क लागू नहीं होगा।';
+
+  @override
+  String get paymentFailed => 'भुगतान विफल';
+
+  @override
+  String get paymentInfoPending =>
+      'आपकी भुगतान प्रक्रियाधीन है, कृपया प्रतीक्षा करें। यदि आपको किसी समस्या का सामना करना पड़ा तो contact@everpixel.org पर संपर्क करें।';
+
+  @override
+  String get paymentInfoTitle => 'भुगतान जानकारी';
 
   @override
   String get perWeek => ' / सप्ताह';
@@ -147,7 +157,13 @@ class PaywallLocalizationsHi extends PaywallLocalizations {
   String get popular => 'लोकप्रिय';
 
   @override
-  String get restorePurchases => 'Restore Purchases';
+  String get privacyPolicy => 'गोपनीयता नीति';
+
+  @override
+  String get restore => 'पुनर्स्थापित करें';
+
+  @override
+  String get restorePurchases => 'खरीद पुनर्स्थापित करें';
 
   @override
   String get save => 'सहेजें';
@@ -165,8 +181,11 @@ class PaywallLocalizationsHi extends PaywallLocalizations {
   String get startFreeTrial => 'मुफ़्त ट्रायल शुरू करें';
 
   @override
+  String get termsOfUse => 'उपयोग की शर्तें';
+
+  @override
   String thenPerWeek(String price) {
-    return 'then \$$price/week';
+    return 'फिर $price/सप्ताह';
   }
 
   @override
@@ -178,7 +197,12 @@ class PaywallLocalizationsHi extends PaywallLocalizations {
   String get unlimitedDownload => 'असीमित डाउनलोड';
 
   @override
-  String get unlockFullPower => 'Unlock Full Power';
+  String get unlockFullPower => 'पूर्ण शक्ति अनलॉक करें';
+
+  @override
+  String unlockFullPowerDescription(String appName) {
+    return '$appName की पूरी शक्ति को अनलॉक करें – अंतिम AI संपादन ऐप।';
+  }
 
   @override
   String get upgradeNow => 'अभी अपग्रेड करें';
@@ -193,10 +217,26 @@ class PaywallLocalizationsHi extends PaywallLocalizations {
   String get weekly => 'साप्ताहिक';
 
   @override
+  String weeklyPrice(String price) {
+    return '$price/सप्ताह';
+  }
+
+  @override
+  String weeksFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks सप्ताह का मुफ्त ट्रायल', one: '1 सप्ताह का मुफ्त ट्रायल');
+    return '$_temp0';
+  }
+
+  @override
   String get yearly => 'वार्षिक';
 
   @override
   String yearlyPrice(String price) {
-    return '\$$price/year';
+    return '$price/वर्ष';
+  }
+
+  @override
+  String trialUserCountText(String userCount, String hours) {
+    return '$userCount people started a trial in the last $hours hours!';
   }
 }

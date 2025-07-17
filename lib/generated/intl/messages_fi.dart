@@ -23,17 +23,13 @@ class PaywallLocalizationsFi extends PaywallLocalizations {
   String get bestOffer => 'PARAS TARJOUS';
 
   @override
+  String get bestValue => 'PARAS ARVO';
+
+  @override
   String get cancelAtAnyTime => 'Peruuta milloin tahansa';
 
   @override
-  String get chooseYourPlan => 'Choose Your Plan';
-
-  @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return 'Sinulta veloitetaan $price $freeTrialDay päivän jälkeen $invoiceDuration, kunnes peruutat.';
   }
 
@@ -48,10 +44,19 @@ class PaywallLocalizationsFi extends PaywallLocalizations {
   }
 
   @override
-  String get continueBtn => 'Continue';
+  String get chooseYourPlan => 'Valitse suunnitelmasi';
 
   @override
-  String get enableFreeTrial => 'Enable Free Trial';
+  String get continueBtn => 'Jatka';
+
+  @override
+  String daysFreeTrial(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days päivän ilmainen kokeilu', one: '1 päivän ilmainen kokeilu');
+    return '$_temp0';
+  }
+
+  @override
+  String get enableFreeTrial => 'Ota ilmainen kokeilu käyttöön';
 
   @override
   String get exclusiveFeatures => 'Eksklusiiviset Ominaisuudet';
@@ -65,15 +70,10 @@ class PaywallLocalizationsFi extends PaywallLocalizations {
   }
 
   @override
-  String get freeTrialDesc =>
-      'Lisää luovuuttasi ja saa rajoittamaton pääsy premium-jäsenyydellä';
+  String get freeTrialDesc => 'Lisää luovuuttasi ja saa rajoittamaton pääsy premium-jäsenyydellä';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return 'Ilmaiset $freeTrialDays päivää, sitten $priceString/$periodInvoiceStr';
   }
 
@@ -81,8 +81,7 @@ class PaywallLocalizationsFi extends PaywallLocalizations {
   String get freeTrialProperty1Big => 'Käytä Ilmaista Kokeilujaksoasi';
 
   @override
-  String get freeTrialProperty1Small =>
-      'Aktivoi helposti yhdellä napsautuksella';
+  String get freeTrialProperty1Small => 'Aktivoi helposti yhdellä napsautuksella';
 
   @override
   String get freeTrialProperty2Big => 'Tänään: Avaa kaikki ominaisuudet heti';
@@ -94,8 +93,7 @@ class PaywallLocalizationsFi extends PaywallLocalizations {
   String get freeTrialProperty3Big => 'Muistutus kokeilun päättymisestä';
 
   @override
-  String get freeTrialProperty3Small =>
-      'Lähetämme sinulle ilmoituksen, kun kokeilusi päättyy';
+  String get freeTrialProperty3Small => 'Lähetämme sinulle ilmoituksen, kun kokeilusi päättyy';
 
   @override
   String get freeTrialProperty4Big => 'Nauti rajoittamattomista latauksista';
@@ -104,12 +102,10 @@ class PaywallLocalizationsFi extends PaywallLocalizations {
   String get freeTrialProperty4Small => 'Helppo käyttää ja mukauttaa';
 
   @override
-  String get freeTrialReminder =>
-      'Muistuta minua ennen ilmaisen kokeilun päättymistä';
+  String get freeTrialReminder => 'Muistuta minua ennen ilmaisen kokeilun päättymistä';
 
   @override
-  String get getUnlimitedAccess =>
-      'Saat rajoittamattoman pääsyn kaikkiin ominaisuuksiin!';
+  String get getUnlimitedAccess => 'Saat rajoittamattoman pääsyn kaikkiin ominaisuuksiin!';
 
   @override
   String get hdQuality => 'HD Laatu';
@@ -121,21 +117,32 @@ class PaywallLocalizationsFi extends PaywallLocalizations {
   String get monthly => 'Kuukausittain';
 
   @override
-  String get notSureYet => 'Not Sure Yet?';
-
-  @override
-  String weekFreeTrial(int weeks) {
-    String _temp0 = intl.Intl.pluralLogic(
-      weeks,
-      locale: localeName,
-      other: '$weeks weeks free trial',
-      one: '1 week free trial',
-    );
-    return '$_temp0';
+  String monthlyPrice(String price) {
+    return '$price/kk';
   }
 
   @override
-  String get otherPlans => 'Other plans';
+  String get notSureYet => 'Etkö ole vielä varma?';
+
+  @override
+  String get otherPlans => 'Muut suunnitelmat';
+
+  @override
+  String get paymentAgreement =>
+      'Tilaukset uusiutuvat automaattisesti, ellei automaattista uusimista poisteta käytöstä vähintään 24 tuntia ennen nykyisen jakson päättymistä. Tililtäsi veloitetaan suunnitelmasi mukaisesti uusimisesta 24 tunnin sisällä ennen nykyisen jakson päättymistä. Voit hallita tai poistaa automaattisen uusimisen käytöstä tilisi asetuksissa milloin tahansa oston jälkeen.';
+
+  @override
+  String get paymentAgreementFreeTrial =>
+      'Maksu veloitetaan tililtäsi ilmaisen kokeilujakson päättyessä. Voit peruuttaa milloin tahansa ilmaisen kokeilujakson aikana, eikä maksuja peritä.';
+
+  @override
+  String get paymentFailed => 'Maksu epäonnistui';
+
+  @override
+  String get paymentInfoPending => 'Maksusi on vireillä, odota hetki. Jos kohtaat ongelmia, ota yhteyttä osoitteeseen contact@everpixel.org.';
+
+  @override
+  String get paymentInfoTitle => 'Maksutiedot';
 
   @override
   String get perWeek => ' / viikko';
@@ -149,7 +156,13 @@ class PaywallLocalizationsFi extends PaywallLocalizations {
   String get popular => 'Suosittu';
 
   @override
-  String get restorePurchases => 'Restore Purchases';
+  String get privacyPolicy => 'Tietosuojakäytäntö';
+
+  @override
+  String get restore => 'Palauta';
+
+  @override
+  String get restorePurchases => 'Palauta ostokset';
 
   @override
   String get save => 'Tallenna';
@@ -167,8 +180,11 @@ class PaywallLocalizationsFi extends PaywallLocalizations {
   String get startFreeTrial => 'Aloita ilmainen kokeilu';
 
   @override
+  String get termsOfUse => 'Käyttöehdot';
+
+  @override
   String thenPerWeek(String price) {
-    return 'then \$$price/week';
+    return 'sen jälkeen $price/viikko';
   }
 
   @override
@@ -180,7 +196,12 @@ class PaywallLocalizationsFi extends PaywallLocalizations {
   String get unlimitedDownload => 'Rajoittamattomat lataukset';
 
   @override
-  String get unlockFullPower => 'Unlock Full Power';
+  String get unlockFullPower => 'Avaa kaikki ominaisuudet';
+
+  @override
+  String unlockFullPowerDescription(String appName) {
+    return 'Avaa $appName:n koko voima – paras tekoälyeditorisovellus.';
+  }
 
   @override
   String get upgradeNow => 'Päivitä nyt';
@@ -195,10 +216,26 @@ class PaywallLocalizationsFi extends PaywallLocalizations {
   String get weekly => 'Viikoittain';
 
   @override
+  String weeklyPrice(String price) {
+    return '$price/viikko';
+  }
+
+  @override
+  String weeksFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks viikon ilmainen kokeilu', one: '1 viikon ilmainen kokeilu');
+    return '$_temp0';
+  }
+
+  @override
   String get yearly => 'Vuosittain';
 
   @override
   String yearlyPrice(String price) {
-    return '\$$price/year';
+    return '$price/vuosi';
+  }
+
+  @override
+  String trialUserCountText(String userCount, String hours) {
+    return '$userCount people started a trial in the last $hours hours!';
   }
 }

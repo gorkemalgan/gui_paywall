@@ -23,17 +23,13 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
   String get bestOffer => 'أفضل عرض';
 
   @override
+  String get bestValue => 'أفضل قيمة';
+
+  @override
   String get cancelAtAnyTime => 'يمكنك الإلغاء في أي وقت';
 
   @override
-  String get chooseYourPlan => 'Choose Your Plan';
-
-  @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return 'سيتم خصم $price بعد $freeTrialDay أيام $invoiceDuration حتى يتم الإلغاء.';
   }
 
@@ -48,10 +44,19 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
   }
 
   @override
-  String get continueBtn => 'Continue';
+  String get chooseYourPlan => 'اختر خطتك';
 
   @override
-  String get enableFreeTrial => 'Enable Free Trial';
+  String get continueBtn => 'استمر';
+
+  @override
+  String daysFreeTrial(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days أيام تجريبية مجانية', one: 'يوم تجريبي مجاني');
+    return '$_temp0';
+  }
+
+  @override
+  String get enableFreeTrial => 'تفعيل النسخة التجريبية المجانية';
 
   @override
   String get exclusiveFeatures => 'ميزات حصرية';
@@ -65,15 +70,10 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
   }
 
   @override
-  String get freeTrialDesc =>
-      'عزز إبداعك واحصل على وصول غير محدود مع عضوية بريميوم';
+  String get freeTrialDesc => 'عزز إبداعك واحصل على وصول غير محدود مع عضوية بريميوم';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '$freeTrialDays يومًا مجانيًا، ثم $priceString/$periodInvoiceStr';
   }
 
@@ -117,21 +117,32 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
   String get monthly => 'شهري';
 
   @override
-  String get notSureYet => 'Not Sure Yet?';
-
-  @override
-  String weekFreeTrial(int weeks) {
-    String _temp0 = intl.Intl.pluralLogic(
-      weeks,
-      locale: localeName,
-      other: '$weeks weeks free trial',
-      one: '1 week free trial',
-    );
-    return '$_temp0';
+  String monthlyPrice(String price) {
+    return '$price/شهر';
   }
 
   @override
-  String get otherPlans => 'Other plans';
+  String get notSureYet => 'لست متأكدًا بعد؟';
+
+  @override
+  String get otherPlans => 'خطط أخرى';
+
+  @override
+  String get paymentAgreement =>
+      'سيتم تجديد الاشتراكات تلقائيًا ما لم يتم إيقاف التجديد التلقائي قبل 24 ساعة على الأقل من نهاية الفترة الحالية. سيتم خصم المبلغ من حسابك وفقًا لخطة التجديد الخاصة بك خلال 24 ساعة قبل نهاية الفترة الحالية. يمكنك إدارة أو إيقاف التجديد التلقائي في إعدادات حسابك في أي وقت بعد الشراء.';
+
+  @override
+  String get paymentAgreementFreeTrial =>
+      'سيتم خصم المبلغ من حسابك في نهاية الفترة التجريبية المجانية. يمكنك الإلغاء في أي وقت خلال الفترة التجريبية المجانية ولن يتم تطبيق أي رسوم.';
+
+  @override
+  String get paymentFailed => 'فشل الدفع';
+
+  @override
+  String get paymentInfoPending => 'دفعتك قيد الانتظار، يُرجى الانتظار. إذا واجهت مشكلة، يُرجى الاتصال بنا على contact@everpixel.org.';
+
+  @override
+  String get paymentInfoTitle => 'معلومات الدفع';
 
   @override
   String get perWeek => ' / أسبوع';
@@ -145,7 +156,13 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
   String get popular => 'شائع';
 
   @override
-  String get restorePurchases => 'Restore Purchases';
+  String get privacyPolicy => 'سياسة الخصوصية';
+
+  @override
+  String get restore => 'استعادة';
+
+  @override
+  String get restorePurchases => 'استعادة المشتريات';
 
   @override
   String get save => 'حفظ';
@@ -163,8 +180,11 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
   String get startFreeTrial => 'ابدأ التجربة المجانية';
 
   @override
+  String get termsOfUse => 'شروط الاستخدام';
+
+  @override
   String thenPerWeek(String price) {
-    return 'then \$$price/week';
+    return 'ثم $price/أسبوع';
   }
 
   @override
@@ -176,7 +196,12 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
   String get unlimitedDownload => 'تنزيل غير محدود';
 
   @override
-  String get unlockFullPower => 'Unlock Full Power';
+  String get unlockFullPower => 'افتح جميع الميزات';
+
+  @override
+  String unlockFullPowerDescription(String appName) {
+    return 'قم بإلغاء قفل القوة الكاملة لتطبيق $appName – أفضل تطبيق لتحرير الذكاء الاصطناعي.';
+  }
 
   @override
   String get upgradeNow => 'قم بالترقية الآن';
@@ -191,10 +216,26 @@ class PaywallLocalizationsAr extends PaywallLocalizations {
   String get weekly => 'أسبوعي';
 
   @override
+  String weeklyPrice(String price) {
+    return '$price/أسبوع';
+  }
+
+  @override
+  String weeksFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks أسابيع تجريبية مجانية', one: 'أسبوع تجريبي مجاني');
+    return '$_temp0';
+  }
+
+  @override
   String get yearly => 'سنوي';
 
   @override
   String yearlyPrice(String price) {
-    return '\$$price/year';
+    return '$price/سنة';
+  }
+
+  @override
+  String trialUserCountText(String userCount, String hours) {
+    return '$userCount people started a trial in the last $hours hours!';
   }
 }

@@ -23,17 +23,13 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   String get bestOffer => 'LEGJOBB AJÁNLAT';
 
   @override
+  String get bestValue => 'LEGJOBB ÉRTÉK';
+
+  @override
   String get cancelAtAnyTime => 'Bármikor lemondhatja';
 
   @override
-  String get chooseYourPlan => 'Choose Your Plan';
-
-  @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return '$freeTrialDay nap után számlázunk $price összeget $invoiceDuration-ig, amíg le nem mondod.';
   }
 
@@ -48,10 +44,19 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   }
 
   @override
-  String get continueBtn => 'Continue';
+  String get chooseYourPlan => 'Válassza ki a csomagot';
 
   @override
-  String get enableFreeTrial => 'Enable Free Trial';
+  String get continueBtn => 'Folytatás';
+
+  @override
+  String daysFreeTrial(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days napos ingyenes próba', one: '1 napos ingyenes próba');
+    return '$_temp0';
+  }
+
+  @override
+  String get enableFreeTrial => 'Ingyenes próba engedélyezése';
 
   @override
   String get exclusiveFeatures => 'Exkluzív funkciók';
@@ -65,15 +70,10 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   }
 
   @override
-  String get freeTrialDesc =>
-      'Növelje kreativitását, és kapjon korlátlan hozzáférést prémium tagsággal';
+  String get freeTrialDesc => 'Növelje kreativitását, és kapjon korlátlan hozzáférést prémium tagsággal';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '$freeTrialDays napig ingyenes, utána $priceString/$periodInvoiceStr';
   }
 
@@ -81,23 +81,19 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   String get freeTrialProperty1Big => 'Használja ki ingyenes próbaidőszakát';
 
   @override
-  String get freeTrialProperty1Small =>
-      'Egyszerűen aktiválhatja egy kattintással';
+  String get freeTrialProperty1Small => 'Egyszerűen aktiválhatja egy kattintással';
 
   @override
-  String get freeTrialProperty2Big =>
-      'Ma: Azonnal oldja fel az összes funkciót';
+  String get freeTrialProperty2Big => 'Ma: Azonnal oldja fel az összes funkciót';
 
   @override
-  String get freeTrialProperty2Small =>
-      'Férjen hozzá az összes funkcióhoz most';
+  String get freeTrialProperty2Small => 'Férjen hozzá az összes funkcióhoz most';
 
   @override
   String get freeTrialProperty3Big => 'Próbaidőszak végi emlékeztető';
 
   @override
-  String get freeTrialProperty3Small =>
-      'Értesítést küldünk, amikor a próbaidőszak lejár';
+  String get freeTrialProperty3Small => 'Értesítést küldünk, amikor a próbaidőszak lejár';
 
   @override
   String get freeTrialProperty4Big => 'Élvezze a korlátlan letöltéseket';
@@ -121,21 +117,33 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   String get monthly => 'Havi';
 
   @override
-  String get notSureYet => 'Not Sure Yet?';
-
-  @override
-  String weekFreeTrial(int weeks) {
-    String _temp0 = intl.Intl.pluralLogic(
-      weeks,
-      locale: localeName,
-      other: '$weeks weeks free trial',
-      one: '1 week free trial',
-    );
-    return '$_temp0';
+  String monthlyPrice(String price) {
+    return '$price/hónap';
   }
 
   @override
-  String get otherPlans => 'Other plans';
+  String get notSureYet => 'Még nem biztos?';
+
+  @override
+  String get otherPlans => 'További csomagok';
+
+  @override
+  String get paymentAgreement =>
+      'Az előfizetések automatikusan megújulnak, kivéve, ha az automatikus megújítás ki van kapcsolva legalább 24 órával a jelenlegi időszak vége előtt. Fiókját a tervének megfelelően számlázzuk ki a jelenlegi időszak vége előtti 24 órán belül a megújításért. A vásárlás után bármikor kezelheti vagy kikapcsolhatja az automatikus megújítást a fiók beállításaiban.';
+
+  @override
+  String get paymentAgreementFreeTrial =>
+      'A fizetést a fiókjára terheljük a próbaidőszak végén. A próbaidőszak alatt bármikor lemondhatja, és nem kerül felszámításra díj.';
+
+  @override
+  String get paymentFailed => 'Fizetés sikertelen';
+
+  @override
+  String get paymentInfoPending =>
+      'A fizetés folyamatban van, kérjük, várjon. Ha problémája van a tranzakcióval, kérjük, írjon a contact@everpixel.org címre.';
+
+  @override
+  String get paymentInfoTitle => 'Fizetési információ';
 
   @override
   String get perWeek => ' / hét';
@@ -149,7 +157,13 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   String get popular => 'Népszerű';
 
   @override
-  String get restorePurchases => 'Restore Purchases';
+  String get privacyPolicy => 'Adatvédelmi irányelvek';
+
+  @override
+  String get restore => 'Visszaállítás';
+
+  @override
+  String get restorePurchases => 'Vásárlások visszaállítása';
 
   @override
   String get save => 'Mentés';
@@ -167,8 +181,11 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   String get startFreeTrial => 'Ingyenes próba indítása';
 
   @override
+  String get termsOfUse => 'Felhasználási feltételek';
+
+  @override
   String thenPerWeek(String price) {
-    return 'then \$$price/week';
+    return 'azután $price/hét';
   }
 
   @override
@@ -180,7 +197,12 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   String get unlimitedDownload => 'Korlátlan letöltés';
 
   @override
-  String get unlockFullPower => 'Unlock Full Power';
+  String get unlockFullPower => 'Minden funkció feloldása';
+
+  @override
+  String unlockFullPowerDescription(String appName) {
+    return 'Oldd fel a $appName teljes erejét – a végső AI szerkesztő alkalmazás.';
+  }
 
   @override
   String get upgradeNow => 'Frissítés most';
@@ -195,10 +217,26 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   String get weekly => 'Heti';
 
   @override
+  String weeklyPrice(String price) {
+    return '$price/hét';
+  }
+
+  @override
+  String weeksFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(weeks, locale: localeName, other: '$weeks hetes ingyenes próba', one: '1 hetes ingyenes próba');
+    return '$_temp0';
+  }
+
+  @override
   String get yearly => 'Éves';
 
   @override
   String yearlyPrice(String price) {
-    return '\$$price/year';
+    return '$price/év';
+  }
+
+  @override
+  String trialUserCountText(String userCount, String hours) {
+    return '$userCount people started a trial in the last $hours hours!';
   }
 }

@@ -23,17 +23,13 @@ class PaywallLocalizationsRo extends PaywallLocalizations {
   String get bestOffer => 'Cea mai bună ofertă';
 
   @override
+  String get bestValue => 'CEA MAI BUNĂ VALOARE';
+
+  @override
   String get cancelAtAnyTime => 'Anulați în orice moment';
 
   @override
-  String get chooseYourPlan => 'Choose Your Plan';
-
-  @override
-  String chargingInfoFreeTrial(
-    String price,
-    String freeTrialDay,
-    String invoiceDuration,
-  ) {
+  String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
     return 'Vei plăti $price după $freeTrialDay zile $invoiceDuration până la anulare.';
   }
 
@@ -48,10 +44,19 @@ class PaywallLocalizationsRo extends PaywallLocalizations {
   }
 
   @override
-  String get continueBtn => 'Continue';
+  String get chooseYourPlan => 'Alegeți planul';
 
   @override
-  String get enableFreeTrial => 'Enable Free Trial';
+  String get continueBtn => 'Continuă';
+
+  @override
+  String daysFreeTrial(int days) {
+    String _temp0 = intl.Intl.pluralLogic(days, locale: localeName, other: '$days zile de probă gratuită', one: '1 zi de probă gratuită');
+    return '$_temp0';
+  }
+
+  @override
+  String get enableFreeTrial => 'Activează perioada de probă gratuită';
 
   @override
   String get exclusiveFeatures => 'Caracteristici exclusive';
@@ -65,15 +70,10 @@ class PaywallLocalizationsRo extends PaywallLocalizations {
   }
 
   @override
-  String get freeTrialDesc =>
-      'Îmbunătățiți-vă creativitatea și obțineți acces nelimitat cu un abonament premium';
+  String get freeTrialDesc => 'Îmbunătățiți-vă creativitatea și obțineți acces nelimitat cu un abonament premium';
 
   @override
-  String freeTrialPriceInfoText(
-    String freeTrialDays,
-    String priceString,
-    String periodInvoiceStr,
-  ) {
+  String freeTrialPriceInfoText(String freeTrialDays, String priceString, String periodInvoiceStr) {
     return '$freeTrialDays zile gratuite, apoi $priceString/$periodInvoiceStr';
   }
 
@@ -84,8 +84,7 @@ class PaywallLocalizationsRo extends PaywallLocalizations {
   String get freeTrialProperty1Small => 'Activați ușor cu un singur clic';
 
   @override
-  String get freeTrialProperty2Big =>
-      'Astăzi: deblochează instantaneu toate funcțiile';
+  String get freeTrialProperty2Big => 'Astăzi: deblochează instantaneu toate funcțiile';
 
   @override
   String get freeTrialProperty2Small => 'Accesați toate funcțiile acum';
@@ -94,8 +93,7 @@ class PaywallLocalizationsRo extends PaywallLocalizations {
   String get freeTrialProperty3Big => 'Memento la sfârșitul procesului';
 
   @override
-  String get freeTrialProperty3Small =>
-      'Vă vom trimite o notificare când se termină perioada de încercare';
+  String get freeTrialProperty3Small => 'Vă vom trimite o notificare când se termină perioada de încercare';
 
   @override
   String get freeTrialProperty4Big => 'Bucurați-vă de descărcări nelimitate';
@@ -104,8 +102,7 @@ class PaywallLocalizationsRo extends PaywallLocalizations {
   String get freeTrialProperty4Small => 'Ușor de utilizat și de personalizat';
 
   @override
-  String get freeTrialReminder =>
-      'Amintește-mi înainte ca perioada de încercare gratuită să expire';
+  String get freeTrialReminder => 'Amintește-mi înainte ca perioada de încercare gratuită să expire';
 
   @override
   String get getUnlimitedAccess => 'Obține acces nelimitat la toate funcțiile!';
@@ -120,21 +117,33 @@ class PaywallLocalizationsRo extends PaywallLocalizations {
   String get monthly => 'Lunar';
 
   @override
-  String get notSureYet => 'Not Sure Yet?';
-
-  @override
-  String weekFreeTrial(int weeks) {
-    String _temp0 = intl.Intl.pluralLogic(
-      weeks,
-      locale: localeName,
-      other: '$weeks weeks free trial',
-      one: '1 week free trial',
-    );
-    return '$_temp0';
+  String monthlyPrice(String price) {
+    return '$price/lună';
   }
 
   @override
-  String get otherPlans => 'Other plans';
+  String get notSureYet => 'Încă nu ești sigur?';
+
+  @override
+  String get otherPlans => 'Alte planuri';
+
+  @override
+  String get paymentAgreement =>
+      'Abonamentele se vor reînnoi automat, cu excepția cazului în care reînnoirea automată este dezactivată cu cel puțin 24 de ore înainte de sfârșitul perioadei curente.Contul dvs. va fi perceput conform planului dvs. de reînnoire în termen de 24 de ore înainte de sfârșitul perioadei curente.Puteți gestiona sau dezactiva reînnoirea automată în setările contului dvs. în orice moment după cumpărare.';
+
+  @override
+  String get paymentAgreementFreeTrial =>
+      'Plata va fi percepută în contul dvs. la sfârșitul perioadei de încercare gratuită.Puteți anula oricând în perioada de încercare gratuită și nu se vor aplica taxe.';
+
+  @override
+  String get paymentFailed => 'Plata a eșuat';
+
+  @override
+  String get paymentInfoPending =>
+      'Plata ta este în așteptare, te rugăm să aștepți. Dacă întâmpini probleme, contactează-ne la contact@everpixel.org.';
+
+  @override
+  String get paymentInfoTitle => 'Informații de plată';
 
   @override
   String get perWeek => ' / săptămână';
@@ -148,7 +157,13 @@ class PaywallLocalizationsRo extends PaywallLocalizations {
   String get popular => 'Popular';
 
   @override
-  String get restorePurchases => 'Restore Purchases';
+  String get privacyPolicy => 'Politica de confidențialitate';
+
+  @override
+  String get restore => 'Restabili';
+
+  @override
+  String get restorePurchases => 'Restaurează achizițiile';
 
   @override
   String get save => 'Salvați';
@@ -166,8 +181,11 @@ class PaywallLocalizationsRo extends PaywallLocalizations {
   String get startFreeTrial => 'Incepe o probă gratuită';
 
   @override
+  String get termsOfUse => 'Termeni de utilizare';
+
+  @override
   String thenPerWeek(String price) {
-    return 'then \$$price/week';
+    return 'apoi $price/săptămână';
   }
 
   @override
@@ -179,7 +197,12 @@ class PaywallLocalizationsRo extends PaywallLocalizations {
   String get unlimitedDownload => 'Descărcare nelimitată';
 
   @override
-  String get unlockFullPower => 'Unlock Full Power';
+  String get unlockFullPower => 'Deblochează toate funcționalitățile';
+
+  @override
+  String unlockFullPowerDescription(String appName) {
+    return 'Dezvăluie întreaga putere a $appName – aplicația supremă de editare cu AI.';
+  }
 
   @override
   String get upgradeNow => 'Upgrade acum';
@@ -194,10 +217,31 @@ class PaywallLocalizationsRo extends PaywallLocalizations {
   String get weekly => 'Săptămânal';
 
   @override
+  String weeklyPrice(String price) {
+    return '$price/săptămână';
+  }
+
+  @override
+  String weeksFreeTrial(int weeks) {
+    String _temp0 = intl.Intl.pluralLogic(
+      weeks,
+      locale: localeName,
+      other: '$weeks săptămâni de probă gratuită',
+      one: '1 săptămână de probă gratuită',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get yearly => 'Anual';
 
   @override
   String yearlyPrice(String price) {
-    return '\$$price/year';
+    return '$price/an';
+  }
+
+  @override
+  String trialUserCountText(String userCount, String hours) {
+    return '$userCount people started a trial in the last $hours hours!';
   }
 }
