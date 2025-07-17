@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gui_paywall/gui_paywall.dart';
+import 'package:gui_paywall/src/context_extensions.dart';
+import 'package:gui_paywall/src/paywalls/plan_screen_2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'GUI Paywall Example',
-      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple), useMaterial3: true),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
       localizationsDelegates: const [
         PaywallLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -29,22 +34,31 @@ class MyApp extends StatelessWidget {
 class PaywallListScreen extends StatelessWidget {
   const PaywallListScreen({super.key});
 
-  PaywallConfig _createMockPaywallConfig() {
-    final products = [
+  PaywallConfig _createMockPaywallConfig(BuildContext context) => PaywallConfig(
+    products: [
+      PaywallProduct(
+        storeId: 'not_sure',
+        price: 0,
+        currency: 'USD',
+        priceString: '',
+        period: ProductPeriod.weekly,
+        title: context.localizations.notSureYet,
+        description: '',
+      ),
       const PaywallProduct(
         storeId: 'weekly_sub',
         price: 4.99,
         currency: 'USD',
-        priceString: '\$4.99',
+        priceString: ' \$4.99',
         period: ProductPeriod.weekly,
-        title: 'Weekly Premium',
+        title: 'Weekly ',
         description: 'Get premium access for 1 week',
       ),
       const PaywallProduct(
         storeId: 'monthly_sub',
         price: 9.99,
         currency: 'USD',
-        priceString: '\$9.99',
+        priceString: ' \$9.99',
         period: ProductPeriod.monthly,
         title: 'Monthly Premium',
         description: 'Get premium access for 1 month',
@@ -54,34 +68,33 @@ class PaywallListScreen extends StatelessWidget {
         storeId: 'yearly_sub',
         price: 49.99,
         currency: 'USD',
-        priceString: '\$49.99',
+        priceString: ' \$49.99',
         period: ProductPeriod.yearly,
         title: 'Yearly Premium',
         description: 'Best value - Save 58%!',
         freeTrialDays: 7,
       ),
-    ];
-
-    return PaywallConfig(
-      products: products,
-      onPurchase: (product) async {
-        debugPrint('Purchasing ${product.storeId}');
-        await Future.delayed(const Duration(seconds: 2));
-        return true;
-      },
-      processUI: <T>(action) async => await action(),
-      isPro: () => false,
-      onClose: () => debugPrint('Paywall closed'),
-      singleDisplayProduct: 1,
-    );
-  }
+    ],
+    onPurchase: (product) async {
+      debugPrint('Purchasing ${product.storeId}');
+      await Future.delayed(const Duration(seconds: 2));
+      return true;
+    },
+    processUI: <T>(action) async => await action(),
+    isPro: () => false,
+    onClose: () => debugPrint('Paywall closed'),
+    singleDisplayProduct: 1,
+  );
 
   @override
   Widget build(BuildContext context) {
-    final paywallConfig = _createMockPaywallConfig();
+    final paywallConfig = _createMockPaywallConfig(context);
 
     return Scaffold(
-      appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary, title: const Text('Paywall Examples')),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('Paywall Examples'),
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -95,15 +108,33 @@ class PaywallListScreen extends StatelessWidget {
                   paywallConfig,
                   userComments: const {
                     'comments': [
-                      {'name': 'John Doe', 'comment': 'Amazing app! The premium features are worth it.', 'rating': 5},
-                      {'name': 'Jane Smith', 'comment': 'Love the AI features. Highly recommended!', 'rating': 5},
+                      {
+                        'name': 'John Doe',
+                        'comment':
+                            'Amazing app! The premium features are worth it.',
+                        'rating': 5,
+                      },
+                      {
+                        'name': 'Jane Smith',
+                        'comment': 'Love the AI features. Highly recommended!',
+                        'rating': 5,
+                      },
                     ],
                   },
                   features: const {
                     'features': [
-                      {'title': 'AI Enhancement', 'description': 'Enhance your photos with AI'},
-                      {'title': 'Remove Background', 'description': 'Remove backgrounds instantly'},
-                      {'title': 'Filters & Effects', 'description': '100+ premium filters'},
+                      {
+                        'title': 'AI Enhancement',
+                        'description': 'Enhance your photos with AI',
+                      },
+                      {
+                        'title': 'Remove Background',
+                        'description': 'Remove backgrounds instantly',
+                      },
+                      {
+                        'title': 'Filters & Effects',
+                        'description': '100+ premium filters',
+                      },
                     ],
                   },
                 ),
@@ -120,11 +151,19 @@ class PaywallListScreen extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.play_circle_outline, size: 80, color: Colors.blue),
+                          Icon(
+                            Icons.play_circle_outline,
+                            size: 80,
+                            color: Colors.blue,
+                          ),
                           SizedBox(height: 16),
                           Text(
                             'Demo Video',
-                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blue),
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            ),
                           ),
                         ],
                       ),
@@ -133,7 +172,19 @@ class PaywallListScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              _buildPaywallButton(context, 'Plan Screen', () => PlanScreen(paywall: paywallConfig, image: Image.asset('assets/images/woman.jpeg'))),
+              _buildPaywallButton(
+                context,
+                'Plan Screen',
+                () =>
+                    PlanScreen(image: Image.asset('assets/images/woman.jpeg')),
+              ),
+              const SizedBox(height: 16),
+              _buildPaywallButton(
+                context,
+                'Plan Screen 2',
+                () =>
+                    PlanScreen2(image: Image.asset('assets/images/woman.jpeg')),
+              ),
             ],
           ),
         ),
@@ -141,11 +192,18 @@ class PaywallListScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildPaywallButton(BuildContext context, String title, Widget Function() destinationBuilder) {
+  Widget _buildPaywallButton(
+    BuildContext context,
+    String title,
+    Widget Function() destinationBuilder,
+  ) {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => destinationBuilder())),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => destinationBuilder()),
+        ),
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

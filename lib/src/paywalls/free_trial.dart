@@ -278,11 +278,16 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
   }
 
   Widget overviewToAppWidget() {
-    final List<dynamic> features = widget.features['features'];
-    final _appFeatures = {
-      for (Map<String, dynamic> feature in features)
-        ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(8)), child: PaywallImageGallery.slider(List<String>.from(feature['images']))):
-            parseLocalized(feature['name']),
+    final List<dynamic> features = widget.features['features'] ?? [];
+    final _appFeatures = <Widget, String?>{
+      for (final feature in features)
+        if (feature is Map<String, dynamic>)
+          ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            child: PaywallImageGallery.slider((feature['images'] is Iterable) ? List<String>.from(feature['images'] ?? <String>[]) : <String>[]),
+          ): parseLocalized(
+            feature['name'],
+          ),
     };
 
     return _CustomScrollableWidget(
@@ -477,6 +482,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
   }
 
   void propertiesListDeactivateFunction() {
+    if (!scrollController.hasClients) return;
     if (scrollController.position.pixels > MediaQuery.of(context).size.height * 0.7 && activateProperitesList[0] == true) {
       setState(() {
         activateProperitesList = List.filled(4, false);
@@ -485,6 +491,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
   }
 
   void propertiesListActivateFunction() {
+    if (!scrollController.hasClients) return;
     for (int i = 0; i < 4; i++) {
       if (scrollController.position.pixels < MediaQuery.of(context).size.height * 0.7 && activateProperitesList[i] == false) {
         Future.delayed(Duration(milliseconds: 50 * (i + 1)), () {
@@ -497,6 +504,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
   }
 
   void titlesScrollControllerFunction() {
+    if (!scrollController.hasClients) return;
     if (scrollController.position.pixels < MediaQuery.of(context).size.height * 0.3 && activateTitles == false) {
       setState(() {
         activateTitles = true;
@@ -510,6 +518,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
   }
 
   void premiumPropertiesScrollControllerFunction() {
+    if (!scrollController.hasClients) return;
     if (scrollController.position.pixels > MediaQuery.of(context).size.height * 0.9 && activatePremiumList == false) {
       setState(() {
         activatePremiumList = true;

@@ -40,5 +40,7 @@
   "userReviews": "Recensioni degli utenti",
   "week": "Settimana",
   "weekly": "Settimanale",
-  "yearly": "Annuale"
+  "yearly": "Annuale",
+  "weekFreeTrial": "{weeks, plural, =1{1 week free trial} other{{weeks} weeks free trial}}",
+  "unlockFullPower": "Unlock the full power of Remini-the ultimate  AI Photo Enhancer."
 }

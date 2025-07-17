@@ -40,5 +40,18 @@
   "userReviews": "Kullanıcı Yorumları",
   "week": "Hafta",
   "weekly": "Haftalık",
-  "yearly": "Yıllık"
+  "yearly": "Yıllık",
+  "weekFreeTrial": "{weeks, plural, =1{1 week free trial} other{{weeks} weeks free trial}}",
+  "unlockFullPower": "Unlock the full power of Remini-the ultimate  AI Photo Enhancer.",
+  "restorePurchase": "Satın alımı geri yükle",
+  "startEditingSeeMagicHappen": "Düzenlemeye Başla\nSihri Gör",
+  "noCommitmentsCancelAnytime": "Taahhüt yok, istediğin zaman iptal et",
+  "trialUsedInfo": "Son 24 saatte {people} kişi 7 günlük denemeyi kullandı!",
+  "sevenDayFullAccess": "7 Günlük Tam Erişim",
+  "mostPopular": "EN POPÜLER",
+  "monthlyAccess": "Aylık Erişim",
+  "savePercent": "%{percent} TASARRUF",
+  "priceWithCurrency": "{price}₺",
+  "continueText": "Devam et",
+  "trialDisclaimer": "7 günlük deneme için {trialPrice}₺, ardından haftalık {weeklyPrice}₺ otomatik yenileme.\n%100 memnun kalmazsanız iade isteyin."
 }
