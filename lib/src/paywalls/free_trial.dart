@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 // Project imports:
-import 'package:gui_paywall/src/context_extensions.dart';
+import 'package:gui_paywall/src/extensions.dart';
 import '../../generated/assets.gen.dart';
 import '../../gui_paywall.dart';
 import '../my_localizations.dart';
+import '../widgets/fitted_text.dart';
 
 // Local imports:
 
@@ -16,17 +17,51 @@ int _animationDurationMs = 300;
 int _fastAnimationDurationMs = 300;
 double _animatedFirstPos = -100;
 
-class PaywallFreeTrial extends StatefulWidget {
-  final PaywallConfig paywall;
+class PaywallFreeTrial extends PaywallBase {
   final Map<String, dynamic> userComments;
   final Map<String, dynamic> features;
-  const PaywallFreeTrial(this.paywall, {super.key, required this.userComments, required this.features});
+  const PaywallFreeTrial(super.paywall, {super.key, required this.userComments, required this.features});
+
+  @override
+  PaywallConfig validateConfiguration() {
+    PaywallConfig _paywall = paywall.freeTrialOnly.preferExpensive;
+    // Check that products exist
+    if (_paywall.products.isEmpty) {
+      paywall.onError('PaywallFreeTrial requires at least one product');
+    }
+
+    // Check that all products have free trials
+    final productsWithoutTrials = _paywall.products.where((p) => !p.haveFreeTrial).toList();
+    if (productsWithoutTrials.isNotEmpty) {
+      paywall.onError('PaywallFreeTrial expects all products to have free trials, but found ${productsWithoutTrials.length} products without trials');
+    }
+
+    // Check for yearly product (used as default selection)
+    final hasYearlyProduct = _paywall.products.any((p) => p.period == ProductPeriod.yearly);
+    if (!hasYearlyProduct && _paywall.products.isNotEmpty) {
+      paywall.onError('No yearly product found, default selection may not work as expected');
+    }
+
+    // Check for required custom data
+    if (_paywall.customData == null) {
+      paywall.onError('No customData provided');
+    } else {
+      if (!_paywall.customData!.containsKey('user_comments_path')) {
+        paywall.onError('No user_comments_path specified in customData, using default');
+      }
+      if (!_paywall.customData!.containsKey('features_path')) {
+        paywall.onError('No features_path specified in customData, using default');
+      }
+    }
+
+    return _paywall;
+  }
 
   @override
   State<PaywallFreeTrial> createState() => _PaywallFreeTrialState();
 }
 
-class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
+class _PaywallFreeTrialState extends State<PaywallFreeTrial> with PaywallSanityCheck<PaywallFreeTrial> {
   late List<PaywallProduct> products = widget.paywall.products;
   PaywallProduct? get selectedProduct => products.firstWhere((e) => e.period == ProductPeriod.yearly);
 
@@ -95,7 +130,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
             ),
           ),
           Positioned(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 15,
             left: 0,
             right: 0,
             child: Center(child: getPremiumButton()),
@@ -123,7 +158,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
         width: MediaQuery.of(context).size.width * 0.75,
         height: MediaQuery.of(context).size.height * 0.07,
         decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(24)),
-        child: Text(
+        child: FittedText(
           context.localizations.startFreeTrial,
           style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
         ),
@@ -137,7 +172,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          FittedText(
             context.localizations.exclusiveFeatures,
             style: const TextStyle(color: Colors.white, fontSize: 18),
             textAlign: TextAlign.start,
@@ -168,7 +203,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
         child: SizedBox(height: MediaQuery.of(context).size.height * 0.06, width: MediaQuery.of(context).size.height * 0.06, child: image),
       ),
       horizontalPadding(),
-      Text(title, style: const TextStyle(color: Colors.white, fontSize: 18)),
+      FittedText(title, style: const TextStyle(color: Colors.white, fontSize: 18)),
     ],
   );
 
@@ -197,7 +232,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
                 width: MediaQuery.of(context).size.width * 0.2,
               ),
               const SizedBox(width: 5),
-              Text("$starCount ($totalDownload)", style: const TextStyle(color: Colors.white, fontSize: 12)),
+              FittedText("$starCount ($totalDownload)", style: const TextStyle(color: Colors.white, fontSize: 12)),
             ],
           ),
         ],
@@ -233,7 +268,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  Text(name, style: const TextStyle(color: Colors.white)),
+                  FittedText(name, style: const TextStyle(color: Colors.white)),
                 ],
               ),
               const Spacer(),
@@ -243,15 +278,16 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
               ),
             ],
           ),
-          Text(
+          FittedText(
             title,
             style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0, top: 4),
-            child: Text(
+            child: FittedText(
               comment,
               maxLines: 4,
+              textAlign: TextAlign.start,
               style: const TextStyle(color: Colors.white, fontSize: 15, overflow: TextOverflow.ellipsis),
             ),
           ),
@@ -278,16 +314,11 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
   }
 
   Widget overviewToAppWidget() {
-    final List<dynamic> features = widget.features['features'] ?? [];
-    final _appFeatures = <Widget, String?>{
-      for (final feature in features)
-        if (feature is Map<String, dynamic>)
-          ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-            child: PaywallImageGallery.slider((feature['images'] is Iterable) ? List<String>.from(feature['images'] ?? <String>[]) : <String>[]),
-          ): parseLocalized(
-            feature['name'],
-          ),
+    final List<dynamic> features = widget.features['features'];
+    final _appFeatures = {
+      for (Map<String, dynamic> feature in features)
+        ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(8)), child: PaywallImageGallery.slider(List<String>.from(feature['images']))):
+            parseLocalized(feature['name']),
     };
 
     return _CustomScrollableWidget(
@@ -309,7 +340,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
         const Icon(Icons.notifications, color: Colors.white70, size: 41),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.5,
-          child: Text(
+          child: FittedText(
             context.localizations.freeTrialReminder,
             style: const TextStyle(color: Colors.white, fontSize: 15),
             textAlign: TextAlign.center,
@@ -363,7 +394,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Center(
-                child: Text(
+                child: FittedText(
                   title,
                   textAlign: TextAlign.center,
                   style: context.textTheme.displayLarge?.copyWith(color: Colors.white),
@@ -380,7 +411,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
   Widget getSmallTitle(String title) => Center(
     child: SizedBox(
       width: MediaQuery.of(context).size.width * 0.85,
-      height: MediaQuery.of(context).size.height * 0.05,
+      height: MediaQuery.of(context).size.height * 0.07,
       child: Stack(
         children: [
           AnimatedPositioned(
@@ -390,10 +421,10 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
             child: Center(
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.85,
-                child: Text(
+                child: FittedText(
                   title,
                   textAlign: TextAlign.center,
-                  maxLines: 3,
+                  maxLines: 2,
                   style: context.textTheme.labelMedium?.copyWith(color: Colors.white),
                 ),
               ),
@@ -463,12 +494,16 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
                     children: [
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.7,
-                        child: Text(bigTitle, style: const TextStyle(fontSize: 18, color: Colors.white)),
+                        child: FittedText(bigTitle, maxLines: 2, style: context.textTheme.titleMedium?.copyWith(color: Colors.white)),
                       ),
                       SizedBox(height: MediaQuery.of(context).size.height * 0.005),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.7,
-                        child: Text(smallTitle, maxLines: 2, style: TextStyle(fontSize: 12, color: Colors.white.withValues(alpha: 0.7))),
+                        child: FittedText(
+                          smallTitle,
+                          maxLines: 2,
+                          style: context.textTheme.bodySmall?.copyWith(color: Colors.white.withValues(alpha: 0.8)),
+                        ),
                       ),
                     ],
                   ),
@@ -482,7 +517,6 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
   }
 
   void propertiesListDeactivateFunction() {
-    if (!scrollController.hasClients) return;
     if (scrollController.position.pixels > MediaQuery.of(context).size.height * 0.7 && activateProperitesList[0] == true) {
       setState(() {
         activateProperitesList = List.filled(4, false);
@@ -491,7 +525,6 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
   }
 
   void propertiesListActivateFunction() {
-    if (!scrollController.hasClients) return;
     for (int i = 0; i < 4; i++) {
       if (scrollController.position.pixels < MediaQuery.of(context).size.height * 0.7 && activateProperitesList[i] == false) {
         Future.delayed(Duration(milliseconds: 50 * (i + 1)), () {
@@ -504,7 +537,6 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
   }
 
   void titlesScrollControllerFunction() {
-    if (!scrollController.hasClients) return;
     if (scrollController.position.pixels < MediaQuery.of(context).size.height * 0.3 && activateTitles == false) {
       setState(() {
         activateTitles = true;
@@ -518,7 +550,6 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> {
   }
 
   void premiumPropertiesScrollControllerFunction() {
-    if (!scrollController.hasClients) return;
     if (scrollController.position.pixels > MediaQuery.of(context).size.height * 0.9 && activatePremiumList == false) {
       setState(() {
         activatePremiumList = true;
@@ -553,7 +584,7 @@ class _CustomScrollableWidget extends StatelessWidget {
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.9,
-          child: Text(
+          child: FittedText(
             title,
             style: const TextStyle(color: Colors.white, fontSize: 18),
             textAlign: TextAlign.start,
@@ -577,7 +608,7 @@ class _CustomScrollableWidget extends StatelessWidget {
                 SizedBox(
                   height: widgetHeight * 0.1,
                   child: Center(
-                    child: Text(
+                    child: FittedText(
                       childWidgets.values.elementAt(index)!,
                       style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                     ),

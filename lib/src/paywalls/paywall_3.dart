@@ -1,6 +1,5 @@
 // Dart imports:
 import 'dart:math';
-import 'dart:ui' as ui;
 
 // Flutter imports:
 import 'package:flutter/material.dart';
@@ -10,7 +9,8 @@ import 'package:flutter_svg/svg.dart';
 
 // Project imports:
 import '../../gui_paywall.dart';
-import '../context_extensions.dart';
+import '../extensions.dart';
+import '../widgets/fitted_text.dart';
 
 // Local imports:
 
@@ -28,7 +28,7 @@ class AnimatedSlide extends StatelessWidget {
     curve: curve,
     transform: Matrix4.translationValues(
       offset.dx * MediaQuery.of(context).size.width,
-      offset.dy * 100, // Using fixed height for slide
+      offset.dy * 78, // Height of tile + padding
       0,
     ),
     child: child,
@@ -41,7 +41,7 @@ class _FigmaConstants {
   static const double videoShadowBlurRadius = 26.8;
   static const Offset videoShadowOffset = Offset(0, 14);
   static const double videoShadowOpacity = 0.15;
-  static const double videoHeightRatio = 0.46;
+  static const double videoHeightRatio = 0.36;
 
   // Radio button
   static const double radioButtonSize = 24.0;
@@ -58,7 +58,7 @@ class _FigmaConstants {
 
   // Discount badge
   static const double discountBadgeTop = -12.0;
-  static const double discountBadgeRight = 40.0;
+  static const double discountBadgeRight = 20.0; // Reduced to prevent cutoff
   static const double discountBadgeVerticalPadding = 5.0;
   static const double discountBadgeHorizontalPadding = 9.5;
   static const double discountBadgeBorderRadius = 32.0;
@@ -73,6 +73,7 @@ class _FigmaConstants {
   static const double tileShadowOpacity = 0.4;
   static const double tileSpacing = 7.78;
   static const double tileHeight = 70.0;
+  static const double tileHeightExpanded = 85.0; // Bigger height for single display mode
 
   // See more button
   static const double seeMoreButtonBottomPadding = 38.0;
@@ -84,12 +85,6 @@ class _FigmaConstants {
   static const double purchaseButtonVerticalPadding = 10.0;
   static const double purchaseButtonHorizontalPadding = 52.0;
   static const double purchaseButtonBorderRadius = 6.0;
-
-  // Blur effect
-  static const double blurRadiusRatio = 497 / 393;
-  static const double blurTopRatio = 258 / 393;
-  static const double blurSigma = 250.0;
-  static const double blurBackgroundOpacity = 0.2;
 
   // Content padding
   static const double contentHorizontalPadding = 15.0;
@@ -105,34 +100,90 @@ class _FigmaConstants {
   // Colors
   static const Color selectedColor = Color(0xFFEAC544);
   static const Color unselectedColor = Color(0xFF9FACD4);
-  static const Color blurBackgroundColor = Color(0xFF3B6BFF);
 
   // Opacity values
   static const double selectedOpacity = 1.0;
   static const double unselectedOpacity = 0.5;
 }
 
-class Paywall3 extends StatefulWidget {
-  final PaywallConfig paywall;
+/// A premium paywall template with video showcase and sliding tile animations.
+///
+/// This paywall displays a video at the top and subscription options below.
+/// Initially shows only the longest duration product (typically yearly) with
+/// a "See other options" button that reveals additional products with a smooth
+/// sliding animation.
+///
+/// **Requirements:**
+/// - Accepts 2 or 3 products in the PaywallConfig
+/// - Products should have different durations (e.g., yearly, monthly, weekly)
+/// - The longest duration product is shown by default
+///
+/// **Features:**
+/// - Video showcase at the top with rounded bottom corners
+/// - Animated product tiles with selection state
+/// - Discount badges showing savings compared to shortest duration:
+///   - For 2 products: badge on the longest duration only
+///   - For 3 products: badges on both longest and middle duration
+/// - Smooth slide-in animation for additional products
+/// - Responsive layout that centers content vertically
+///
+/// **Usage:**
+/// ```dart
+/// Paywall3(
+///   paywallConfig,
+///   video: VideoPlayerWidget(),
+/// )
+/// ```
+class Paywall3 extends PaywallBase {
   final Widget video;
-  const Paywall3(this.paywall, {super.key, required this.video});
+  const Paywall3(super.paywall, {super.key, required this.video});
+
+  @override
+  PaywallConfig validateConfiguration() {
+    PaywallConfig _paywall = paywall.noFreeTrial.preferExpensive;
+    // Check product count (2-3 products expected)
+    final productCount = _paywall.products.length;
+    if (productCount < 2 || productCount > 3) {
+      _paywall.onError('Paywall3 expects 2 to 3 products, but got $productCount');
+    }
+
+    // Check that no products have free trials
+    final productsWithTrials = _paywall.products.where((p) => p.haveFreeTrial).toList();
+    if (productsWithTrials.isNotEmpty) {
+      _paywall.onError('Paywall3 expects products without free trials, but found ${productsWithTrials.length} products with trials');
+    }
+
+    // Check for different durations
+    final uniquePeriods = _paywall.products.map((p) => p.period).toSet();
+    if (uniquePeriods.length != _paywall.products.length) {
+      _paywall.onError('Products should have different durations for optimal display');
+    }
+
+    // Check for required custom data
+    if (_paywall.customData == null || !_paywall.customData!.containsKey('video_path')) {
+      _paywall.onError('No video_path specified in customData, using default');
+    }
+
+    return _paywall;
+  }
+
   @override
   Paywall3State createState() => Paywall3State();
 }
 
-class Paywall3State extends State<Paywall3> {
+class Paywall3State extends State<Paywall3> with PaywallSanityCheck<Paywall3> {
   // Sort products from longest duration to the shortest one
   late final List<PaywallProduct> _products = widget.paywall.productsSorted.reversed.toList();
-  // keep same selected product index - default to yearly
-  late PaywallProduct selectedProduct = _products.firstWhere(
-    (product) => product.period == ProductPeriod.yearly,
-    orElse: () => _products[widget.paywall.singleDisplayProduct.clamp(0, _products.length - 1)],
-  );
+  // Default to the longest duration product (first in our sorted list)
+  late PaywallProduct selectedProduct = _products.isNotEmpty
+      ? _products[0]
+      : _products[widget.paywall.singleDisplayProduct.clamp(0, _products.length - 1)];
   late bool isSingleDisplayTile = widget.paywall.isSingleDisplay;
   late bool isSingleOffer = _products.length == 1;
   final PageController _pageController = PageController();
   bool _showAllTiles = false;
   bool _isTrialSelected = false;
+  bool _isAnimating = false;
 
   // Helper to check if any product is actually selected (not trial)
   bool get isProductSelected => !_isTrialSelected;
@@ -141,19 +192,6 @@ class Paywall3State extends State<Paywall3> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
-  }
-
-  String _getLocalizedPeriodName(ProductPeriod period) {
-    switch (period) {
-      case ProductPeriod.weekly:
-        return context.localizations.weekly;
-      case ProductPeriod.monthly:
-        return context.localizations.monthly;
-      case ProductPeriod.yearly:
-        return context.localizations.yearly;
-      case ProductPeriod.lifetime:
-        return context.localizations.lifetime;
-    }
   }
 
   @override
@@ -204,232 +242,327 @@ class Paywall3State extends State<Paywall3> {
       );
     }
 
-    Widget tiles() {
-      Widget createTile(PaywallProduct? product, PaywallProduct shortestPackage, {bool isTrialTile = false}) {
-        // Trial tile data if isTrialTile is true
-        bool isTrial = isTrialTile;
-        bool isSelected = isTrial ? _isTrialSelected : (isProductSelected && product == selectedProduct);
-        double opacity = isSelected ? _FigmaConstants.selectedOpacity : _FigmaConstants.unselectedOpacity;
+    Widget tiles() => LayoutBuilder(
+      builder: (context, constraints) {
+        // Calculate available height for tiles
+        double availableHeight = constraints.maxHeight;
 
-        Widget radioButton() => Container(
-          width: _FigmaConstants.radioButtonSize,
-          height: _FigmaConstants.radioButtonSize,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: isSelected ? _FigmaConstants.selectedColor : _FigmaConstants.unselectedColor,
-              width: _FigmaConstants.radioButtonBorderWidth,
-            ),
-          ),
-          child: isSelected
-              ? Container(
-                  margin: const EdgeInsets.all(_FigmaConstants.radioButtonInnerMargin),
-                  decoration: const BoxDecoration(shape: BoxShape.circle, color: _FigmaConstants.selectedColor),
-                )
-              : null,
-        );
+        // Calculate tile heights based on display mode and number of products
+        double calculateTileHeight() {
+          if (!_showAllTiles && _products.length > 1) {
+            // Single display mode - only one tile visible
+            return min(_FigmaConstants.tileHeightExpanded, availableHeight * 0.3);
+          } else {
+            // All tiles visible - distribute space evenly
+            int visibleTileCount = _products.length;
+            double totalSpacing =
+                (_FigmaConstants.tileBottomPadding * visibleTileCount) +
+                _FigmaConstants.seeMoreButtonTopSpacing +
+                40; // Extra spacing for see more button
+            double availableForTiles = availableHeight - totalSpacing;
+            double calculatedHeight = availableForTiles / visibleTileCount;
+            return min(_FigmaConstants.tileHeight, max(60, calculatedHeight));
+          }
+        }
 
-        Widget productLabel() => Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: _FigmaConstants.productLabelHorizontalPadding,
-            vertical: _FigmaConstants.productLabelVerticalPadding,
-          ),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(_FigmaConstants.productLabelBorderRadius)),
-          child: Text(
-            isTrial ? context.localizations.trialDays(3) : _getLocalizedPeriodName(product!.period),
-            style: context.textTheme.bodyLarge?.copyWith(color: isSelected ? context.colorScheme.onPrimary : context.colorScheme.secondary),
-            textAlign: TextAlign.center,
-          ),
-        );
+        double tileHeight = calculateTileHeight();
 
-        Widget priceInfo() => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              isTrial
-                  ? context.localizations.free
-                  : product!.period == ProductPeriod.lifetime
-                  ? (product.priceString ?? '${product.price.toStringAsFixed(2)} ${product.currency}')
-                  : '${product.priceForDays(7).toStringAsFixed(2)} ${product.currency}${context.localizations.perWeek}',
-              style: context.textTheme.bodyMedium?.copyWith(
-                color: isSelected ? context.colorScheme.onPrimary : context.colorScheme.secondary,
-                fontWeight: FontWeight.w500,
+        Widget createTile(PaywallProduct? product, PaywallProduct shortestPackage, {bool isTrialTile = false, int? productIndex}) {
+          // Trial tile data if isTrialTile is true
+          bool isTrial = isTrialTile;
+          bool isSelected = isTrial ? _isTrialSelected : (isProductSelected && product == selectedProduct);
+          double opacity = isSelected ? _FigmaConstants.selectedOpacity : _FigmaConstants.unselectedOpacity;
+
+          Widget radioButton() => Container(
+            width: _FigmaConstants.radioButtonSize,
+            height: _FigmaConstants.radioButtonSize,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: isSelected ? _FigmaConstants.selectedColor : _FigmaConstants.unselectedColor,
+                width: _FigmaConstants.radioButtonBorderWidth,
               ),
-              textAlign: TextAlign.end,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
-            if (!isTrial && product!.period != ProductPeriod.lifetime)
-              Text(
-                product.priceString ?? '${product.price.toStringAsFixed(2)} ${product.currency}',
-                style: context.textTheme.bodySmall?.copyWith(
-                  color: context.colorScheme.onPrimaryContainer,
-                  fontSize: _FigmaConstants.priceSmallFontSize,
-                  fontWeight: FontWeight.w300,
+            child: isSelected
+                ? Container(
+                    margin: const EdgeInsets.all(_FigmaConstants.radioButtonInnerMargin),
+                    decoration: const BoxDecoration(shape: BoxShape.circle, color: _FigmaConstants.selectedColor),
+                  )
+                : null,
+          );
+
+          Widget productLabel() => Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: _FigmaConstants.productLabelHorizontalPadding,
+              vertical: _FigmaConstants.productLabelVerticalPadding,
+            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(_FigmaConstants.productLabelBorderRadius)),
+            child: FittedText(
+              isTrial ? context.localizations.trialDays(3) : product!.period.localizedName(context),
+              style: context.textTheme.bodyLarge?.copyWith(color: isSelected ? context.colorScheme.onPrimary : context.colorScheme.secondary),
+              textAlign: TextAlign.center,
+            ),
+          );
+
+          Widget priceInfo() {
+            // Get the period unit and days for the shortest package
+            String perPeriodSuffix = '';
+            double perPeriodPrice = 0.0;
+
+            if (!isTrial && product != null && product.period != ProductPeriod.lifetime) {
+              // Calculate price per shortest package period using the durationDays property
+              perPeriodPrice = product.priceForDays(shortestPackage.period.durationDays);
+              // Use the periodInvoiceStr from the enum, fallback to perWeek if null
+              perPeriodSuffix = shortestPackage.period.periodInvoiceStr ?? context.localizations.perWeek;
+            }
+
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                // Package price on top
+                FittedText(
+                  isTrial ? context.localizations.free : product!.priceString ?? '${product.price.toStringAsFixed(2)} ${product.currency}',
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    color: isSelected ? context.colorScheme.onPrimary : context.colorScheme.secondary,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.end,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                textAlign: TextAlign.end,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-          ],
-        );
-
-        Widget discountBadge() {
-          if (isTrial || product == null || product == shortestPackage) {
-            return const SizedBox.shrink();
+                // Per period price on bottom
+                if (!isTrial && product!.period != ProductPeriod.lifetime)
+                  FittedText(
+                    '${perPeriodPrice.toStringAsFixed(2)} ${product.currency} $perPeriodSuffix',
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: context.colorScheme.onPrimaryContainer,
+                      fontSize: _FigmaConstants.priceSmallFontSize,
+                      fontWeight: FontWeight.w300,
+                    ),
+                    textAlign: TextAlign.end,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+              ],
+            );
           }
 
-          int discountPercentage = (product.saveRatio(shortestPackage) * 100).round();
-          if (discountPercentage <= 0) {
-            return const SizedBox.shrink();
+          Widget discountBadge() {
+            if (isTrial || product == null || product == shortestPackage) {
+              return const SizedBox.shrink();
+            }
+
+            int discountPercentage = (product.saveRatio(shortestPackage) * 100).round();
+            if (discountPercentage <= 0) {
+              return const SizedBox.shrink();
+            }
+
+            // Logic for showing discount badges:
+            // - When showing single tile: only show badge on the longest (first) product
+            // - When showing all tiles: show badges on all products except the shortest
+            bool shouldShowBadge = _showAllTiles || productIndex == 0;
+
+            if (!shouldShowBadge) {
+              return const SizedBox.shrink();
+            }
+
+            return Positioned(
+              top: _FigmaConstants.discountBadgeTop,
+              right: _FigmaConstants.discountBadgeRight,
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: _FigmaConstants.discountBadgeVerticalPadding,
+                  horizontal: _FigmaConstants.discountBadgeHorizontalPadding,
+                ),
+                decoration: BoxDecoration(
+                  color: _FigmaConstants.selectedColor,
+                  borderRadius: BorderRadius.circular(_FigmaConstants.discountBadgeBorderRadius),
+                ),
+                child: Center(
+                  child: FittedText(
+                    context.localizations.percentOff(discountPercentage),
+                    style: context.textTheme.labelSmall?.copyWith(color: context.colorScheme.surface),
+                  ),
+                ),
+              ),
+            );
           }
-          return Positioned(
-            top: _FigmaConstants.discountBadgeTop,
-            right: _FigmaConstants.discountBadgeRight,
-            child: Container(
-              padding: EdgeInsets.symmetric(
-                vertical: _FigmaConstants.discountBadgeVerticalPadding,
-                horizontal: _FigmaConstants.discountBadgeHorizontalPadding,
-              ),
-              decoration: BoxDecoration(
-                color: _FigmaConstants.selectedColor,
-                borderRadius: BorderRadius.circular(_FigmaConstants.discountBadgeBorderRadius),
-              ),
-              child: Center(
-                child: Text(
-                  context.localizations.percentOff(discountPercentage),
-                  style: context.textTheme.labelSmall?.copyWith(color: context.colorScheme.surface),
+
+          return Padding(
+            padding: const EdgeInsets.only(bottom: _FigmaConstants.tileBottomPadding),
+            child: Opacity(
+              opacity: opacity,
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    if (isTrial) {
+                      _isTrialSelected = true;
+                      // Deselect any product when trial is selected
+                    } else {
+                      _isTrialSelected = false;
+                      selectedProduct = product!;
+                    }
+                  });
+                  widget.paywall.logSelectProduct(selectedProduct.storeId);
+                },
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.easeOutCubic,
+                      height: tileHeight,
+                      padding: const EdgeInsets.symmetric(horizontal: _FigmaConstants.tileHorizontalPadding),
+                      decoration: BoxDecoration(
+                        color: context.colorScheme.surface,
+                        borderRadius: BorderRadius.circular(_FigmaConstants.tileBorderRadius),
+                        border: Border.all(
+                          color: isSelected ? _FigmaConstants.selectedColor : Colors.transparent,
+                          width: _FigmaConstants.tileBorderWidth,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: _FigmaConstants.tileShadowOpacity),
+                            blurRadius: _FigmaConstants.tileShadowBlurRadius,
+                            offset: _FigmaConstants.tileShadowOffset,
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Row(
+                              children: [
+                                radioButton(),
+                                const SizedBox(width: _FigmaConstants.tileSpacing),
+                                Flexible(child: productLabel()),
+                              ],
+                            ),
+                          ),
+                          Expanded(flex: 3, child: priceInfo()),
+                        ],
+                      ),
+                    ),
+                    discountBadge(),
+                  ],
                 ),
               ),
             ),
           );
         }
 
-        return Padding(
-          padding: const EdgeInsets.only(bottom: _FigmaConstants.tileBottomPadding),
-          child: Opacity(
-            opacity: opacity,
-            child: InkWell(
-              onTap: () {
-                setState(() {
-                  if (isTrial) {
-                    _isTrialSelected = true;
-                    // Deselect any product when trial is selected
-                  } else {
-                    _isTrialSelected = false;
-                    selectedProduct = product!;
-                  }
-                });
-                widget.paywall.onAnalyticsEvent?.call(
-                  "paywall_select_product",
-                  parameters: {"product_id": isTrial ? "trial_${product!.storeId}" : selectedProduct.storeId},
-                );
-              },
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    height: _FigmaConstants.tileHeight,
-                    padding: const EdgeInsets.symmetric(horizontal: _FigmaConstants.tileHorizontalPadding),
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.surface,
-                      borderRadius: BorderRadius.circular(_FigmaConstants.tileBorderRadius),
-                      border: Border.all(
-                        color: isSelected ? _FigmaConstants.selectedColor : Colors.transparent,
-                        width: _FigmaConstants.tileBorderWidth,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: _FigmaConstants.tileShadowOpacity),
-                          blurRadius: _FigmaConstants.tileShadowBlurRadius,
-                          offset: _FigmaConstants.tileShadowOffset,
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: Row(
-                            children: [
-                              radioButton(),
-                              const SizedBox(width: _FigmaConstants.tileSpacing),
-                              Flexible(child: productLabel()),
-                            ],
-                          ),
-                        ),
-                        Expanded(flex: 3, child: priceInfo()),
-                      ],
-                    ),
-                  ),
-                  discountBadge(),
-                ],
+        PaywallProduct shortestProduct = widget.paywall.shortestProduct;
+        final allTiles = _products.asMap().entries.map((entry) => createTile(entry.value, shortestProduct, productIndex: entry.key)).toList();
+
+        Widget buildSeeMoreButton() => GestureDetector(
+          onTap: () async {
+            if (_isAnimating) return;
+
+            setState(() {
+              _isAnimating = true;
+              _showAllTiles = true;
+              // If trial was selected, switch to the longest duration product when showing all options
+              if (_isTrialSelected) {
+                _isTrialSelected = false;
+                selectedProduct = _products.isNotEmpty ? _products[0] : _products.first;
+              }
+            });
+
+            // Wait for animations to complete
+            await Future.delayed(const Duration(milliseconds: 500));
+            if (mounted) {
+              setState(() {
+                _isAnimating = false;
+              });
+            }
+
+            widget.paywall.logViewItemList();
+          },
+          child: Container(
+            padding: const EdgeInsets.only(bottom: _FigmaConstants.seeMoreButtonBottomPadding),
+            child: Center(
+              child: FittedText(
+                context.localizations.seeOtherOptions,
+                style: context.textTheme.bodyLarge?.copyWith(
+                  color: context.colorScheme.onPrimaryContainer,
+                  fontSize: _FigmaConstants.seeMoreButtonFontSize,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
           ),
         );
-      }
 
-      PaywallProduct shortestProduct = widget.paywall.shortestProduct;
-      final allTiles = _products.map((e) => createTile(e, shortestProduct)).toList();
+        // Find the longest duration product (first in our sorted list)
+        // Since _products is already sorted from longest to shortest, index 0 is the longest
+        int longestProductIndex = 0;
 
-      Widget buildSeeMoreButton() => GestureDetector(
-        onTap: () {
-          setState(() {
-            _showAllTiles = true;
-            // If trial was selected, switch to yearly when showing all options
-            if (_isTrialSelected) {
-              _isTrialSelected = false;
-              selectedProduct = _products.firstWhere((product) => product.period == ProductPeriod.yearly, orElse: () => _products.first);
-            }
-          });
-          widget.paywall.onAnalyticsEvent?.call("paywall_see_more_tapped");
-        },
-        child: Container(
-          padding: const EdgeInsets.only(bottom: _FigmaConstants.seeMoreButtonBottomPadding),
-          child: Center(
-            child: Text(
-              context.localizations.seeOtherOptions,
-              style: context.textTheme.bodyLarge?.copyWith(
-                color: context.colorScheme.onPrimaryContainer,
-                fontSize: _FigmaConstants.seeMoreButtonFontSize,
-                fontWeight: FontWeight.w400,
-              ),
+        return SizedBox(
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 12.0), // Add top padding to prevent badge cutoff
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Show only the longest duration tile initially
+                if (allTiles.isNotEmpty) allTiles[longestProductIndex],
+                // Hidden tiles with smooth expand animation
+                ClipRect(
+                  child: AnimatedAlign(
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeOutCubic,
+                    alignment: Alignment.topCenter,
+                    heightFactor: _showAllTiles ? 1.0 : 0.0,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 12.0), // Extra padding for badge overflow
+                      child: Column(
+                        children: [
+                          ...List.generate(allTiles.length, (index) {
+                            if (index == longestProductIndex) return const SizedBox.shrink(); // Skip longest product as it's already shown
+                            return AnimatedOpacity(
+                              duration: const Duration(milliseconds: 300),
+                              opacity: _showAllTiles ? 1.0 : 0.0,
+                              child: AnimatedSlide(
+                                duration: const Duration(milliseconds: 400),
+                                curve: Curves.easeOutCubic,
+                                offset: Offset(0, _showAllTiles ? 0.0 : 0.3),
+                                child: allTiles[index],
+                              ),
+                            );
+                          }),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                AnimatedCrossFade(
+                  duration: const Duration(milliseconds: 300),
+                  crossFadeState: _showAllTiles ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                  firstChild: const SizedBox.shrink(),
+                  secondChild: _products.length > 1
+                      ? Column(
+                          children: [
+                            const SizedBox(height: _FigmaConstants.seeMoreButtonTopSpacing),
+                            buildSeeMoreButton(),
+                          ],
+                        )
+                      : const SizedBox.shrink(),
+                ),
+              ],
             ),
           ),
-        ),
-      );
-
-      return Column(
-        children: [
-          ...List.generate(allTiles.length, (index) {
-            final bool isVisible = _showAllTiles || index < 2;
-            return AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeOut,
-              height: isVisible ? _FigmaConstants.tileHeight + _FigmaConstants.tileBottomPadding : 0.0,
-              child: ClipRRect(
-                child: AnimatedSlide(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeOutCubic,
-                  offset: isVisible ? Offset.zero : const Offset(0, -1),
-                  child: AnimatedOpacity(duration: const Duration(milliseconds: 300), opacity: isVisible ? 1.0 : 0.0, child: allTiles[index]),
-                ),
-              ),
-            );
-          }),
-          if (!_showAllTiles && _products.length >= 3) ...[const SizedBox(height: _FigmaConstants.seeMoreButtonTopSpacing), buildSeeMoreButton()],
-        ],
-      );
-    }
+        );
+      },
+    );
 
     Widget chargingInfoText() {
       bool isLifeTime = selectedProduct.period == ProductPeriod.lifetime;
       return Padding(
         padding: const EdgeInsets.only(top: _FigmaConstants.purchaseButtonTopPadding),
-        child: Text(
+        child: FittedText(
           selectedProduct.haveFreeTrial
               ? context.localizations.chargingInfoFreeTrial(
                   selectedProduct.price.toStringAsFixed(2),
@@ -465,7 +598,7 @@ class Paywall3State extends State<Paywall3> {
           color: _FigmaConstants.selectedColor,
           borderRadius: BorderRadius.circular(_FigmaConstants.purchaseButtonBorderRadius),
         ),
-        child: Text(
+        child: FittedText(
           context.localizations.upgradeNow,
           style: context.textTheme.titleMedium?.copyWith(color: context.colorScheme.surface, fontWeight: FontWeight.w500),
         ),
@@ -474,36 +607,18 @@ class Paywall3State extends State<Paywall3> {
 
     return Material(
       color: Colors.transparent,
-      child: Container(
-        color: const Color(0xFF000821),
-        child: LayoutBuilder(
-          builder: (context, constraint) {
-            double height = constraint.maxHeight;
-            double heightVideo = min(height * _FigmaConstants.videoHeightRatio, MediaQuery.of(context).size.width);
-            double blurRadius = _FigmaConstants.blurRadiusRatio * heightVideo;
-            double blurTop = _FigmaConstants.blurTopRatio * heightVideo;
-            double blurLeft = (MediaQuery.of(context).size.width - blurRadius) / 2;
-            return Stack(
-              children: [
-                // Background blur effect
-                Positioned(
-                  top: blurTop,
-                  left: blurLeft,
-                  child: Container(
-                    width: blurRadius,
-                    height: blurRadius,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: _FigmaConstants.blurBackgroundColor.withValues(alpha: _FigmaConstants.blurBackgroundOpacity),
-                    ),
-                    child: BackdropFilter(
-                      filter: ui.ImageFilter.blur(sigmaX: _FigmaConstants.blurSigma, sigmaY: _FigmaConstants.blurSigma),
-                      child: Container(),
-                    ),
-                  ),
-                ),
-                SingleChildScrollView(
-                  child: SizedBox(
+      child: LayoutBuilder(
+        builder: (context, constraint) {
+          double height = constraint.maxHeight;
+          double heightVideo = min(height * _FigmaConstants.videoHeightRatio, MediaQuery.of(context).size.width);
+          return Container(
+            color: const Color(0xFF000821),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  // Main content container with screen height
+                  SizedBox(
                     height: height,
                     child: Column(
                       children: [
@@ -522,7 +637,7 @@ class Paywall3State extends State<Paywall3> {
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Text(
+                                          FittedText(
                                             context.localizations.appPro(widget.paywall.customData?['appName'] ?? 'Pixvibe'),
                                             style: TextStyle(
                                               fontFamily: 'Lexend',
@@ -542,7 +657,7 @@ class Paywall3State extends State<Paywall3> {
                                       const SizedBox(height: _FigmaConstants.subtitleTopSpacing),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                        child: Text(
+                                        child: FittedText(
                                           context.localizations.getUnlimitedAccess,
                                           style: TextStyle(
                                             fontFamily: 'Lexend',
@@ -558,12 +673,10 @@ class Paywall3State extends State<Paywall3> {
                                   ),
                                 ),
                                 // Subscription tiles with expanded space
-                                Expanded(
-                                  child: SingleChildScrollView(physics: const BouncingScrollPhysics(), child: tiles()),
-                                ),
+                                Expanded(child: Center(child: tiles())),
                                 // Purchase button and info with fixed spacing
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 16.0, bottom: 24.0),
+                                  padding: const EdgeInsets.only(top: 1.0, bottom: 20.0),
                                   child: Column(children: [buttonSubscribe(), chargingInfoText()]),
                                 ),
                               ],
@@ -573,11 +686,13 @@ class Paywall3State extends State<Paywall3> {
                       ],
                     ),
                   ),
-                ),
-              ],
-            );
-          },
-        ),
+                  // Footer placed below the main content (outside screen height)
+                  PaywallFullFooter(paywallConfig: widget.paywall, isFreeTrial: selectedProduct.haveFreeTrial),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

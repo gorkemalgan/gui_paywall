@@ -28,18 +28,13 @@
   },
   "bestValue": "BEST VALUE",
   "@bestValue": {
-    "description": "Badge for the yearly plan",
+    "description": "Badge text for best value option",
     "context": "plan screen"
   },
   "cancelAtAnyTime": "Cancel at any time",
   "@cancelAtAnyTime": {
     "description": "",
     "context": "free trial page"
-  },
-  "chooseYourPlan": "Choose Your Plan",
-  "@chooseYourPlan": {
-    "description": "Title for plan selection screen",
-    "context": "plan screen"
   },
   "chargingInfoFreeTrial": "You will pay {price} after {freeTrialDay} days {invoiceDuration} until it cancel",
   "@chargingInfoFreeTrial": {
@@ -86,10 +81,26 @@
       }
     }
   },
+  "chooseYourPlan": "Choose Your Plan",
+  "@chooseYourPlan": {
+    "description": "Title for plan selection screen",
+    "context": "plan screen"
+  },
   "continueBtn": "Continue",
   "@continueBtn": {
     "description": "Continue button text",
     "context": "generic"
+  },
+  "daysFreeTrial": "{days, plural, =1{1 day free trial} other{{days} days free trial}}",
+  "@daysFreeTrial": {
+    "description": "Text showing free trial duration in days",
+    "context": "plan screen",
+    "placeholders": {
+      "days": {
+        "type": "int",
+        "example": "1"
+      }
+    }
   },
   "enableFreeTrial": "Enable Free Trial",
   "@enableFreeTrial": {
@@ -206,26 +217,51 @@
     "description": "monthly subscription period",
     "context": "paywall"
   },
+  "monthlyPrice": "{price}/month",
+  "@monthlyPrice": {
+    "description": "Monthly price display",
+    "context": "plan screen",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "$9.99"
+      }
+    }
+  },
   "notSureYet": "Not Sure Yet?",
   "@notSureYet": {
     "description": "Asks user if he is not sure to but subscription yet",
     "context": "paywall"
   },
-  "weekFreeTrial": "{weeks, plural, =1{1 week free trial} other{{weeks} weeks free trial}}",
-  "@weekFreeTrial": {
-    "description": "Text showing free trial duration in weeks",
-    "context": "plan screen",
-    "placeholders": {
-      "weeks": {
-        "type": "int",
-        "example": "1"
-      }
-    }
-  },
   "otherPlans": "Other plans",
   "@otherPlans": {
     "description": "Link to see other subscription plans",
     "context": "plan screen"
+  },
+  "paymentAgreement": "Subscriptions will automatically renew unless auto-renew is turned off at least 24 hours before the end of the current period. Your account will be charged according to your plan for renewal within 24 hours prior to the end of the current period. You can manage or turn-off auto-renew in your account settings at any time after purchase.",
+  "@paymentAgreement": {
+    "description": "to show payment agreement",
+    "context": "paywall"
+  },
+  "paymentAgreementFreeTrial": "Payment will be charged to your account at the end of the free trial period. You can cancel anytime during the free trial period and no charges will be applied.",
+  "@paymentAgreementFreeTrial": {
+    "description": "to show payment agreement for free trial",
+    "context": "paywall"
+  },
+  "paymentFailed": "Payment failed check your payment method and try again later",
+  "@paymentFailed": {
+    "description": "",
+    "context": ""
+  },
+  "paymentInfoPending": "Your payment is pending, please wait if you encountered any problems with the transaction, you can contact us from contact@everpixel.org",
+  "@paymentInfoPending": {
+    "description": "",
+    "context": ""
+  },
+  "paymentInfoTitle": "Payment Info",
+  "@paymentInfoTitle": {
+    "description": "",
+    "context": ""
   },
   "perWeek": " / week",
   "@perWeek": {
@@ -248,10 +284,20 @@
     "description": "to show popular options",
     "context": "generic"
   },
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": "to show privacy policy",
+    "context": "settings"
+  },
+  "restore": "Restore",
+  "@restore": {
+    "description": "to restore the existing subscription",
+    "context": "paywall"
+  },
   "restorePurchases": "Restore Purchases",
-  "@restorePurchases":{
-    "description": "Button to restore previous purchases",
-    "context": "generic"
+  "@restorePurchases": {
+    "description": "Button or label to restore in-app purchases",
+    "context": "Settings Page"
   },
   "save": "Save",
   "@save": {
@@ -278,7 +324,12 @@
     "description": "to start free trial for premium subscription",
     "context": "paywall"
   },
-  "thenPerWeek": "then ${price}/week",
+  "termsOfUse": "Terms of Use",
+  "@termsOfUse": {
+    "description": "to show terms of use",
+    "context": "settings"
+  },
+  "thenPerWeek": "then {price}/week",
   "@thenPerWeek": {
     "description": "Price per week after free trial",
     "context": "plan screen",
@@ -305,15 +356,21 @@
     "description": "",
     "context": "free trial page"
   },
-  "unlockFullPower": "Unlock the full power of Remini-the ultimate  AI Photo Enhancer.",
+  "unlockFullPower": "Unlock Full Power",
   "@unlockFullPower": {
     "description": "Subtitle for plan selection",
     "context": "plan screen"
   },
-  "startEditing": "Start Editing See Magic Happen",
-  "@startEditing": {
-    "description": "Short action text for starting editing",
-    "context": "plan screen or button"
+  "unlockFullPowerDescription": "Unlock the full power of {appName}–the ultimate AI Editor App.",
+  "@unlockFullPowerDescription": {
+    "description": "Description text for paywall",
+    "context": "plan screen",
+    "placeholders": {
+      "appName": {
+        "type": "String",
+        "example": "Remini"
+      }
+    }
   },
   "upgradeNow": "Upgrade now!",
   "@upgradeNow": {
@@ -335,12 +392,34 @@
     "description": "weekly subscription period",
     "context": "paywall"
   },
+  "weeklyPrice": "{price}/week",
+  "@weeklyPrice": {
+    "description": "Weekly price display",
+    "context": "plan screen",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "$9.99 / week"
+      }
+    }
+  },
+  "weeksFreeTrial": "{weeks, plural, =1{1 week free trial} other{{weeks} weeks free trial}}",
+  "@weeksFreeTrial": {
+    "description": "Text showing free trial duration in weeks",
+    "context": "plan screen",
+    "placeholders": {
+      "weeks": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
   "yearly": "Yearly",
   "@yearly": {
     "description": "yearly subscription period",
     "context": "paywall"
   },
-  "yearlyPrice": "${price}/year",
+  "yearlyPrice": "{price}/year",
   "@yearlyPrice": {
     "description": "Yearly price display",
     "context": "plan screen",
@@ -349,59 +428,6 @@
         "type": "String",
         "example": "$59.99"
       }
-    }
-  },
-  "startEditingSeeMagicHappen": "Start Editing\nSee Magic Happen",
-  "@startEditingSeeMagicHappen": {
-    "description": "Main title for plan screen 2"
-  },
-  "noCommitmentsCancelAnytime": "No commitments, cancel anytime",
-  "@noCommitmentsCancelAnytime": {
-    "description": "Subtitle for plan screen 2"
-  },
-  "trialUsedInfo": "{people} people have used the 7-day Trial in the last 24 hours!",
-  "@trialUsedInfo": {
-    "description": "Shows how many people used the trial in the last 24 hours",
-    "placeholders": {
-      "people": {}
-    }
-  },
-  "sevenDayFullAccess": "7-Day Full Access",
-  "@sevenDayFullAccess": {
-    "description": "Title for 7-day plan option"
-  },
-  "mostPopular": "MOST POPULAR",
-  "@mostPopular": {
-    "description": "Badge for most popular plan"
-  },
-  "priceWithCurrency": "${price}",
-  "@priceWithCurrency": {
-    "description": "Shows price with currency symbol",
-    "placeholders": {
-      "price": {}
-    }
-  },
-  "monthlyAccess": "Monthly Access",
-  "@monthlyAccess": {
-    "description": "Title for monthly plan option"
-  },
-  "savePercent": "SAVE {percent}%",
-  "@savePercent": {
-    "description": "Shows how much percent is saved",
-    "placeholders": {
-      "percent": {}
-    }
-  },
-  "continueText": "Continue",
-  "@continueText": {
-    "description": "Continue button text"
-  },
-  "trialDisclaimer": "Billed ${trialPrice} for 7-day trial, then ${weeklyPrice}/week auto-renewal.\nRequest a refund if you’re not 100% satisfied",
-  "@trialDisclaimer": {
-    "description": "Disclaimer for trial and weekly renewal",
-    "placeholders": {
-      "trialPrice": {},
-      "weeklyPrice": {}
     }
   }
 }
