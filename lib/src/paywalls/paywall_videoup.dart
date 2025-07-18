@@ -4,7 +4,6 @@ import '../models/paywall_config.dart';
 import '../extensions.dart';
 import '../widgets/footers.dart';
 
-// Video Up! screen (formerly known as PlanScreen2)
 class VideoUpScreen extends PaywallBase {
   final Image image;
   const VideoUpScreen({required this.image, Key? key, required PaywallConfig paywall}) : super(paywall, key: key);
@@ -21,174 +20,170 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
 
   @override
   Widget build(BuildContext context) {
-    final Widget backgroundImage = Image(image: widget.image.image, fit: BoxFit.cover, width: double.infinity, height: double.infinity);
+    final backgroundImage = Image(image: widget.image.image, fit: BoxFit.cover, width: double.infinity, height: double.infinity);
 
     return Scaffold(
       body: Stack(
         children: [
           Positioned.fill(child: backgroundImage),
-          Positioned.fill(child: Container(color: Colors.black.withValues(alpha: 0.4))),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.only(bottom: 40),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Positioned.fill(child: Container(color: Colors.black.withOpacity(0.4))),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final screenHeight = constraints.maxHeight;
+
+              return SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
                       children: [
-                        IconButton(
-                          icon: const Icon(Icons.close, color: Colors.white),
-                          onPressed: () => Navigator.of(context).pop(),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            // Restore purchases using paywall's built-in function
-                            widget.paywall.restorePurchases(context);
-                          },
-                          child: Text(
-                            context.localizations.restorePurchases,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              decoration: TextDecoration.underline,
-                              decorationColor: Colors.white,
-                              decorationThickness: 2,
-                            ),
+                        SizedBox(
+                          height: screenHeight,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.close, color: Colors.white),
+                                    onPressed: () => Navigator.of(context).pop(),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      widget.paywall.restorePurchases(context);
+                                    },
+                                    child: Text(
+                                      context.localizations.restorePurchases,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        decoration: TextDecoration.underline,
+                                        decorationColor: Colors.white,
+                                        decorationThickness: 2,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 40),
+                              Text(
+                                context.localizations.chooseYourPlan,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                context.localizations.cancelAtAnyTime,
+                                style: const TextStyle(color: Colors.white),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 20),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+                                    decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(12)),
+                                    child: RichText(
+                                      text: TextSpan(
+                                        style: const TextStyle(color: Colors.white, fontSize: 13),
+                                        children: [
+                                          TextSpan(
+                                            text: context.localizations.trialUserCount(2342),
+                                            style: const TextStyle(fontWeight: FontWeight.bold),
+                                          ),
+                                          const TextSpan(text: ' '),
+                                          TextSpan(
+                                            text: context.localizations.trialUsedInLastHours(24),
+                                            style: const TextStyle(fontWeight: FontWeight.bold),
+                                          ),
+                                          const TextSpan(text: '!'),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 16.0),
+                                    child: CustomPaint(
+                                      size: const Size(20, 8),
+                                      painter: _DownArrowPainter(color: Colors.blue),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+
+                              ...widget.paywall.products.map(
+                                (product) => buildOptionTile(
+                                  title: product.title ?? product.period.localizedName(context),
+                                  subtitle: product.description ?? '',
+                                  price: product.priceString_,
+                                  value: product.storeId,
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              ElevatedButton(
+                                onPressed: () {
+                                  if (selectedPlanStoreId != null) {
+                                    final selectedProduct = widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId);
+                                    widget.paywall.purchase(selectedProduct, context);
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: selectedPlanStoreId == null ? Colors.white24 : Colors.cyanAccent,
+                                  foregroundColor: selectedPlanStoreId == null ? Colors.white : Colors.black,
+                                  shadowColor: Colors.transparent,
+                                  elevation: 0,
+                                  shape: const StadiumBorder(),
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                ),
+                                child: Text(context.localizations.continueBtn, style: const TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                              const SizedBox(height: 10),
+                              Builder(
+                                builder: (context) {
+                                  final selectedProduct = selectedPlanStoreId != null
+                                      ? widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId)
+                                      : null;
+
+                                  final price = selectedProduct?.price.toStringAsFixed(2) ?? '-';
+                                  final freeTrialDay = (selectedProduct?.freeTrialDays != null && (selectedProduct?.freeTrialDays ?? 0) > 0)
+                                      ? selectedProduct?.freeTrialDays?.toString()
+                                      : null;
+                                  final invoiceDuration = selectedProduct?.period.periodInvoiceStr ?? selectedProduct?.period.displayName ?? '-';
+
+                                  String disclaimerText = '';
+                                  if (selectedProduct != null) {
+                                    if (freeTrialDay != null) {
+                                      disclaimerText = context.localizations.chargingInfoFreeTrial(price, freeTrialDay, invoiceDuration);
+                                    } else {
+                                      disclaimerText = context.localizations.chargingInfoStandart(price, invoiceDuration);
+                                    }
+                                  }
+
+                                  return Text(
+                                    disclaimerText,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(color: Colors.white70, fontSize: 11),
+                                  );
+                                },
+                              ),
+                            ],
                           ),
                         ),
+
+                        // 🔽 FOOTER EKRANIN ALTINDA GÖRÜNÜR
+                        const SizedBox(height: 30),
+                        PaywallFullFooter(paywallConfig: widget.paywall),
                       ],
                     ),
-                    const SizedBox(height: 60),
-                    const SizedBox(height: 40),
-
-                    /// Title and subtitle
-                    Text(
-                      context.localizations.chooseYourPlan,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      context.localizations.cancelAtAnyTime,
-                      style: const TextStyle(color: Colors.white),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 20),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-                          decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(12)),
-                          child: RichText(
-                            text: TextSpan(
-                              style: const TextStyle(color: Colors.white, fontSize: 13),
-                              children: [
-                                TextSpan(
-                                  text: context.localizations.trialUserCount(2342),
-                                  style: const TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                TextSpan(text: ' '),
-                                TextSpan(
-                                  text: context.localizations.trialUsedInLastHours(24),
-                                  style: const TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                TextSpan(text: '!'),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 0),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16.0),
-                          child: CustomPaint(
-                            size: const Size(20, 8),
-                            painter: _DownArrowPainter(color: Colors.blue),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-
-                    ...widget.paywall.products.map(
-                      (product) => buildOptionTile(
-                        title: product.title ?? product.period.localizedName(context),
-                        subtitle: product.description ?? '',
-                        price: product.priceString_,
-                        value: product.storeId,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.ease,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: selectedPlanStoreId == null ? Colors.white.withValues(alpha: 0.2) : Colors.cyanAccent,
-                        borderRadius: BorderRadius.circular(40),
-                        border: Border.all(color: selectedPlanStoreId == null ? Colors.transparent : Colors.cyanAccent, width: 2),
-                      ),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (selectedPlanStoreId != null) {
-                            // Purchase using paywall's built-in function
-                            final selectedProduct = widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId);
-                            widget.paywall.purchase(selectedProduct, context);
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          foregroundColor: selectedPlanStoreId == null ? Colors.white : Colors.black,
-                          shadowColor: Colors.transparent,
-                          elevation: 0,
-                          shape: const StadiumBorder(),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          side: BorderSide.none,
-                        ),
-                        child: Text(context.localizations.continueBtn, style: const TextStyle(fontWeight: FontWeight.bold)),
-                      ),
-                    ),
-
-                    /// Disclaimer text
-                    Builder(
-                      builder: (context) {
-                        final selectedProduct = selectedPlanStoreId != null
-                            ? widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId)
-                            : null;
-
-                        final price = selectedProduct?.price.toStringAsFixed(2) ?? '-';
-                        final freeTrialDay = (selectedProduct?.freeTrialDays != null && (selectedProduct?.freeTrialDays ?? 0) > 0)
-                            ? selectedProduct?.freeTrialDays?.toString()
-                            : null;
-                        final invoiceDuration = selectedProduct?.period.periodInvoiceStr ?? selectedProduct?.period.displayName ?? '-';
-
-                        String disclaimerText = '';
-                        if (selectedProduct != null) {
-                          if (freeTrialDay != null) {
-                            disclaimerText = context.localizations.chargingInfoFreeTrial(price, freeTrialDay, invoiceDuration);
-                          } else {
-                            disclaimerText = context.localizations.chargingInfoStandart(price, invoiceDuration);
-                          }
-                        }
-
-                        return Text(
-                          disclaimerText,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(color: Colors.white70, fontSize: 11),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    // Footer'ı scrollable içeriğin en altına ekliyoruz
-                    PaywallFullFooter(paywallConfig: widget.paywall),
-                  ], // Column children
-                ), // Column
-              ), // SingleChildScrollView
-            ), // Padding
-          ), // SafeArea
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
@@ -199,11 +194,7 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
     return GestureDetector(
       onTap: () {
         setState(() {
-          if (isSelected) {
-            selectedPlanStoreId = null;
-          } else {
-            selectedPlanStoreId = value;
-          }
+          selectedPlanStoreId = isSelected ? null : value;
         });
       },
       child: Container(
@@ -212,7 +203,7 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
         decoration: BoxDecoration(
           border: Border.all(color: isSelected ? Colors.cyanAccent : Colors.white24, width: 2),
           borderRadius: BorderRadius.circular(12),
-          color: Colors.white.withValues(alpha: 0.05),
+          color: Colors.white.withOpacity(0.05),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -223,7 +214,6 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: isSelected ? Colors.cyanAccent : Colors.white54, width: 2),
-                color: Colors.transparent,
               ),
               child: isSelected
                   ? Center(
