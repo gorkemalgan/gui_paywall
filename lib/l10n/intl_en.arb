@@ -36,7 +36,7 @@
     "description": "",
     "context": "free trial page"
   },
-  "chargingInfoFreeTrial": "You will pay {price} after {freeTrialDay} days {invoiceDuration} until it cancel",
+  "chargingInfoFreeTrial": "Billed {price}/{invoiceDuration}. Auto-renewal after {freeTrialDay} days. Request a refund if you're not 100% satisfied.",
   "@chargingInfoFreeTrial": {
     "description": "",
     "context": "paywall",
@@ -430,7 +430,8 @@
       }
     }
   },
-  "trialUserCountText": "{userCount} people started a trial in the last {hours} hours!",
+  "trialUserCount": "{count} people started a trial",
+  "trialUsedInLastHours": "{count} people used trial in last 24 hours",
   "@trialUserCountText": {
     "description": "Shows how many people started a trial in the last X hours",
     "placeholders": {

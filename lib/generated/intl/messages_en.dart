@@ -30,7 +30,7 @@ class PaywallLocalizationsEn extends PaywallLocalizations {
 
   @override
   String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
-    return 'You will pay $price after $freeTrialDay days $invoiceDuration until it cancel';
+    return 'Billed $price/$invoiceDuration. Auto-renewal after $freeTrialDay days. Request a refund if you\'re not 100% satisfied.';
   }
 
   @override
@@ -236,7 +236,12 @@ class PaywallLocalizationsEn extends PaywallLocalizations {
   }
 
   @override
-  String trialUserCountText(String userCount, String hours) {
-    return '$userCount people started a trial in the last $hours hours!';
+  String trialUserCount(Object count) {
+    return '$count people started a trial';
+  }
+
+  @override
+  String trialUsedInLastHours(Object count) {
+    return '$count people used trial in last 24 hours';
   }
 }

@@ -30,7 +30,7 @@ class PaywallLocalizationsTr extends PaywallLocalizations {
 
   @override
   String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
-    return '$freeTrialDay gün sonra $price tahsil edilecektir $invoiceDuration kadar iptal edilene kadar.';
+    return '$price/$invoiceDuration olarak faturalandırılır. $freeTrialDay gün sonra otomatik yenileme başlar. %100 memnun kalmazsanız iade talep edebilirsiniz.';
   }
 
   @override
@@ -236,7 +236,12 @@ class PaywallLocalizationsTr extends PaywallLocalizations {
   }
 
   @override
-  String trialUserCountText(String userCount, String hours) {
-    return '$userCount people started a trial in the last $hours hours!';
+  String trialUserCount(Object count) {
+    return '$count kişi deneme başlattı';
+  }
+
+  @override
+  String trialUsedInLastHours(Object count) {
+    return 'Son 24 saatte $count kişi deneme kullandı';
   }
 }

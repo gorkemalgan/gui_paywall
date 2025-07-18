@@ -6,7 +6,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:desktop_window/desktop_window.dart';
 
 import 'package:gui_paywall/gui_paywall.dart';
-import 'package:gui_paywall/src/paywalls/plan_screen_2.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

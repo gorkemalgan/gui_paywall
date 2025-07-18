@@ -25,7 +25,7 @@ class _PlanScreen2State extends State<PlanScreen2> with PaywallSanityCheck<PlanS
       body: Stack(
         children: [
           Positioned.fill(child: backgroundImage),
-          Positioned.fill(child: Container(color: Colors.black.withOpacity(0.4))),
+          Positioned.fill(child: Container(color: Colors.black.withValues(alpha: 0.4))),
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -77,14 +77,13 @@ class _PlanScreen2State extends State<PlanScreen2> with PaywallSanityCheck<PlanS
                           text: TextSpan(
                             style: const TextStyle(color: Colors.white, fontSize: 13),
                             children: [
-                              // TODO: trialUserCount ve trialUsedInLastHours fonksiyonları localization'a eklenmeli veya kaldırılmalı
                               TextSpan(
-                                text: '2342',
+                                text: context.localizations.trialUserCount(2342),
                                 style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                               TextSpan(text: ' '),
                               TextSpan(
-                                text: '24',
+                                text: context.localizations.trialUsedInLastHours(24),
                                 style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                               TextSpan(text: '!'),
@@ -118,7 +117,7 @@ class _PlanScreen2State extends State<PlanScreen2> with PaywallSanityCheck<PlanS
                     curve: Curves.ease,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: selectedPlanStoreId == null ? Colors.white.withOpacity(0.2) : Colors.cyanAccent,
+                      color: selectedPlanStoreId == null ? Colors.white.withValues(alpha: 0.2) : Colors.cyanAccent,
                       borderRadius: BorderRadius.circular(40),
                       border: Border.all(color: selectedPlanStoreId == null ? Colors.transparent : Colors.cyanAccent, width: 2),
                     ),
@@ -142,20 +141,33 @@ class _PlanScreen2State extends State<PlanScreen2> with PaywallSanityCheck<PlanS
                   ),
 
                   /// Disclaimer text
-                  Text(
-                    context.localizations.chargingInfoFreeTrial(
-                      selectedPlanStoreId != null
-                          ? (widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId).price.toStringAsFixed(2))
-                          : '-',
-                      selectedPlanStoreId != null
-                          ? (widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId).freeTrialDays?.toString() ?? '-')
-                          : '-',
-                      selectedPlanStoreId != null
-                          ? (widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId).period.periodInvoiceStr ?? '-')
-                          : '-',
-                    ),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(color: Colors.white70, fontSize: 11),
+                  Builder(
+                    builder: (context) {
+                      final selectedProduct = selectedPlanStoreId != null
+                          ? widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId)
+                          : null;
+
+                      final price = selectedProduct?.price.toStringAsFixed(2) ?? '-';
+                      final freeTrialDay = (selectedProduct?.freeTrialDays != null && selectedProduct!.freeTrialDays! > 0)
+                          ? selectedProduct!.freeTrialDays.toString()
+                          : null;
+                      final invoiceDuration = selectedProduct?.period.periodInvoiceStr ?? selectedProduct?.period.displayName ?? '-';
+
+                      String disclaimerText = '';
+                      if (selectedProduct != null) {
+                        if (freeTrialDay != null) {
+                          disclaimerText = context.localizations.chargingInfoFreeTrial(price, freeTrialDay, invoiceDuration);
+                        } else {
+                          disclaimerText = context.localizations.chargingInfoStandart(price, invoiceDuration);
+                        }
+                      }
+
+                      return Text(
+                        disclaimerText,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(color: Colors.white70, fontSize: 11),
+                      );
+                    },
                   ),
                   const SizedBox(height: 10),
                 ],
@@ -185,7 +197,7 @@ class _PlanScreen2State extends State<PlanScreen2> with PaywallSanityCheck<PlanS
         decoration: BoxDecoration(
           border: Border.all(color: isSelected ? Colors.cyanAccent : Colors.white24, width: 2),
           borderRadius: BorderRadius.circular(12),
-          color: Colors.white.withOpacity(0.05),
+          color: Colors.white.withValues(alpha: 0.05),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

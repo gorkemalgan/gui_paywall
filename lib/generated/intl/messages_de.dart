@@ -235,7 +235,12 @@ class PaywallLocalizationsDe extends PaywallLocalizations {
   }
 
   @override
-  String trialUserCountText(String userCount, String hours) {
-    return '$userCount people started a trial in the last $hours hours!';
+  String trialUserCount(Object count) {
+    return '$count people started a trial';
+  }
+
+  @override
+  String trialUsedInLastHours(Object count) {
+    return '$count people used trial in last 24 hours';
   }
 }
