@@ -11,6 +11,6 @@ export 'src/widgets/widgets.dart';
 export 'src/paywalls/free_trial.dart';
 export 'src/paywalls/paywall_3.dart';
 export 'src/paywalls/paywall_remini.dart';
-export 'src/paywalls/plan_screen_2.dart';
+export 'src/paywalls/paywall_videoup.dart';
 
 export '../generated/intl/messages.dart' show PaywallLocalizations;
