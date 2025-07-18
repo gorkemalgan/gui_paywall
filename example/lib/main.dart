@@ -159,6 +159,8 @@ class PaywallListScreen extends StatelessWidget {
                 'Paywall Remini',
                 () => PaywallRemini(paywall: paywallConfig, image: Image.asset('assets/images/woman.jpeg')),
               ),
+              const SizedBox(height: 16),
+              _buildPaywallButton(context, 'Video Up!', () => VideoUpScreen(paywall: paywallConfig, image: Image.asset('assets/images/woman.jpeg'))),
             ],
           ),
         ),
