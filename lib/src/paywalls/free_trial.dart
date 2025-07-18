@@ -1,7 +1,5 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:carousel_slider/carousel_slider.dart';
 
 // Project imports:
@@ -10,8 +8,6 @@ import '../../generated/assets.gen.dart';
 import '../../gui_paywall.dart';
 import '../my_localizations.dart';
 import '../widgets/fitted_text.dart';
-
-// Local imports:
 
 int _animationDurationMs = 300;
 int _fastAnimationDurationMs = 300;
@@ -200,7 +196,7 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> with PaywallSanityC
     children: [
       ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(8)),
-        child: SizedBox(height: MediaQuery.of(context).size.height * 0.06, width: MediaQuery.of(context).size.height * 0.06, child: image),
+        child: SizedBox(height: MediaQuery.of(context).size.height * 0.04, width: MediaQuery.of(context).size.height * 0.04, child: image),
       ),
       horizontalPadding(),
       FittedText(title, style: const TextStyle(color: Colors.white, fontSize: 18)),
@@ -260,8 +256,8 @@ class _PaywallFreeTrialState extends State<PaywallFreeTrial> with PaywallSanityC
                       borderRadius: BorderRadius.circular(64),
                       color: Colors.blue,
                     ),
-                    height: MediaQuery.of(context).size.height * 0.07,
-                    width: MediaQuery.of(context).size.height * 0.07,
+                    height: MediaQuery.of(context).size.height * 0.047,
+                    width: MediaQuery.of(context).size.height * 0.047,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(64),
                       child: Image.asset(photoPath, fit: BoxFit.cover),
@@ -599,7 +595,7 @@ class _CustomScrollableWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  height: isSlider ? widgetHeight * 0.5 : widgetHeight * 0.8,
+                  height: isSlider ? widgetHeight * 0.33 : widgetHeight * 0.53,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
                   child: childWidgets.keys.elementAt(index),
                 ),

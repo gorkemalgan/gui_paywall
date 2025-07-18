@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:desktop_window/desktop_window.dart';
 
 import 'package:gui_paywall/gui_paywall.dart';
+import 'package:gui_paywall/new_screen.dart' as custom4;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -153,6 +154,8 @@ class PaywallListScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(height: 16),
+              _buildPaywallButton(context, 'Paywall 4', () => custom4.Paywall4()),
               const SizedBox(height: 16),
               _buildPaywallButton(
                 context,
