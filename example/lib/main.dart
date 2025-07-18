@@ -6,7 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:desktop_window/desktop_window.dart';
 
 import 'package:gui_paywall/gui_paywall.dart';
-import 'package:gui_paywall/src/paywalls/plan_screen_2.dart';
+import 'package:gui_paywall/generated/intl/messages.dart' show PaywallLocalizations;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,13 +25,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
     title: 'GUI Paywall Example',
     theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple), useMaterial3: true),
-    localizationsDelegates: const [
+    localizationsDelegates: [
       PaywallLocalizations.delegate,
       GlobalMaterialLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
       GlobalCupertinoLocalizations.delegate,
     ],
-    supportedLocales: const [Locale('en')],
+    supportedLocales: PaywallLocalizations.supportedLocales,
     home: const PaywallListScreen(),
   );
 }
@@ -39,40 +39,42 @@ class MyApp extends StatelessWidget {
 class PaywallListScreen extends StatelessWidget {
   const PaywallListScreen({super.key});
 
-  PaywallConfig _createMockPaywallConfig() {
+  @override
+  Widget build(BuildContext context) {
+    final localizations = PaywallLocalizations.of(context);
     final products = [
-      const PaywallProduct(
+      PaywallProduct(
         storeId: 'weekly_sub',
         price: 4.99,
         currency: 'USD',
-        priceString: '\$4.99',
+        priceString: ' 4.99',
         period: ProductPeriod.weekly,
-        title: 'Weekly Premium',
-        description: 'Get premium access for 1 week',
+        title: localizations!.weeklyPremiumTitle,
+        description: localizations!.weeklyPremiumDescription,
       ),
-      const PaywallProduct(
+      PaywallProduct(
         storeId: 'monthly_sub',
         price: 9.99,
         currency: 'USD',
-        priceString: '\$9.99',
+        priceString: ' 9.99',
         period: ProductPeriod.monthly,
-        title: 'Monthly Premium',
-        description: 'Get premium access for 1 month',
+        title: localizations!.monthlyPremiumTitle,
+        description: localizations!.monthlyPremiumDescription,
         freeTrialDays: 3,
       ),
-      const PaywallProduct(
+      PaywallProduct(
         storeId: 'yearly_sub',
         price: 49.99,
         currency: 'USD',
-        priceString: '\$49.99',
+        priceString: ' 49.99',
         period: ProductPeriod.yearly,
-        title: 'Yearly Premium',
-        description: 'Best value - Save 58%!',
+        title: localizations!.yearlyPremiumTitle,
+        description: localizations!.yearlyPremiumDescription,
         freeTrialDays: 7,
       ),
     ];
 
-    return PaywallConfig(
+    final paywallConfig = PaywallConfig(
       appName: 'PixVibe',
       name: 'placement_1',
       debugMode: false,
@@ -87,7 +89,7 @@ class PaywallListScreen extends StatelessWidget {
       onTermsOfUse: () {},
       onPrivacyPolicy: () {},
       onPurchase: (product) async {
-        debugPrint('Purchasing ${product.storeId}');
+        debugPrint('Purchasing 27{product.storeId}');
         await Future.delayed(const Duration(seconds: 2));
         return true;
       },
@@ -96,11 +98,6 @@ class PaywallListScreen extends StatelessWidget {
       onClose: () => debugPrint('Paywall closed'),
       singleDisplayProduct: 1,
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final paywallConfig = _createMockPaywallConfig();
 
     return Scaffold(
       appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary, title: const Text('Paywall Examples')),

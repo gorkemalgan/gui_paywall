@@ -430,9 +430,39 @@
       }
     }
   },
-  "trialUserCountText": "{userCount} people started a trial in the last {hours} hours!",
+  "weeklyPremiumTitle": "Weekly Premium",
+  "@weeklyPremiumTitle": {
+    "description": "Product title for weekly premium subscription",
+    "context": "plan screen"
+  },
+  "weeklyPremiumDescription": "Get premium access for 1 week",
+  "@weeklyPremiumDescription": {
+    "description": "Product description for weekly premium subscription",
+    "context": "plan screen"
+  },
+  "monthlyPremiumTitle": "Monthly Premium",
+  "@monthlyPremiumTitle": {
+    "description": "Product title for monthly premium subscription",
+    "context": "plan screen"
+  },
+  "monthlyPremiumDescription": "Get premium access for 1 month",
+  "@monthlyPremiumDescription": {
+    "description": "Product description for monthly premium subscription",
+    "context": "plan screen"
+  },
+  "yearlyPremiumTitle": "Yearly Premium",
+  "@yearlyPremiumTitle": {
+    "description": "Product title for yearly premium subscription",
+    "context": "plan screen"
+  },
+  "yearlyPremiumDescription": "Best value - Save 58%!",
+  "@yearlyPremiumDescription": {
+    "description": "Product description for yearly premium subscription",
+    "context": "plan screen"
+  },
+  "trialUserCountText": "{userCount} users started trial in last {hours} hours!",
   "@trialUserCountText": {
-    "description": "Shows how many people started a trial in the last X hours",
+    "description": "Shows how many users started a trial in the last X hours",
     "placeholders": {
       "userCount": {"type": "String", "example": "2342"},
       "hours": {"type": "String", "example": "24"}

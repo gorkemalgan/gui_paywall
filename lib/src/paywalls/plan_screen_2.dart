@@ -77,17 +77,10 @@ class _PlanScreen2State extends State<PlanScreen2> with PaywallSanityCheck<PlanS
                           text: TextSpan(
                             style: const TextStyle(color: Colors.white, fontSize: 13),
                             children: [
-                              // TODO: trialUserCount ve trialUsedInLastHours fonksiyonları localization'a eklenmeli veya kaldırılmalı
                               TextSpan(
-                                text: '2342',
+                                text: context.localizations.trialInfo('2342', '24'),
                                 style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              TextSpan(text: ' '),
-                              TextSpan(
-                                text: '24',
-                                style: const TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              TextSpan(text: '!'),
                             ],
                           ),
                         ),

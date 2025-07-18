@@ -6,7 +6,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 // Project imports:
 import 'package:gui_paywall/src/extensions.dart';
-import '../../generated/assets.gen.dart';
+import 'package:gui_paywall/generated/assets.gen.dart';
 import '../../gui_paywall.dart';
 import '../my_localizations.dart';
 import '../widgets/fitted_text.dart';

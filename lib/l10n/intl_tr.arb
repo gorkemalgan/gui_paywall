@@ -63,5 +63,43 @@
   "weeklyPrice": "{price}/hafta",
   "weeksFreeTrial": "{weeks, plural, =1{1 hafta ücretsiz deneme} other{{weeks} hafta ücretsiz deneme}}",
   "yearly": "Yıllık",
-  "yearlyPrice": "{price}/yıl"
+  "yearlyPrice": "{price}/yıl",
+  "weeklyPremiumTitle": "Haftalık Premium",
+  "@weeklyPremiumTitle": {
+    "description": "Haftalık premium abonelik için ürün başlığı",
+    "context": "plan screen"
+  },
+  "weeklyPremiumDescription": "1 hafta boyunca premium erişim elde edin",
+  "@weeklyPremiumDescription": {
+    "description": "Haftalık premium abonelik için ürün açıklaması",
+    "context": "plan screen"
+  },
+  "monthlyPremiumTitle": "Aylık Premium",
+  "@monthlyPremiumTitle": {
+    "description": "Aylık premium abonelik için ürün başlığı",
+    "context": "plan screen"
+  },
+  "monthlyPremiumDescription": "1 ay boyunca premium erişim elde edin",
+  "@monthlyPremiumDescription": {
+    "description": "Aylık premium abonelik için ürün açıklaması",
+    "context": "plan screen"
+  },
+  "yearlyPremiumTitle": "Yıllık Premium",
+  "@yearlyPremiumTitle": {
+    "description": "Yıllık premium abonelik için ürün başlığı",
+    "context": "plan screen"
+  },
+  "yearlyPremiumDescription": "En iyi değer - %58 tasarruf edin!",
+  "@yearlyPremiumDescription": {
+    "description": "Yıllık premium abonelik için ürün açıklaması",
+    "context": "plan screen"
+  },
+  "trialUserCountText": "{userCount} kişi son {hours} saatte deneme başlattı!",
+  "@trialUserCountText": {
+    "description": "Son X saatte kaç kişinin deneme başlattığını gösterir",
+    "placeholders": {
+      "userCount": {"type": "String", "example": "2342"},
+      "hours": {"type": "String", "example": "24"}
+    }
+  }
 }
