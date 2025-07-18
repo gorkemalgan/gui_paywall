@@ -66,7 +66,9 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 40),
+                              // Spacer ile aşağıya itiyoruz
+                              const Spacer(),
+                              // Aşağıda görünmesini istediğimiz alanlar:
                               Text(
                                 context.localizations.chooseYourPlan,
                                 textAlign: TextAlign.center,
@@ -170,6 +172,8 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                   );
                                 },
                               ),
+                              // Sonunda bir Spacer daha ekleyerek ortalamayı güçlendirebiliriz (isteğe bağlı)
+                              const Spacer(),
                             ],
                           ),
                         ),
