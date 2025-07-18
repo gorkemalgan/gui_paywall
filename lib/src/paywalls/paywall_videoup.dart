@@ -67,8 +67,10 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                 ],
                               ),
                               // Spacer ile aşağıya itiyoruz
+                              // Pushes down with Spacer
                               const Spacer(),
                               // Aşağıda görünmesini istediğimiz alanlar:
+                              // The areas we want to appear below:
                               Text(
                                 context.localizations.chooseYourPlan,
                                 textAlign: TextAlign.center,
@@ -172,12 +174,14 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                 },
                               ),
                               // Sonunda bir Spacer daha ekleyerek ortalamayı güçlendirebiliriz (isteğe bağlı)
+                              // Optionally, we can add another Spacer at the end to strengthen centering
                               const Spacer(),
                             ],
                           ),
                         ),
 
                         // 🔽 FOOTER EKRANIN ALTINDA GÖRÜNÜR
+                        // 🔽 FOOTER APPEARS AT THE BOTTOM OF THE SCREEN
                         const SizedBox(height: 30),
                         PaywallFullFooter(paywallConfig: widget.paywall),
                       ],
