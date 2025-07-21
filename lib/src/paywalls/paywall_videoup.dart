@@ -9,7 +9,16 @@ class VideoUpScreen extends PaywallBase {
   const VideoUpScreen({required this.image, Key? key, required PaywallConfig paywall}) : super(paywall, key: key);
 
   @override
-  PaywallConfig validateConfiguration() => paywall;
+  PaywallConfig validateConfiguration() {
+    // Get the configuration with only paired products
+    final pairedConfig = paywall.paired;
+    final pairs = pairedConfig.productsPaired;
+    // Check we have 2 or 3 pairs
+    if (pairs.length < 2 || pairs.length > 3) {
+      paywall.onError('VideoUpScreen requires 2 or 3 product pairs, found  pairs.length}');
+    }
+    return pairedConfig;
+  }
 
   @override
   State<VideoUpScreen> createState() => _VideoUpScreenState();
@@ -26,7 +35,7 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
       body: Stack(
         children: [
           Positioned.fill(child: backgroundImage),
-          Positioned.fill(child: Container(color: Colors.black.withOpacity(0.4))),
+          Positioned.fill(child: Container(color: Colors.black.withValues(alpha: 0.4))),
           LayoutBuilder(
             builder: (context, constraints) {
               final screenHeight = constraints.maxHeight;
@@ -66,10 +75,8 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                   ),
                                 ],
                               ),
-                              // Spacer ile aşağıya itiyoruz
                               // Pushes down with Spacer
                               const Spacer(),
-                              // Aşağıda görünmesini istediğimiz alanlar:
                               // The areas we want to appear below:
                               Text(
                                 context.localizations.chooseYourPlan,
@@ -173,14 +180,12 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                   );
                                 },
                               ),
-                              // Sonunda bir Spacer daha ekleyerek ortalamayı güçlendirebiliriz (isteğe bağlı)
                               // Optionally, we can add another Spacer at the end to strengthen centering
                               const Spacer(),
                             ],
                           ),
                         ),
 
-                        // 🔽 FOOTER EKRANIN ALTINDA GÖRÜNÜR
                         // 🔽 FOOTER APPEARS AT THE BOTTOM OF THE SCREEN
                         const SizedBox(height: 30),
                         PaywallFullFooter(paywallConfig: widget.paywall),
@@ -210,7 +215,7 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
         decoration: BoxDecoration(
           border: Border.all(color: isSelected ? Colors.cyanAccent : Colors.white24, width: 2),
           borderRadius: BorderRadius.circular(12),
-          color: Colors.white.withOpacity(0.05),
+          color: Colors.white.withValues(alpha: 0.05),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
