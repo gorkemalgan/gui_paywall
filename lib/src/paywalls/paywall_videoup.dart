@@ -114,7 +114,7 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                               ),
                               const SizedBox(height: 10),
 
-                              ...widget.paywall.products.map(
+                              ...widget.paywall.productsSorted.reversed.map(
                                 (product) => buildOptionTile(
                                   title: product.title ?? product.period.localizedName(context),
                                   subtitle: product.description ?? '',
@@ -314,15 +314,4 @@ class _DownArrowPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-
-enum PeriodType { year, month, week, day, unknown }
-
-PeriodType getPeriodType(String name) {
-  name = name.toLowerCase();
-  if (name.contains('year')) return PeriodType.year;
-  if (name.contains('month')) return PeriodType.month;
-  if (name.contains('week')) return PeriodType.week;
-  if (name.contains('day')) return PeriodType.day;
-  return PeriodType.unknown;
 }
