@@ -31,12 +31,12 @@
     "description": "Badge text for best value option",
     "context": "plan screen"
   },
-  "cancelAtAnyTime": "Cancel at any time",
+  "cancelAtAnyTime": "No commitments, cancel anytime",
   "@cancelAtAnyTime": {
     "description": "",
     "context": "free trial page"
   },
-  "chargingInfoFreeTrial": "You will pay {price} after {freeTrialDay} days {invoiceDuration} until it cancel",
+  "chargingInfoFreeTrial": "Billed {price}/{invoiceDuration}. Auto-renewal after {freeTrialDay} days. Request a refund if you're not 100% satisfied.",
   "@chargingInfoFreeTrial": {
     "description": "",
     "context": "paywall",
@@ -296,8 +296,16 @@
   },
   "restorePurchases": "Restore Purchases",
   "@restorePurchases": {
-    "description": "Button or label to restore in-app purchases",
-    "context": "Settings Page"
+    "description": "Button text to restore in-app purchases"
+  },
+  "peopleUsed7DayTrial": "{count} people have used the 7-day Trial in the last 24 hours!",
+  "@peopleUsed7DayTrial": {
+    "description": "A message showing how many people have used the 7-day trial in the last 24 hours.",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
   },
   "save": "Save",
   "@save": {
@@ -427,6 +435,37 @@
       "price": {
         "type": "String",
         "example": "$59.99"
+      }
+    }
+  },
+  "trialUserCount": "{count} people started a trial",
+  "@trialUserCount": {
+    "description": "Shows how many people started a trial in the last X hours",
+    "placeholders": {
+      "count": {"type": "String", "example": "2342"}
+    }
+  },
+  "trialUsedInLastHours": "{count} people used trial in last 24 hours",
+  "@trialUsedInLastHours": {
+    "description": "Shows how many people used trial in the last X hours",
+    "placeholders": {
+      "count": {"type": "String", "example": "2342"}
+    }
+  },
+  "startEditingSeeMagicHappen": "Start Editing\nSee Magic Happen!",
+  "@startEditingSeeMagicHappen": {
+    "description": "Title for plan selection screen, alternative to choose your plan",
+    "context": "plan screen"
+  },
+  "paywallExamples": "Paywall Examples",
+  "reviewSummary": "{starCount} ({totalDownload})",
+  "@reviewSummary": {
+    "placeholders": {
+      "starCount": {
+        "type": "String"
+      },
+      "totalDownload": {
+        "type": "String"
       }
     }
   }

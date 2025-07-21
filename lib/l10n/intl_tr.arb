@@ -6,7 +6,7 @@
   "bestOffer": "EN İYİ TEKLİF",
   "bestValue": "EN İYİ TEKLİF",
   "cancelAtAnyTime": "İstediğiniz zaman iptal edin",
-  "chargingInfoFreeTrial": "{freeTrialDay} gün sonra {price} tahsil edilecektir {invoiceDuration} kadar iptal edilene kadar.",
+  "chargingInfoFreeTrial": "{price}/{invoiceDuration} olarak faturalandırılır. {freeTrialDay} gün sonra otomatik yenileme başlar. %100 memnun kalmazsanız iade talep edebilirsiniz.",
   "chargingInfoLifeTime": "Ömür boyu erişim için yalnızca bir kez {price} ödeyin. Ekstra ücret veya abonelik yok.",
   "chargingInfoStandart": "{price} için {invoiceDuration} otomatik olarak yenilenecektir, iptal edilene kadar.",
   "chooseYourPlan": "Planını Seç",
@@ -45,6 +45,18 @@
   "privacyPolicy": "Gizlilik Politikası",
   "restore": "Geri Yükle",
   "restorePurchases": "Satın Alımları Geri Yükle",
+  "@restorePurchases": {
+    "description": "Button text to restore in-app purchases"
+  },
+  "peopleUsed7DayTrial": "Son 24 saatte {count} kişi 7 günlük denemeyi kullandı!",
+  "@peopleUsed7DayTrial": {
+    "description": "A message showing how many people have used the 7-day trial in the last 24 hours.",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "save": "Kaydet",
   "seeAllOptions": "Tüm Seçenekleri Gör",
   "seeOtherOptions": "Diğer seçenekleri gör",
@@ -63,5 +75,12 @@
   "weeklyPrice": "{price}/hafta",
   "weeksFreeTrial": "{weeks, plural, =1{1 hafta ücretsiz deneme} other{{weeks} hafta ücretsiz deneme}}",
   "yearly": "Yıllık",
-  "yearlyPrice": "{price}/yıl"
+  "yearlyPrice": "{price}/yıl",
+  "trialUserCount": "{count} kişi deneme başlattı",
+  "trialUsedInLastHours": "Son 24 saatte {count} kişi deneme kullandı",
+  "startEditingSeeMagicHappen": "Düzenlemeye Başla\nSihri Gör!",
+  "@startEditingSeeMagicHappen": {
+    "description": "Plan seçim ekranı başlığı, choose your plan alternatifi",
+    "context": "plan screen"
+  }
 }

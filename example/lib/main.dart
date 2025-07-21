@@ -102,7 +102,7 @@ class PaywallListScreen extends StatelessWidget {
     final paywallConfig = _createMockPaywallConfig();
 
     return Scaffold(
-      appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary, title: const Text('Paywall Examples')),
+      appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary, title: Text(PaywallLocalizations.of(context)!.paywallExamples)),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -159,6 +159,8 @@ class PaywallListScreen extends StatelessWidget {
                 'Paywall Remini',
                 () => PaywallRemini(paywall: paywallConfig, image: Image.asset('assets/images/woman.jpeg')),
               ),
+              const SizedBox(height: 16),
+              _buildPaywallButton(context, 'Video Up!', () => VideoUpScreen(paywall: paywallConfig, image: Image.asset('assets/images/woman.jpeg'))),
             ],
           ),
         ),
