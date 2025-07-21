@@ -122,6 +122,7 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(left: 16.0),
+
                                     child: CustomPaint(
                                       size: const Size(20, 8),
                                       painter: _DownArrowPainter(color: Colors.blue),
