@@ -52,6 +52,7 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
+                              const SizedBox(height: 20), //new line
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -76,7 +77,7 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                 ],
                               ),
                               // Pushes down with Spacer
-                              const SizedBox(height: 200),
+                              const SizedBox(height: 170),
                               // The areas we want to appear below:
                               Text(
                                 context.localizations.startEditingSeeMagicHappen,
@@ -99,17 +100,22 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                     child: RichText(
                                       text: TextSpan(
                                         style: const TextStyle(color: Colors.white, fontSize: 13),
-                                        children: [
-                                          TextSpan(
-                                            text: context.localizations.trialUserCount('2342'),
-                                            style: const TextStyle(fontWeight: FontWeight.bold),
+                                        children: <TextSpan>[
+                                          const TextSpan(
+                                            text: '2,342',
+                                            style: TextStyle(fontWeight: FontWeight.bold),
                                           ),
-                                          const TextSpan(text: ' '),
-                                          TextSpan(
-                                            text: context.localizations.trialUsedInLastHours('24'),
-                                            style: const TextStyle(fontWeight: FontWeight.bold),
+                                          const TextSpan(text: ' people have used the '),
+                                          const TextSpan(
+                                            text: '7-day',
+                                            style: TextStyle(fontWeight: FontWeight.bold),
                                           ),
-                                          const TextSpan(text: '!'),
+                                          const TextSpan(text: ' Trial in the last '),
+                                          const TextSpan(
+                                            text: '24',
+                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                          ),
+                                          const TextSpan(text: ' hours!'),
                                         ],
                                       ),
                                     ),
@@ -125,60 +131,122 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                               ),
                               const SizedBox(height: 10),
 
-                              ...widget.paywall.products.map(
-                                (product) => buildOptionTile(
-                                  title: product.title ?? product.period.localizedName(context),
-                                  subtitle: product.description ?? '',
-                                  price: product.priceString_,
-                                  value: product.storeId,
-                                ),
-                              ),
+                              ...(() {
+                                final sortedProducts = [...widget.paywall.products];
+                                sortedProducts.sort((a, b) {
+                                  // Yearly başa, weekly sona
+                                  if (a.period.displayName.toLowerCase().contains('year')) return -1;
+                                  if (b.period.displayName.toLowerCase().contains('year')) return 1;
+                                  if (a.period.displayName.toLowerCase().contains('week')) return 1;
+                                  if (b.period.displayName.toLowerCase().contains('week')) return -1;
+                                  return 0;
+                                });
+                                return sortedProducts.map(
+                                  (product) => buildOptionTile(
+                                    title: product.title ?? product.period.localizedName(context),
+                                    subtitle: product.description ?? '',
+                                    price: product.priceString_,
+                                    value: product.storeId,
+                                  ),
+                                );
+                              })(),
                               const SizedBox(height: 20),
-                              ElevatedButton(
-                                onPressed: () {
-                                  if (selectedPlanStoreId != null) {
-                                    final selectedProduct = widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId);
-                                    widget.paywall.purchase(selectedProduct, context);
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: selectedPlanStoreId == null ? Colors.white24 : Colors.cyanAccent,
-                                  foregroundColor: selectedPlanStoreId == null ? Colors.white : Colors.black,
-                                  shadowColor: Colors.transparent,
-                                  elevation: 0,
-                                  shape: const StadiumBorder(),
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
-                                ),
-                                child: Text(context.localizations.continueBtn, style: const TextStyle(fontWeight: FontWeight.bold)),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 65,
+                                    width: 350,
+                                    child: AnimatedContainer(
+                                      duration: const Duration(milliseconds: 350),
+                                      curve: Curves.easeInOut,
+                                      decoration: BoxDecoration(
+                                        color: selectedPlanStoreId == null ? Colors.white24 : Colors.cyanAccent,
+                                        borderRadius: BorderRadius.circular(40),
+                                      ),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          if (selectedPlanStoreId != null) {
+                                            final selectedProduct = widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId);
+                                            widget.paywall.purchase(selectedProduct, context);
+                                          }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.transparent,
+                                          foregroundColor: selectedPlanStoreId == null ? Colors.white : Colors.black,
+                                          shadowColor: Colors.transparent,
+                                          elevation: 0,
+                                          shape: const StadiumBorder(),
+                                          padding: EdgeInsets.zero,
+                                        ),
+                                        child: Container(
+                                          width: double.infinity,
+                                          padding: const EdgeInsets.symmetric(vertical: 16),
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                              colors: selectedPlanStoreId == null
+                                                  ? [Colors.white24, Colors.white38]
+                                                  : [Colors.cyanAccent, Colors.cyan],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight,
+                                            ),
+                                            borderRadius: BorderRadius.circular(40),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              context.localizations.continueBtn,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: selectedPlanStoreId == null ? Colors.white : Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                               const SizedBox(height: 10),
-                              Builder(
-                                builder: (context) {
-                                  final selectedProduct = selectedPlanStoreId != null
-                                      ? widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId)
-                                      : null;
+                              const SizedBox(height: 8),
+                              AnimatedSwitcher(
+                                duration: const Duration(milliseconds: 1200),
+                                transitionBuilder: (child, animation) => SlideTransition(
+                                  position: Tween<Offset>(
+                                    begin: const Offset(0, -0.05),
+                                    end: Offset.zero,
+                                  ).animate(CurvedAnimation(parent: animation, curve: Curves.easeInOutCubic)),
+                                  child: FadeTransition(opacity: animation, child: child),
+                                ),
+                                child: Builder(
+                                  builder: (context) {
+                                    final selectedProduct = selectedPlanStoreId != null
+                                        ? widget.paywall.products.firstWhere((p) => p.storeId == selectedPlanStoreId)
+                                        : null;
 
-                                  final price = selectedProduct?.price.toStringAsFixed(2) ?? '-';
-                                  final freeTrialDay = (selectedProduct?.freeTrialDays != null && (selectedProduct?.freeTrialDays ?? 0) > 0)
-                                      ? selectedProduct?.freeTrialDays?.toString()
-                                      : null;
-                                  final invoiceDuration = selectedProduct?.period.periodInvoiceStr ?? selectedProduct?.period.displayName ?? '-';
+                                    final price = selectedProduct?.price.toStringAsFixed(2) ?? '-';
+                                    final freeTrialDay = (selectedProduct?.freeTrialDays != null && (selectedProduct?.freeTrialDays ?? 0) > 0)
+                                        ? selectedProduct?.freeTrialDays?.toString()
+                                        : null;
+                                    final invoiceDuration = selectedProduct?.period.periodInvoiceStr ?? selectedProduct?.period.displayName ?? '-';
 
-                                  String disclaimerText = '';
-                                  if (selectedProduct != null) {
-                                    if (freeTrialDay != null) {
-                                      disclaimerText = context.localizations.chargingInfoFreeTrial(price, freeTrialDay, invoiceDuration);
-                                    } else {
-                                      disclaimerText = context.localizations.chargingInfoStandart(price, invoiceDuration);
+                                    String disclaimerText = '';
+                                    if (selectedProduct != null) {
+                                      if (freeTrialDay != null) {
+                                        disclaimerText = context.localizations.chargingInfoFreeTrial(price, freeTrialDay, invoiceDuration);
+                                      } else {
+                                        disclaimerText = context.localizations.chargingInfoStandart(price, invoiceDuration);
+                                      }
                                     }
-                                  }
 
-                                  return Text(
-                                    disclaimerText,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(color: Colors.white70, fontSize: 11),
-                                  );
-                                },
+                                    return Text(
+                                      disclaimerText,
+                                      key: ValueKey(disclaimerText),
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(color: Colors.white70, fontSize: 11),
+                                    );
+                                  },
+                                ),
                               ),
                               // Optionally, we can add another Spacer at the end to strengthen centering
                               const Spacer(),
@@ -187,7 +255,7 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                         ),
 
                         // 🔽 FOOTER APPEARS AT THE BOTTOM OF THE SCREEN
-                        const SizedBox(height: 30),
+                        //const SizedBox(height: 0),
                         PaywallFullFooter(paywallConfig: widget.paywall),
                       ],
                     ),
