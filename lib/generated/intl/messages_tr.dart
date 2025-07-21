@@ -252,4 +252,12 @@ class PaywallLocalizationsTr extends PaywallLocalizations {
 
   @override
   String get startEditingSeeMagicHappen => 'Düzenlemeye Başla\nSihri Gör!';
+
+  @override
+  String get paywallExamples => 'Paywall Examples';
+
+  @override
+  String reviewSummary(String starCount, String totalDownload) {
+    return '$starCount ($totalDownload)';
+  }
 }

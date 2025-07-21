@@ -52,7 +52,7 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              const SizedBox(height: 20), //new line
+                              const SizedBox(height: 20),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -76,9 +76,7 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                   ),
                                 ],
                               ),
-                              // Pushes down with Spacer
                               const SizedBox(height: 170),
-                              // The areas we want to appear below:
                               Text(
                                 context.localizations.startEditingSeeMagicHappen,
                                 textAlign: TextAlign.center,
@@ -222,14 +220,10 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                   },
                                 ),
                               ),
-                              // Optionally, we can add another Spacer at the end to strengthen centering
                               const Spacer(),
                             ],
                           ),
                         ),
-
-                        // 🔽 FOOTER APPEARS AT THE BOTTOM OF THE SCREEN
-                        //const SizedBox(height: 0),
                         PaywallFullFooter(paywallConfig: widget.paywall),
                       ],
                     ),

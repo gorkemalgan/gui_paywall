@@ -456,5 +456,17 @@
   "@startEditingSeeMagicHappen": {
     "description": "Title for plan selection screen, alternative to choose your plan",
     "context": "plan screen"
+  },
+  "paywallExamples": "Paywall Examples",
+  "reviewSummary": "{starCount} ({totalDownload})",
+  "@reviewSummary": {
+    "placeholders": {
+      "starCount": {
+        "type": "String"
+      },
+      "totalDownload": {
+        "type": "String"
+      }
+    }
   }
 }
