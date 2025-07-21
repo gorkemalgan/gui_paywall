@@ -125,20 +125,22 @@ class _PremiumCarouselState extends State<_PremiumCarousel> {
           ],
         ),
       ),
+      // Dot'lar her zaman gösterilecek
+      _buildDots(),
+      const SizedBox(height: 8),
+      // Alt metinler
       if (_currentPage == 2)
         const Padding(
           padding: EdgeInsets.only(top: 4, bottom: 2),
           child: Text('14 day free trial', style: TextStyle(color: Colors.grey, fontSize: 16)),
-        ),
-      const SizedBox(height: 5),
-      if (_currentPage != 2) ...[
-        _buildDots(),
-        if (_currentPage == 1)
-          const Padding(
-            padding: EdgeInsets.only(top: 8, bottom: 2),
-            child: Text('7 day free trial', style: TextStyle(color: Colors.white, fontSize: 16)),
-          ),
-      ],
+        )
+      else if (_currentPage == 1)
+        const Padding(
+          padding: EdgeInsets.only(top: 8, bottom: 2),
+          child: Text('7 day free trial', style: TextStyle(color: Colors.grey, fontSize: 16)),
+        )
+      else
+        const SizedBox(height: 28),
       const SizedBox(height: 12),
       Expanded(
         child: PageView.builder(
@@ -146,145 +148,273 @@ class _PremiumCarouselState extends State<_PremiumCarousel> {
           itemCount: _pages.length,
           itemBuilder: (context, idx) {
             final p = _pages[idx];
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: Column(
-                children: [
-                  // Kart içeriği
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.amber, width: 2),
-                        color: Colors.black,
-                      ),
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          if (!(idx == 2)) ...[
-                            Text(
-                              p.trialLabel,
-                              style: const TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 10),
-                          ],
-                          Image.asset('assets/images/mascot_m.png', height: 140, fit: BoxFit.cover),
-                          if (idx == 2) ...[
-                            const SizedBox(height: 8),
-                            Text(
-                              'BEST DEAL!',
-                              style: TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                          const SizedBox(height: 10),
-                          if (idx == 2) ...[
-                            Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(13),
-                              margin: const EdgeInsets.symmetric(horizontal: 28, vertical: 2).copyWith(bottom: 10),
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade900,
-                                border: Border.all(color: Colors.amber, width: 1.5),
-                                borderRadius: BorderRadius.zero,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    p.planName,
-                                    style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  const SizedBox(height: 6),
-                                  ...p.features.map(
-                                    (f) => Text(
-                                      f,
-                                      style: const TextStyle(color: Colors.white),
+            return idx == 2
+                ? Column(
+                    children: [
+                      Image.asset('assets/images/mascot_m.png', height: 140, fit: BoxFit.cover),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        height: 220,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: List.generate(
+                              3,
+                              (innerIdx) => Container(
+                                width: 250,
+                                height: 320,
+                                margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 0),
+                                padding: const EdgeInsets.all(18),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade900,
+                                  border: Border.all(color: Colors.amber, width: 1.5),
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      p.planName,
+                                      style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
                                       textAlign: TextAlign.center,
                                     ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    p.priceLine,
-                                    style: const TextStyle(color: Colors.white, fontSize: 16),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    'LEARN MORE',
-                                    style: TextStyle(color: Colors.red.shade400, fontSize: 13, fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ] else ...[
-                            Text(
-                              p.planName,
-                              style: const TextStyle(color: Colors.amber, fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(p.priceLine, style: const TextStyle(color: Colors.white, fontSize: 16)),
-                            if (p.renewLine.isNotEmpty) Text(p.renewLine, style: const TextStyle(color: Colors.grey, fontSize: 14)),
-                            const SizedBox(height: 10),
-                            ...p.features.map(
-                              (f) => Row(
-                                children: [
-                                  const Icon(Icons.check, color: Colors.amber, size: 20),
-                                  const SizedBox(width: 8),
-                                  Expanded(
-                                    child: Text(f, style: const TextStyle(color: Colors.white)),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            if (p.disabledFeature.isNotEmpty)
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8),
-                                child: Row(
-                                  children: [
-                                    const Icon(Icons.close, color: Colors.grey, size: 20),
-                                    const SizedBox(width: 8),
-                                    Expanded(
-                                      child: Text(p.disabledFeature, style: const TextStyle(color: Colors.grey)),
+                                    const SizedBox(height: 6),
+                                    ...p.features.map(
+                                      (f) => Text(
+                                        f,
+                                        style: const TextStyle(color: Colors.white),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Text(
+                                      p.priceLine,
+                                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Text(
+                                      'LEARN MORE',
+                                      style: TextStyle(color: Colors.red.shade400, fontSize: 13, fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.center,
                                     ),
                                   ],
                                 ),
                               ),
-                          ],
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.amber,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.workspace_premium, color: Colors.black, size: 22),
-                          const SizedBox(width: 8),
-                          Text(
-                            p.buttonText,
-                            style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                        ],
+                        ),
                       ),
+                      const SizedBox(height: 154),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.amber,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(Icons.workspace_premium, color: Colors.black, size: 22),
+                              const SizedBox(width: 10),
+                              Text(
+                                'GO PREMIUM',
+                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: Column(
+                      children: [
+                        // Kart üstü banner: 1. sayfa için FIRST 7 DAYS FREE, 2. sayfa için BEST DEAL!
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16, bottom: 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if (_currentPage == 0)
+                                Container(
+                                  height: 32,
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.amber,
+                                    border: Border.all(color: Colors.amber, width: 1),
+                                    borderRadius: BorderRadius.zero,
+                                  ),
+                                  child: const Text(
+                                    'FIRST 7 DAYS FREE',
+                                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 13),
+                                  ),
+                                )
+                              else if (_currentPage == 1)
+                                Container(
+                                  height: 32,
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.amber,
+                                    border: Border.all(color: Colors.amber, width: 1),
+                                    borderRadius: BorderRadius.zero,
+                                  ),
+                                  child: const Text(
+                                    'BEST DEAL!',
+                                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 13),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                        // Kart içeriği
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.amber, width: 2),
+                              color: Colors.black,
+                            ),
+                            padding: EdgeInsets.only(top: idx == 1 ? 0 : 16, left: 16, right: 16, bottom: 16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/images/mascot_m.png', height: 150, fit: BoxFit.cover),
+                                if (idx == 2) ...[
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    'BEST DEAL!',
+                                    style: TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                                const SizedBox(height: 8),
+                                if (idx == 2) ...[
+                                  Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.all(13),
+                                    margin: const EdgeInsets.symmetric(horizontal: 28, vertical: 2).copyWith(bottom: 10),
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey.shade900,
+                                      border: Border.all(color: Colors.amber, width: 1.5),
+                                      borderRadius: BorderRadius.zero,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          p.planName,
+                                          style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        const SizedBox(height: 6),
+                                        ...p.features.map(
+                                          (f) => Text(
+                                            f,
+                                            style: const TextStyle(color: Colors.white),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        Text(
+                                          p.priceLine,
+                                          style: const TextStyle(color: Colors.white, fontSize: 16),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        const SizedBox(height: 10),
+                                        Text(
+                                          'LEARN MORE',
+                                          style: TextStyle(color: Colors.red.shade400, fontSize: 13, fontWeight: FontWeight.bold),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ] else ...[
+                                  Text(
+                                    p.planName,
+                                    style: TextStyle(color: Colors.amber, fontSize: (idx == 0 || idx == 1) ? 16 : 20, fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Text(
+                                    p.priceLine,
+                                    style: TextStyle(color: Colors.white, fontSize: (idx == 0 || idx == 1) ? 13 : 16),
+                                  ),
+                                  if (p.renewLine.isNotEmpty)
+                                    Text(
+                                      p.renewLine,
+                                      style: TextStyle(color: Colors.grey, fontSize: (idx == 0 || idx == 1) ? 11 : 14),
+                                    ),
+                                  const SizedBox(height: 10),
+                                  ...p.features.map(
+                                    (f) => Row(
+                                      children: [
+                                        Icon(Icons.check, color: Colors.amber, size: (idx == 0 || idx == 1) ? 16 : 20),
+                                        const SizedBox(width: 8),
+                                        Expanded(
+                                          child: Text(
+                                            f,
+                                            style: TextStyle(color: Colors.white, fontSize: (idx == 0 || idx == 1) ? 13 : 16),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  if (p.disabledFeature.isNotEmpty)
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 8),
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.close, color: Colors.grey, size: (idx == 0 || idx == 1) ? 16 : 20),
+                                          const SizedBox(width: 8),
+                                          Expanded(
+                                            child: Text(
+                                              p.disabledFeature,
+                                              style: TextStyle(color: Colors.grey, fontSize: (idx == 0 || idx == 1) ? 13 : 16),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                ],
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.amber,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(Icons.workspace_premium, color: Colors.black, size: 22),
+                                const SizedBox(width: 8),
+                                Text(
+                                  p.buttonText,
+                                  style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                ],
-              ),
-            );
+                  );
           },
         ),
       ),
