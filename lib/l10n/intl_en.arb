@@ -31,7 +31,7 @@
     "description": "Badge text for best value option",
     "context": "plan screen"
   },
-  "cancelAtAnyTime": "Cancel at any time",
+  "cancelAtAnyTime": "No commitments, cancel anytime",
   "@cancelAtAnyTime": {
     "description": "",
     "context": "free trial page"
@@ -431,12 +431,22 @@
     }
   },
   "trialUserCount": "{count} people started a trial",
-  "trialUsedInLastHours": "{count} people used trial in last 24 hours",
-  "@trialUserCountText": {
+  "@trialUserCount": {
     "description": "Shows how many people started a trial in the last X hours",
     "placeholders": {
-      "userCount": {"type": "String", "example": "2342"},
-      "hours": {"type": "String", "example": "24"}
+      "count": {"type": "String", "example": "2342"}
     }
+  },
+  "trialUsedInLastHours": "{count} people used trial in last 24 hours",
+  "@trialUsedInLastHours": {
+    "description": "Shows how many people used trial in the last X hours",
+    "placeholders": {
+      "count": {"type": "String", "example": "2342"}
+    }
+  },
+  "startEditingSeeMagicHappen": "Start Editing\nSee Magic Happen!",
+  "@startEditingSeeMagicHappen": {
+    "description": "Title for plan selection screen, alternative to choose your plan",
+    "context": "plan screen"
   }
 }

@@ -65,5 +65,10 @@
   "yearly": "Yıllık",
   "yearlyPrice": "{price}/yıl",
   "trialUserCount": "{count} kişi deneme başlattı",
-  "trialUsedInLastHours": "Son 24 saatte {count} kişi deneme kullandı"
+  "trialUsedInLastHours": "Son 24 saatte {count} kişi deneme kullandı",
+  "startEditingSeeMagicHappen": "Düzenlemeye Başla\nSihri Gör!",
+  "@startEditingSeeMagicHappen": {
+    "description": "Plan seçim ekranı başlığı, choose your plan alternatifi",
+    "context": "plan screen"
+  }
 }

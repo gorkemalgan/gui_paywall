@@ -236,12 +236,15 @@ class PaywallLocalizationsTr extends PaywallLocalizations {
   }
 
   @override
-  String trialUserCount(Object count) {
+  String trialUserCount(String count) {
     return '$count kişi deneme başlattı';
   }
 
   @override
-  String trialUsedInLastHours(Object count) {
+  String trialUsedInLastHours(String count) {
     return 'Son 24 saatte $count kişi deneme kullandı';
   }
+
+  @override
+  String get startEditingSeeMagicHappen => 'Düzenlemeye Başla\nSihri Gör!';
 }

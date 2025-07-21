@@ -76,14 +76,14 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                 ],
                               ),
                               // Pushes down with Spacer
-                              const Spacer(),
+                              const SizedBox(height: 200),
                               // The areas we want to appear below:
                               Text(
-                                context.localizations.chooseYourPlan,
+                                context.localizations.startEditingSeeMagicHappen,
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
                               ),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 8),
                               Text(
                                 context.localizations.cancelAtAnyTime,
                                 style: const TextStyle(color: Colors.white),
@@ -101,12 +101,12 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                         style: const TextStyle(color: Colors.white, fontSize: 13),
                                         children: [
                                           TextSpan(
-                                            text: context.localizations.trialUserCount(2342),
+                                            text: context.localizations.trialUserCount('2342'),
                                             style: const TextStyle(fontWeight: FontWeight.bold),
                                           ),
                                           const TextSpan(text: ' '),
                                           TextSpan(
-                                            text: context.localizations.trialUsedInLastHours(24),
+                                            text: context.localizations.trialUsedInLastHours('24'),
                                             style: const TextStyle(fontWeight: FontWeight.bold),
                                           ),
                                           const TextSpan(text: '!'),

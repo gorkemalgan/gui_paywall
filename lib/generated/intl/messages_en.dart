@@ -26,7 +26,7 @@ class PaywallLocalizationsEn extends PaywallLocalizations {
   String get bestValue => 'BEST VALUE';
 
   @override
-  String get cancelAtAnyTime => 'Cancel at any time';
+  String get cancelAtAnyTime => 'No commitments, cancel anytime';
 
   @override
   String chargingInfoFreeTrial(String price, String freeTrialDay, String invoiceDuration) {
@@ -236,12 +236,15 @@ class PaywallLocalizationsEn extends PaywallLocalizations {
   }
 
   @override
-  String trialUserCount(Object count) {
+  String trialUserCount(String count) {
     return '$count people started a trial';
   }
 
   @override
-  String trialUsedInLastHours(Object count) {
+  String trialUsedInLastHours(String count) {
     return '$count people used trial in last 24 hours';
   }
+
+  @override
+  String get startEditingSeeMagicHappen => 'Start Editing\nSee Magic Happen!';
 }
