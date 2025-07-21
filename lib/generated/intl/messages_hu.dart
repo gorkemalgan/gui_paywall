@@ -166,6 +166,11 @@ class PaywallLocalizationsHu extends PaywallLocalizations {
   String get restorePurchases => 'Vásárlások visszaállítása';
 
   @override
+  String peopleUsed7DayTrial(String count) {
+    return '$count people have used the 7-day Trial in the last 24 hours!';
+  }
+
+  @override
   String get save => 'Mentés';
 
   @override

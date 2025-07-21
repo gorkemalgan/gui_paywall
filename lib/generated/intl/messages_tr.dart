@@ -166,6 +166,11 @@ class PaywallLocalizationsTr extends PaywallLocalizations {
   String get restorePurchases => 'Satın Alımları Geri Yükle';
 
   @override
+  String peopleUsed7DayTrial(String count) {
+    return 'Son 24 saatte $count kişi 7 günlük denemeyi kullandı!';
+  }
+
+  @override
   String get save => 'Kaydet';
 
   @override

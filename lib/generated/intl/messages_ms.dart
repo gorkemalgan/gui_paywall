@@ -165,6 +165,11 @@ class PaywallLocalizationsMs extends PaywallLocalizations {
   String get restorePurchases => 'Pulihkan Pembelian';
 
   @override
+  String peopleUsed7DayTrial(String count) {
+    return '$count people have used the 7-day Trial in the last 24 hours!';
+  }
+
+  @override
   String get save => 'Simpan';
 
   @override

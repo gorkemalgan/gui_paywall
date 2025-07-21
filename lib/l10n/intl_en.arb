@@ -296,8 +296,16 @@
   },
   "restorePurchases": "Restore Purchases",
   "@restorePurchases": {
-    "description": "Button or label to restore in-app purchases",
-    "context": "Settings Page"
+    "description": "Button text to restore in-app purchases"
+  },
+  "peopleUsed7DayTrial": "{count} people have used the 7-day Trial in the last 24 hours!",
+  "@peopleUsed7DayTrial": {
+    "description": "A message showing how many people have used the 7-day trial in the last 24 hours.",
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
   },
   "save": "Save",
   "@save": {

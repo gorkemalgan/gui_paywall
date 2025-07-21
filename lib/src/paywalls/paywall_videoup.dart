@@ -100,23 +100,7 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                                     child: RichText(
                                       text: TextSpan(
                                         style: const TextStyle(color: Colors.white, fontSize: 13),
-                                        children: <TextSpan>[
-                                          const TextSpan(
-                                            text: '2,342',
-                                            style: TextStyle(fontWeight: FontWeight.bold),
-                                          ),
-                                          const TextSpan(text: ' people have used the '),
-                                          const TextSpan(
-                                            text: '7-day',
-                                            style: TextStyle(fontWeight: FontWeight.bold),
-                                          ),
-                                          const TextSpan(text: ' Trial in the last '),
-                                          const TextSpan(
-                                            text: '24',
-                                            style: TextStyle(fontWeight: FontWeight.bold),
-                                          ),
-                                          const TextSpan(text: ' hours!'),
-                                        ],
+                                        children: <TextSpan>[TextSpan(text: context.localizations.peopleUsed7DayTrial('2,342'))],
                                       ),
                                     ),
                                   ),
@@ -132,25 +116,14 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
                               ),
                               const SizedBox(height: 10),
 
-                              ...(() {
-                                final sortedProducts = [...widget.paywall.products];
-                                sortedProducts.sort((a, b) {
-                                  // Yearly başa, weekly sona
-                                  if (a.period.displayName.toLowerCase().contains('year')) return -1;
-                                  if (b.period.displayName.toLowerCase().contains('year')) return 1;
-                                  if (a.period.displayName.toLowerCase().contains('week')) return 1;
-                                  if (b.period.displayName.toLowerCase().contains('week')) return -1;
-                                  return 0;
-                                });
-                                return sortedProducts.map(
-                                  (product) => buildOptionTile(
-                                    title: product.title ?? product.period.localizedName(context),
-                                    subtitle: product.description ?? '',
-                                    price: product.priceString_,
-                                    value: product.storeId,
-                                  ),
-                                );
-                              })(),
+                              ...widget.paywall.products.map(
+                                (product) => buildOptionTile(
+                                  title: product.title ?? product.period.localizedName(context),
+                                  subtitle: product.description ?? '',
+                                  price: product.priceString_,
+                                  value: product.storeId,
+                                ),
+                              ),
                               const SizedBox(height: 20),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -347,4 +320,15 @@ class _DownArrowPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+enum PeriodType { year, month, week, day, unknown }
+
+PeriodType getPeriodType(String name) {
+  name = name.toLowerCase();
+  if (name.contains('year')) return PeriodType.year;
+  if (name.contains('month')) return PeriodType.month;
+  if (name.contains('week')) return PeriodType.week;
+  if (name.contains('day')) return PeriodType.day;
+  return PeriodType.unknown;
 }
