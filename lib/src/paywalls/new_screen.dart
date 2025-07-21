@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/paywall_config.dart';
 
 class Paywall4 extends StatelessWidget {
