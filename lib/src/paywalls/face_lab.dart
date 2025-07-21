@@ -27,6 +27,7 @@ class _FaceLabPremiumScreenState extends State<FaceLabPremiumScreen> {
     backgroundColor: Colors.black,
     body: Stack(
       children: [
+        SizedBox.expand(child: Image.asset('assets/images/woman_facelabb.jpg', fit: BoxFit.cover)),
         Column(
           children: [
             const SizedBox(height: 60),
