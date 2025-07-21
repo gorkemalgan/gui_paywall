@@ -161,45 +161,98 @@ class _PremiumCarouselState extends State<_PremiumCarousel> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(
-                            p.trialLabel,
-                            style: const TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 10),
-                          Image.asset('assets/images/mascot_m.png', height: 130, fit: BoxFit.cover),
-                          const SizedBox(height: 10),
-                          Text(
-                            p.planName,
-                            style: const TextStyle(color: Colors.amber, fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 6),
-                          Text(p.priceLine, style: const TextStyle(color: Colors.white, fontSize: 16)),
-                          if (p.renewLine.isNotEmpty) Text(p.renewLine, style: const TextStyle(color: Colors.grey, fontSize: 14)),
-                          const SizedBox(height: 10),
-                          ...p.features.map(
-                            (f) => Row(
-                              children: [
-                                const Icon(Icons.check, color: Colors.amber, size: 20),
-                                const SizedBox(width: 8),
-                                Expanded(
-                                  child: Text(f, style: const TextStyle(color: Colors.white)),
-                                ),
-                              ],
+                          if (!(idx == 2)) ...[
+                            Text(
+                              p.trialLabel,
+                              style: const TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
                             ),
-                          ),
-                          if (p.disabledFeature.isNotEmpty)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8),
-                              child: Row(
+                            const SizedBox(height: 10),
+                          ],
+                          Image.asset('assets/images/mascot_m.png', height: 140, fit: BoxFit.cover),
+                          if (idx == 2) ...[
+                            const SizedBox(height: 8),
+                            Text(
+                              'BEST DEAL!',
+                              style: TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                          const SizedBox(height: 10),
+                          if (idx == 2) ...[
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(13),
+                              margin: const EdgeInsets.symmetric(horizontal: 28, vertical: 2).copyWith(bottom: 10),
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade900,
+                                border: Border.all(color: Colors.amber, width: 1.5),
+                                borderRadius: BorderRadius.zero,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Icon(Icons.close, color: Colors.grey, size: 20),
-                                  const SizedBox(width: 8),
-                                  Expanded(
-                                    child: Text(p.disabledFeature, style: const TextStyle(color: Colors.grey)),
+                                  Text(
+                                    p.planName,
+                                    style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 6),
+                                  ...p.features.map(
+                                    (f) => Text(
+                                      f,
+                                      style: const TextStyle(color: Colors.white),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    p.priceLine,
+                                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    'LEARN MORE',
+                                    style: TextStyle(color: Colors.red.shade400, fontSize: 13, fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
                                   ),
                                 ],
                               ),
                             ),
+                          ] else ...[
+                            Text(
+                              p.planName,
+                              style: const TextStyle(color: Colors.amber, fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(p.priceLine, style: const TextStyle(color: Colors.white, fontSize: 16)),
+                            if (p.renewLine.isNotEmpty) Text(p.renewLine, style: const TextStyle(color: Colors.grey, fontSize: 14)),
+                            const SizedBox(height: 10),
+                            ...p.features.map(
+                              (f) => Row(
+                                children: [
+                                  const Icon(Icons.check, color: Colors.amber, size: 20),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Text(f, style: const TextStyle(color: Colors.white)),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            if (p.disabledFeature.isNotEmpty)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.close, color: Colors.grey, size: 20),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(p.disabledFeature, style: const TextStyle(color: Colors.grey)),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                          ],
                         ],
                       ),
                     ),
@@ -212,11 +265,19 @@ class _PremiumCarouselState extends State<_PremiumCarousel> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amber,
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
                       ),
-                      child: Text(
-                        p.buttonText,
-                        style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.workspace_premium, color: Colors.black, size: 22),
+                          const SizedBox(width: 8),
+                          Text(
+                            p.buttonText,
+                            style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                     ),
                   ),
