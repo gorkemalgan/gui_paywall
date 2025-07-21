@@ -6,7 +6,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:desktop_window/desktop_window.dart';
 
 import 'package:gui_paywall/gui_paywall.dart';
-import 'package:gui_paywall/src/paywalls/face_lab.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -161,7 +160,12 @@ class PaywallListScreen extends StatelessWidget {
                 () => PaywallRemini(paywall: paywallConfig, image: Image.asset('assets/images/woman.jpeg')),
               ),
               const SizedBox(height: 16),
-              _buildPaywallButton(context, 'Face Lab Paywall', () => const FaceLabPremiumScreen()),
+              _buildPaywallButton(
+                context,
+                'Face Lab Paywall',
+                () => FaceLabPremiumScreen(image: Image.asset('assets/images/woman_facelabb.jpg', fit: BoxFit.cover)),
+              ),
+              // () => FaceLab(paywall: paywallConfig, image: Image.asset('assets/free_trial/women_facelabb.jpg')),
             ],
           ),
         ),

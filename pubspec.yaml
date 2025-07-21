@@ -29,6 +29,7 @@ flutter:
   generate: true
   assets:
     - assets/free_trial/
+    - assets/images/
 
 
 flutter_gen:
