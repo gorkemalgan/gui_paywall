@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../extensions.dart';
 
 void main() {
   runApp(const FaceLabPremiumApp());
@@ -27,57 +28,67 @@ class _FaceLabPremiumScreenState extends State<FaceLabPremiumScreen> {
     backgroundColor: Colors.black,
     body: Stack(
       children: [
+        // Arka plan görseli
         SizedBox.expand(child: Image.asset('assets/images/woman_facelabb.jpg', fit: BoxFit.cover)),
+        // Alt kısımda yazıların arkasına siyah gölgelendirme
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            height: 420, // Biraz daha yüksek
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [
+                  Color(0xFF000000), // Tam siyah
+                  Color(0xCC000000), // %80 opak siyah
+                  Color(0x88000000), // %53 opak siyah
+                  Colors.transparent,
+                ],
+                stops: [0.0, 0.4, 0.7, 1.0],
+              ),
+            ),
+          ),
+        ),
         Column(
           children: [
             const SizedBox(height: 60),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: 16.0),
-                  child: Icon(Icons.close, color: Colors.white, size: 28),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 16.0),
-                  child: Row(
-                    children: const [
-                      Icon(Icons.signal_cellular_4_bar, color: Colors.white, size: 18),
-                      SizedBox(width: 4),
-                      Icon(Icons.wifi, color: Colors.white, size: 18),
-                      SizedBox(width: 4),
-                      Icon(Icons.battery_full, color: Colors.white, size: 18),
-                      SizedBox(width: 4),
-                      Text('42', style: TextStyle(color: Colors.white, fontSize: 14)),
-                    ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop(); // Paywall seçme ekranına dönmek için bir pop yeterli
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 16.0),
+                    child: Icon(Icons.close, color: Colors.white, size: 28),
                   ),
                 ),
+                // Sağ üstteki gereksiz ikonlar kaldırıldı
               ],
             ),
-            SizedBox(
-              width: double.infinity,
-              height: 260,
-              child: (widget.image ?? Image.asset('assets/images/woman_facelabb.jpg', fit: BoxFit.cover)),
-            ),
+            // Üstteki tekrar görseli kaldırdım
             const Spacer(),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'FaceLab Premium',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
+                  context.localizations.faceLabPremium,
+                  style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
                   textAlign: TextAlign.left,
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Unlimited full access',
-                  style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                  context.localizations.unlimitedAccess,
+                  style: const TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -89,7 +100,7 @@ class _FaceLabPremiumScreenState extends State<FaceLabPremiumScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('3 Day Free Trial Enabled', style: TextStyle(color: Colors.white, fontSize: 14)),
+                  Text(context.localizations.freeTrialEnabled, style: const TextStyle(color: Colors.white, fontSize: 14)),
                   GestureDetector(
                     onTap: () {
                       setState(() {
@@ -135,10 +146,10 @@ class _FaceLabPremiumScreenState extends State<FaceLabPremiumScreen> {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(16),
                     onTap: () {},
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        'Start Free Trial',
-                        style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+                        context.localizations.startFreeTrial,
+                        style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -146,25 +157,25 @@ class _FaceLabPremiumScreenState extends State<FaceLabPremiumScreen> {
               ),
             ),
             const SizedBox(height: 12),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.check_circle, color: Colors.green, size: 16),
-                SizedBox(width: 4),
-                Text('No payment now', style: TextStyle(color: Colors.white, fontSize: 14)),
+                const Icon(Icons.check_circle, color: Colors.green, size: 16),
+                const SizedBox(width: 4),
+                Text(context.localizations.noPaymentNow, style: const TextStyle(color: Colors.white, fontSize: 14)),
               ],
             ),
             const SizedBox(height: 16),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text('Terms of Use', style: TextStyle(color: Colors.white70, fontSize: 12)),
-                  Text('|', style: TextStyle(color: Colors.white70)),
-                  Text('Restore', style: TextStyle(color: Colors.white70, fontSize: 12)),
-                  Text('|', style: TextStyle(color: Colors.white70)),
-                  Text('Privacy Policy', style: TextStyle(color: Colors.white70, fontSize: 12)),
+                  Text(context.localizations.termsOfUse, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                  const Text('|', style: TextStyle(color: Colors.white70)),
+                  Text(context.localizations.restore, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                  const Text('|', style: TextStyle(color: Colors.white70)),
+                  Text(context.localizations.privacyPolicy, style: const TextStyle(color: Colors.white70, fontSize: 12)),
                 ],
               ),
             ),

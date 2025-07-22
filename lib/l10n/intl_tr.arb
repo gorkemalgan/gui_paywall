@@ -63,5 +63,25 @@
   "weeklyPrice": "{price}/hafta",
   "weeksFreeTrial": "{weeks, plural, =1{1 hafta ücretsiz deneme} other{{weeks} hafta ücretsiz deneme}}",
   "yearly": "Yıllık",
-  "yearlyPrice": "{price}/yıl"
+  "yearlyPrice": "{price}/yıl",
+  "faceLabPremium": "FaceLab Premium",
+  "@faceLabPremium": {
+    "description": "FaceLab paywall başlığı",
+    "context": "face lab paywall"
+  },
+  "unlimitedAccess": "Sınırsız tam erişim",
+  "@unlimitedAccess": {
+    "description": "FaceLab paywall alt başlığı",
+    "context": "face lab paywall"
+  },
+  "freeTrialEnabled": "3 Günlük Ücretsiz Deneme Etkin",
+  "@freeTrialEnabled": {
+    "description": "FaceLab paywall ücretsiz deneme anahtarı",
+    "context": "face lab paywall"
+  },
+  "noPaymentNow": "Şimdi ödeme yok",
+  "@noPaymentNow": {
+    "description": "FaceLab paywall ödeme bilgilendirmesi",
+    "context": "face lab paywall"
+  }
 }

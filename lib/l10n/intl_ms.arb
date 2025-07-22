@@ -63,5 +63,25 @@
   "weeklyPrice": "{price}/minggu",
   "weeksFreeTrial": "{weeks, plural, =1{Cuba percuma 1 minggu} other{Cuba percuma {weeks} minggu}}",
   "yearly": "Tahunan",
-  "yearlyPrice": "{price}/tahun"
+  "yearlyPrice": "{price}/tahun",
+  "faceLabPremium": "FaceLab Premium",
+  "@faceLabPremium": {
+    "description": "FaceLab paywall title",
+    "context": "face lab paywall"
+  },
+  "unlimitedAccess": "Unlimited full access",
+  "@unlimitedAccess": {
+    "description": "FaceLab paywall subtitle",
+    "context": "face lab paywall"
+  },
+  "freeTrialEnabled": "3 Day Free Trial Enabled",
+  "@freeTrialEnabled": {
+    "description": "FaceLab paywall free trial switch label",
+    "context": "face lab paywall"
+  },
+  "noPaymentNow": "No payment now",
+  "@noPaymentNow": {
+    "description": "FaceLab paywall no payment info",
+    "context": "face lab paywall"
+  }
 }

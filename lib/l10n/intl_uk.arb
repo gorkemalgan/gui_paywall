@@ -62,6 +62,26 @@
   "weekly": "Щотижня",
   "weeklyPrice": "{price}/тиждень",
   "weeksFreeTrial": "{weeks, plural, =1{1 тиждень безкоштовної пробної версії} other{{weeks} тижні(в) безкоштовної пробної версії}}",
-  "yearly": "Щорічно",
-  "yearlyPrice": "{price}/рік"
+  "yearly": "Річний",
+  "yearlyPrice": "{price}/рік",
+  "faceLabPremium": "FaceLab Premium",
+  "@faceLabPremium": {
+    "description": "FaceLab paywall title",
+    "context": "face lab paywall"
+  },
+  "unlimitedAccess": "Unlimited full access",
+  "@unlimitedAccess": {
+    "description": "FaceLab paywall subtitle",
+    "context": "face lab paywall"
+  },
+  "freeTrialEnabled": "3 Day Free Trial Enabled",
+  "@freeTrialEnabled": {
+    "description": "FaceLab paywall free trial switch label",
+    "context": "face lab paywall"
+  },
+  "noPaymentNow": "No payment now",
+  "@noPaymentNow": {
+    "description": "FaceLab paywall no payment info",
+    "context": "face lab paywall"
+  }
 }

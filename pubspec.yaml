@@ -1,44 +1,28 @@
-name: gui_paywall
-description: "Dedicated paywall and monetization UI templates for Flutter applications with multiple design variants and conversion-optimized layouts."
-version: 0.0.1
-publish_to: none
+name: l10n_demo
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.0+1
 
 environment:
   sdk: ^3.8.1
-  flutter: ">=1.17.0"
 
 dependencies:
-  carousel_slider: ^5.0.0
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_svg: ^2.2.0
   intl: ^0.20.0
 
 dev_dependencies:
-  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  flutter_gen_runner:
-  import_sorter: ^4.6.0
-  intl_utils: ^2.8.11
+  flutter_lints: ^6.0.0
 
 flutter:
   uses-material-design: true
   generate: true
-  assets:
-    - assets/free_trial/
-    - assets/images/
-
-
-flutter_gen:
-  line_length: 150
-  output: lib/generated/
-  integrations:
-    flutter_svg: true
-    lottie: true
-  assets:
-    outputs:
-      class_name: PaywallAssets
-      package_parameter_enabled: true
+  l10n:
+    arb-dir: lib/l10n
+    template-arb-file: app_en.arb
+    output-localization-file: app_localizations.dart
+    output-class: AppLocalizations

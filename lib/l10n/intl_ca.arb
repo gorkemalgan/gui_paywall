@@ -1,14 +1,86 @@
 {
   "@@locale": "ca",
   "adFree": "Sense anuncis",
+  "@adFree": {
+    "description": "",
+    "context": "free trial page"
+  },
   "appOverview": "Visió general de l'app",
+  "@appOverview": {
+    "description": "",
+    "context": "free trial page"
+  },
   "appPro": "{appName} Pro",
+  "@appPro": {
+    "description": "product name for premium version",
+    "context": "paywall",
+    "placeholders": {
+      "appName": {
+        "type": "String",
+        "example": "Pixvibe"
+      }
+    }
+  },
   "bestOffer": "MILLOR OFERTA",
+  "@bestOffer": {
+    "description": "",
+    "context": "free trial page"
+  },
   "bestValue": "MILLOR OFERTA",
+  "@bestValue": {
+    "description": "Badge text for best value option",
+    "context": "plan screen"
+  },
   "cancelAtAnyTime": "Cancel·la en qualsevol moment",
+  "@cancelAtAnyTime": {
+    "description": "",
+    "context": "free trial page"
+  },
   "chargingInfoFreeTrial": "Se't cobrarà {price} després de {freeTrialDay} dies {invoiceDuration} fins a la cancel·lació.",
+  "@chargingInfoFreeTrial": {
+    "description": "",
+    "context": "paywall",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "39.99"
+      },
+      "freeTrialDay": {
+        "type": "String",
+        "example": "7"
+      },
+      "invoiceDuration": {
+        "type": "String",
+        "example": "7"
+      }
+    }
+  },
   "chargingInfoLifeTime": "Paga {price} una vegada per accés de per vida. Sense despeses extres ni subscripcions.",
+  "@chargingInfoLifeTime": {
+    "description": "",
+    "context": "paywall",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "39.99"
+      }
+    }
+  },
   "chargingInfoStandart": "Es renovarà automàticament per {price} cada {invoiceDuration} fins a la cancel·lació.",
+  "@chargingInfoStandart": {
+    "description": "",
+    "context": "paywall",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "39.99"
+      },
+      "invoiceDuration": {
+        "type": "String",
+        "example": "invoice weekly"
+      }
+    }
+  },
   "chooseYourPlan": "Tria el teu pla",
   "continueBtn": "Continua",
   "daysFreeTrial": "{days, plural, =1{1 dia de prova gratuïta} other{{days} dies de prova gratuïta}}",
@@ -63,5 +135,25 @@
   "weeklyPrice": "{price}/setmana",
   "weeksFreeTrial": "{weeks, plural, =1{1 setmana de prova gratuïta} other{{weeks} setmanes de prova gratuïta}}",
   "yearly": "Anual",
-  "yearlyPrice": "{price}/any"
+  "yearlyPrice": "{price}/any",
+  "faceLabPremium": "FaceLab Premium",
+  "@faceLabPremium": {
+    "description": "FaceLab paywall title",
+    "context": "face lab paywall"
+  },
+  "unlimitedAccess": "Unlimited full access",
+  "@unlimitedAccess": {
+    "description": "FaceLab paywall subtitle",
+    "context": "face lab paywall"
+  },
+  "freeTrialEnabled": "3 Day Free Trial Enabled",
+  "@freeTrialEnabled": {
+    "description": "FaceLab paywall free trial switch label",
+    "context": "face lab paywall"
+  },
+  "noPaymentNow": "No payment now",
+  "@noPaymentNow": {
+    "description": "FaceLab paywall no payment info",
+    "context": "face lab paywall"
+  }
 }

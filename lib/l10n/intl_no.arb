@@ -63,5 +63,25 @@
   "weeklyPrice": "{price}/uke",
   "weeksFreeTrial": "{weeks, plural, =1{1 uke gratis prøveperiode} other{{weeks} uker gratis prøveperiode}}",
   "yearly": "Årlig",
-  "yearlyPrice": "{price}/år"
+  "yearlyPrice": "{price}/år",
+  "faceLabPremium": "FaceLab Premium",
+  "@faceLabPremium": {
+    "description": "FaceLab paywall title",
+    "context": "face lab paywall"
+  },
+  "unlimitedAccess": "Unlimited full access",
+  "@unlimitedAccess": {
+    "description": "FaceLab paywall subtitle",
+    "context": "face lab paywall"
+  },
+  "freeTrialEnabled": "3 Day Free Trial Enabled",
+  "@freeTrialEnabled": {
+    "description": "FaceLab paywall free trial switch label",
+    "context": "face lab paywall"
+  },
+  "noPaymentNow": "No payment now",
+  "@noPaymentNow": {
+    "description": "FaceLab paywall no payment info",
+    "context": "face lab paywall"
+  }
 }

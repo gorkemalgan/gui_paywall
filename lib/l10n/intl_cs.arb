@@ -1,11 +1,41 @@
 {
   "@@locale": "cs",
   "adFree": "Bez reklam",
+  "@adFree": {
+    "description": "",
+    "context": "free trial page"
+  },
   "appOverview": "Přehled aplikace",
+  "@appOverview": {
+    "description": "",
+    "context": "free trial page"
+  },
   "appPro": "{appName} Pro",
+  "@appPro": {
+    "description": "product name for premium version",
+    "context": "paywall",
+    "placeholders": {
+      "appName": {
+        "type": "String",
+        "example": "Pixvibe"
+      }
+    }
+  },
   "bestOffer": "NEJLEPŠÍ NABÍDKA",
+  "@bestOffer": {
+    "description": "",
+    "context": "free trial page"
+  },
   "bestValue": "NEJLEPŠÍ HODNOTA",
+  "@bestValue": {
+    "description": "Badge text for best value option",
+    "context": "plan screen"
+  },
   "cancelAtAnyTime": "Kdykoli můžete zrušit",
+  "@cancelAtAnyTime": {
+    "description": "",
+    "context": "free trial page"
+  },
   "chargingInfoFreeTrial": "Bude vám účtováno {price} po {freeTrialDay} dnech {invoiceDuration} než zrušíte.",
   "chargingInfoLifeTime": "Zaplaťte {price} jednou pro doživotní přístup. Žádné další poplatky ani předplatné.",
   "chargingInfoStandart": "Automaticky obnovováno za {price} každé {invoiceDuration} dokud nezrušíte.",
@@ -63,5 +93,25 @@
   "weeklyPrice": "{price}/týden",
   "weeksFreeTrial": "{weeks, plural, =1{1 týden zkušební verze zdarma} other{{weeks} týdnů zkušební verze zdarma}}",
   "yearly": "Ročně",
-  "yearlyPrice": "{price}/rok"
+  "yearlyPrice": "{price}/rok",
+  "faceLabPremium": "FaceLab Premium",
+  "@faceLabPremium": {
+    "description": "FaceLab paywall title",
+    "context": "face lab paywall"
+  },
+  "unlimitedAccess": "Unlimited full access",
+  "@unlimitedAccess": {
+    "description": "FaceLab paywall subtitle",
+    "context": "face lab paywall"
+  },
+  "freeTrialEnabled": "3 Day Free Trial Enabled",
+  "@freeTrialEnabled": {
+    "description": "FaceLab paywall free trial switch label",
+    "context": "face lab paywall"
+  },
+  "noPaymentNow": "No payment now",
+  "@noPaymentNow": {
+    "description": "FaceLab paywall no payment info",
+    "context": "face lab paywall"
+  }
 }
