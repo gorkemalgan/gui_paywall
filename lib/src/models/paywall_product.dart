@@ -39,8 +39,8 @@ class PaywallProduct {
   final String? priceString;
   final ProductPeriod period;
   final int? freeTrialDays;
-  final Map<String, dynamic>? title;
-  final Map<String, dynamic>? description;
+  final String? title;
+  final String? description;
 
   const PaywallProduct({
     required this.storeId,
@@ -101,8 +101,8 @@ class PaywallProduct {
 }
 
 extension PaywallProductLocalization on PaywallProduct {
-  String getLocalizedTitle() => title != null ? parseLocalized(title!) : '';
-  String getLocalizedDescription() => description != null ? parseLocalized(description!) : '';
+  String getLocalizedTitle() => title ?? '';
+  String getLocalizedDescription() => description ?? '';
 }
 
 // Extension methods are used for ProductPeriod to provide localized UI strings.

@@ -116,10 +116,10 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
 
                               ...widget.paywall.productsSorted.reversed.map(
                                 (product) => buildOptionTile(
-                                  title: product.title != null && product.title!['text'] != null && (product.title!['text'] as String).isNotEmpty
-                                      ? product.title!['text']
+                                  title: (product.title != null && product.title!.isNotEmpty)
+                                      ? product.title!
                                       : product.period.localizedName(context),
-                                  subtitle: product.description != null && product.description!['text'] != null ? product.description!['text'] : '',
+                                  subtitle: product.description ?? '',
                                   price: product.priceString_,
                                   value: product.storeId,
                                 ),
