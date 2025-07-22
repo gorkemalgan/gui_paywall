@@ -131,7 +131,7 @@ extension ProductPeriodTitleDescriptionExtension on ProductPeriod {
       case ProductPeriod.yearly:
         return PaywallLocalizations.of(context)!.yearlyPremiumTitle;
       case ProductPeriod.lifetime:
-        // Eğer lifetime için bir başlık yoksa boş dönebiliriz veya bir string dönebiliriz.
+        // If there is no title for lifetime, we can return empty or a string.
         return '';
     }
   }
@@ -145,7 +145,7 @@ extension ProductPeriodTitleDescriptionExtension on ProductPeriod {
       case ProductPeriod.yearly:
         return PaywallLocalizations.of(context)!.yearlyPremiumDescription;
       case ProductPeriod.lifetime:
-        // Eğer lifetime için bir açıklama yoksa boş dönebiliriz veya bir string dönebiliriz.
+        // If there is no description for lifetime, we can return empty or a string.
         return '';
     }
   }
