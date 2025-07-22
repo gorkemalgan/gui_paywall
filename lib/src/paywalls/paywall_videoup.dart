@@ -3,6 +3,7 @@ import '../base/paywall_base.dart';
 import '../models/paywall_config.dart';
 import '../extensions.dart';
 import '../widgets/footers.dart';
+import '../models/paywall_product.dart';
 
 class VideoUpScreen extends PaywallBase {
   final Image image;
@@ -116,10 +117,8 @@ class _VideoUpScreenState extends State<VideoUpScreen> with PaywallSanityCheck<V
 
                               ...widget.paywall.productsSorted.reversed.map(
                                 (product) => buildOptionTile(
-                                  title: (product.title != null && product.title!.isNotEmpty)
-                                      ? product.title!
-                                      : product.period.localizedName(context),
-                                  subtitle: product.description ?? '',
+                                  title: product.period.getTitle(context),
+                                  subtitle: product.period.getDescription(context),
                                   price: product.priceString_,
                                   value: product.storeId,
                                 ),

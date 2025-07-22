@@ -41,32 +41,9 @@ class PaywallListScreen extends StatelessWidget {
 
   PaywallConfig _createMockPaywallConfig(BuildContext context) {
     final products = [
-      PaywallProduct(
-        storeId: 'weekly_sub',
-        price: 4.99,
-        currency: 'USD',
-        period: ProductPeriod.weekly,
-        title: ProductPeriod.weekly.getTitle(context),
-        description: ProductPeriod.weekly.getDescription(context),
-      ),
-      PaywallProduct(
-        storeId: 'monthly_sub',
-        price: 9.99,
-        currency: 'USD',
-        period: ProductPeriod.monthly,
-        title: ProductPeriod.monthly.getTitle(context),
-        description: ProductPeriod.monthly.getDescription(context),
-        freeTrialDays: 3,
-      ),
-      PaywallProduct(
-        storeId: 'yearly_sub',
-        price: 49.99,
-        currency: 'USD',
-        period: ProductPeriod.yearly,
-        title: ProductPeriod.yearly.getTitle(context),
-        description: ProductPeriod.yearly.getDescription(context),
-        freeTrialDays: 7,
-      ),
+      PaywallProduct(storeId: 'weekly_sub', price: 4.99, currency: 'USD', period: ProductPeriod.weekly),
+      PaywallProduct(storeId: 'monthly_sub', price: 9.99, currency: 'USD', period: ProductPeriod.monthly, freeTrialDays: 3),
+      PaywallProduct(storeId: 'yearly_sub', price: 49.99, currency: 'USD', period: ProductPeriod.yearly, freeTrialDays: 7),
     ];
 
     return PaywallConfig(

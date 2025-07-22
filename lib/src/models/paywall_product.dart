@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 // Project imports:
 import '../extensions.dart';
-import '../my_localizations.dart';
 import 'package:gui_paywall/generated/intl/messages.dart';
 
 enum ProductPeriod {
