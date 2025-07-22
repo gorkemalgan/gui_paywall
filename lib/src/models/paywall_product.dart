@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // Project imports:
 import '../extensions.dart';
 import '../my_localizations.dart';
+import 'package:gui_paywall/generated/intl/messages.dart';
 
 enum ProductPeriod {
   weekly(7, 'Weekly', 'per week'),
@@ -117,6 +118,36 @@ extension ProductPeriodExtension on ProductPeriod {
         return context.localizations.getPremiumAccessFor(days, context.localizations.yearly);
       case ProductPeriod.lifetime:
         return context.localizations.getPremiumAccessFor(days, context.localizations.lifetime);
+    }
+  }
+}
+
+extension ProductPeriodTitleDescriptionExtension on ProductPeriod {
+  String getTitle(BuildContext context) {
+    switch (this) {
+      case ProductPeriod.weekly:
+        return PaywallLocalizations.of(context)!.weeklyPremiumTitle;
+      case ProductPeriod.monthly:
+        return PaywallLocalizations.of(context)!.monthlyPremiumTitle;
+      case ProductPeriod.yearly:
+        return PaywallLocalizations.of(context)!.yearlyPremiumTitle;
+      case ProductPeriod.lifetime:
+        // Eğer lifetime için bir başlık yoksa boş dönebiliriz veya bir string dönebiliriz.
+        return '';
+    }
+  }
+
+  String getDescription(BuildContext context) {
+    switch (this) {
+      case ProductPeriod.weekly:
+        return PaywallLocalizations.of(context)!.weeklyPremiumDescription;
+      case ProductPeriod.monthly:
+        return PaywallLocalizations.of(context)!.monthlyPremiumDescription;
+      case ProductPeriod.yearly:
+        return PaywallLocalizations.of(context)!.yearlyPremiumDescription;
+      case ProductPeriod.lifetime:
+        // Eğer lifetime için bir açıklama yoksa boş dönebiliriz veya bir string dönebiliriz.
+        return '';
     }
   }
 }
