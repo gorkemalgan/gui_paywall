@@ -468,5 +468,19 @@
         "type": "String"
       }
     }
-  }
+  },
+  "getPremiumAccessFor": "Get premium access for {days} {period}",
+  "@getPremiumAccessFor": {
+    "description": "Premium erişim süresi metni",
+    "placeholders": {
+      "days": {},
+      "period": {}
+    }
+  },
+  "weeklyPremiumTitle": "Weekly Premium",
+  "weeklyPremiumDescription": "Get premium access for 1 week",
+  "monthlyPremiumTitle": "Monthly Premium",
+  "monthlyPremiumDescription": "Get premium access for 1 month",
+  "yearlyPremiumTitle": "Yearly Premium",
+  "yearlyPremiumDescription": "Best value - Save 58%!"
 }

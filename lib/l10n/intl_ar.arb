@@ -1,67 +1,386 @@
 {
   "@@locale": "ar",
   "adFree": "بدون إعلانات",
+  "@adFree": {
+    "description": "Ad Free",
+    "context": "free trial page"
+  },
   "appOverview": "نظرة عامة على التطبيق",
+  "@appOverview": {
+    "description": "App Overview",
+    "context": "free trial page"
+  },
   "appPro": "{appName} برو",
+  "@appPro": {
+    "description": "product name for premium version",
+    "context": "paywall",
+    "placeholders": {
+      "appName": {"type": "String", "example": "Pixvibe"}
+    }
+  },
   "bestOffer": "أفضل عرض",
+  "@bestOffer": {
+    "description": "BEST OFFER",
+    "context": "free trial page"
+  },
   "bestValue": "أفضل قيمة",
+  "@bestValue": {
+    "description": "Badge text for best value option",
+    "context": "plan screen"
+  },
   "cancelAtAnyTime": "يمكنك الإلغاء في أي وقت",
+  "@cancelAtAnyTime": {
+    "description": "No commitments, cancel anytime",
+    "context": "free trial page"
+  },
   "chargingInfoFreeTrial": "سيتم خصم {price} بعد {freeTrialDay} أيام {invoiceDuration} حتى يتم الإلغاء.",
+  "@chargingInfoFreeTrial": {
+    "description": "Billed {price}/{invoiceDuration}. Auto-renewal after {freeTrialDay} days. Request a refund if you're not 100% satisfied.",
+    "context": "paywall",
+    "placeholders": {
+      "price": {"type": "String", "example": "39.99"},
+      "freeTrialDay": {"type": "String", "example": "7"},
+      "invoiceDuration": {"type": "String", "example": "7"}
+    }
+  },
   "chargingInfoLifeTime": "ادفع {price} مرة واحدة للوصول مدى الحياة. لا رسوم إضافية أو اشتراكات.",
+  "@chargingInfoLifeTime": {
+    "description": "Pay {price} once for lifetime access. No extra charges or subscriptions.",
+    "context": "paywall",
+    "placeholders": {
+      "price": {"type": "String", "example": "39.99"}
+    }
+  },
   "chargingInfoStandart": "تجديد تلقائي لـ {price} كل {invoiceDuration} حتى يتم الإلغاء.",
+  "@chargingInfoStandart": {
+    "description": "Auto-renews for {price} {invoiceDuration} until cancelled",
+    "context": "paywall",
+    "placeholders": {
+      "price": {"type": "String", "example": "39.99"},
+      "invoiceDuration": {"type": "String", "example": "invoice weekly"}
+    }
+  },
   "chooseYourPlan": "اختر خطتك",
+  "@chooseYourPlan": {
+    "description": "Title for plan selection screen",
+    "context": "plan screen"
+  },
   "continueBtn": "استمر",
+  "@continueBtn": {
+    "description": "Continue button text",
+    "context": "generic"
+  },
   "daysFreeTrial": "{days, plural, =1{يوم تجريبي مجاني} other{{days} أيام تجريبية مجانية}}",
+  "@daysFreeTrial": {
+    "description": "Text showing free trial duration in days",
+    "context": "plan screen",
+    "placeholders": {
+      "days": {"type": "int", "example": "1"}
+    }
+  },
   "enableFreeTrial": "تفعيل النسخة التجريبية المجانية",
+  "@enableFreeTrial": {
+    "description": "Text to enable free trial",
+    "context": "plan screen"
+  },
   "exclusiveFeatures": "ميزات حصرية",
+  "@exclusiveFeatures": {
+    "description": "Exclusive Features",
+    "context": "free trial page"
+  },
   "free": "مجاني",
+  "@free": {
+    "description": "free price label",
+    "context": "paywall"
+  },
   "freeTrialDaysFree": "{numDays} يوماً مجاناً",
+  "@freeTrialDaysFree": {
+    "description": "",
+    "context": "free trial page",
+    "placeholders": {
+      "numDays": {"type": "String", "example": "3"}
+    }
+  },
   "freeTrialDesc": "عزز إبداعك واحصل على وصول غير محدود مع عضوية بريميوم",
+  "@freeTrialDesc": {
+    "description": "Enhance your creativity and get unlimited access with a premium membership",
+    "context": "free trial page"
+  },
   "freeTrialPriceInfoText": "{freeTrialDays} يومًا مجانيًا، ثم {priceString}/{periodInvoiceStr}",
+  "@freeTrialPriceInfoText": {
+    "description": "free trial price information",
+    "context": "",
+    "placeholders": {
+      "freeTrialDays": {"description": "free trial days", "type": "String"},
+      "priceString": {"description": "price", "type": "String"},
+      "periodInvoiceStr": {"description": "period invoice", "type": "String"}
+    }
+  },
   "freeTrialProperty1Big": "استخدم فترة التجربة المجانية الخاصة بك",
+  "@freeTrialProperty1Big": {
+    "description": "Use Your Free Trial Period",
+    "context": "free trial page"
+  },
   "freeTrialProperty1Small": "قم بالتفعيل بسهولة بنقرة واحدة",
+  "@freeTrialProperty1Small": {
+    "description": "Easily activate with one click",
+    "context": "free trial page"
+  },
   "freeTrialProperty2Big": "اليوم: افتح جميع الميزات فورًا",
+  "@freeTrialProperty2Big": {
+    "description": "Today: Instantly unlock all features",
+    "context": "free trial page"
+  },
   "freeTrialProperty2Small": "احصل على وصول إلى جميع الميزات الآن",
+  "@freeTrialProperty2Small": {
+    "description": "Access all features now",
+    "context": "free trial page"
+  },
   "freeTrialProperty3Big": "تذكير بانتهاء التجربة",
+  "@freeTrialProperty3Big": {
+    "description": "Reminder end of trial",
+    "context": "free trial page"
+  },
   "freeTrialProperty3Small": "سنرسل لك إشعارًا عند انتهاء التجربة",
+  "@freeTrialProperty3Small": {
+    "description": "We will send you a notification when your trial ends",
+    "context": "free trial page"
+  },
   "freeTrialProperty4Big": "استمتع بتنزيلات غير محدودة",
+  "@freeTrialProperty4Big": {
+    "description": "Enjoy unlimited downloads",
+    "context": "free trial page"
+  },
   "freeTrialProperty4Small": "سهل الاستخدام والتخصيص",
+  "@freeTrialProperty4Small": {
+    "description": "Easy to use and customize",
+    "context": "free trial page"
+  },
   "freeTrialReminder": "ذكرني قبل انتهاء الفترة التجريبية المجانية",
+  "@freeTrialReminder": {
+    "description": "Remind me before the free trial expires",
+    "context": "free trial page"
+  },
   "getUnlimitedAccess": "احصل على وصول غير محدود إلى جميع الميزات!",
+  "@getUnlimitedAccess": {
+    "description": "subtitle for premium features",
+    "context": "paywall"
+  },
   "hdQuality": "جودة عالية الوضوح",
+  "@hdQuality": {
+    "description": "HD Quality",
+    "context": "free trial page"
+  },
   "lifetime": "مدى الحياة",
+  "@lifetime": {
+    "description": "lifetime subscription period",
+    "context": "paywall"
+  },
   "monthly": "شهري",
+  "@monthly": {
+    "description": "monthly subscription period",
+    "context": "paywall"
+  },
   "monthlyPrice": "{price}/شهر",
+  "@monthlyPrice": {
+    "description": "Monthly price display",
+    "context": "plan screen",
+    "placeholders": {
+      "price": {"type": "String", "example": "$9.99"}
+    }
+  },
   "notSureYet": "لست متأكدًا بعد؟",
+  "@notSureYet": {
+    "description": "Asks user if he is not sure to but subscription yet",
+    "context": "paywall"
+  },
   "otherPlans": "خطط أخرى",
+  "@otherPlans": {
+    "description": "Link to see other subscription plans",
+    "context": "plan screen"
+  },
   "paymentAgreement": "سيتم تجديد الاشتراكات تلقائيًا ما لم يتم إيقاف التجديد التلقائي قبل 24 ساعة على الأقل من نهاية الفترة الحالية. سيتم خصم المبلغ من حسابك وفقًا لخطة التجديد الخاصة بك خلال 24 ساعة قبل نهاية الفترة الحالية. يمكنك إدارة أو إيقاف التجديد التلقائي في إعدادات حسابك في أي وقت بعد الشراء.",
+  "@paymentAgreement": {
+    "description": "to show payment agreement",
+    "context": "paywall"
+  },
   "paymentAgreementFreeTrial": "سيتم خصم المبلغ من حسابك في نهاية الفترة التجريبية المجانية. يمكنك الإلغاء في أي وقت خلال الفترة التجريبية المجانية ولن يتم تطبيق أي رسوم.",
+  "@paymentAgreementFreeTrial": {
+    "description": "to show payment agreement for free trial",
+    "context": "paywall"
+  },
   "paymentFailed": "فشل الدفع",
+  "@paymentFailed": {
+    "description": "Payment failed check your payment method and try again later",
+    "context": ""
+  },
   "paymentInfoPending": "دفعتك قيد الانتظار، يُرجى الانتظار. إذا واجهت مشكلة، يُرجى الاتصال بنا على contact@everpixel.org.",
+  "@paymentInfoPending": {
+    "description": "Your payment is pending, please wait if you encountered any problems with the transaction, you can contact us from contact@everpixel.org",
+    "context": ""
+  },
   "paymentInfoTitle": "معلومات الدفع",
+  "@paymentInfoTitle": {
+    "description": "Payment Info",
+    "context": ""
+  },
   "perWeek": " / أسبوع",
+  "@perWeek": {
+    "description": "per week suffix for pricing",
+    "context": "paywall"
+  },
   "percentOff": "{percent}% خصم",
+  "@percentOff": {
+    "description": "discount percentage badge",
+    "context": "paywall",
+    "placeholders": {
+      "percent": {"type": "int", "example": "50"}
+    }
+  },
   "popular": "شائع",
+  "@popular": {
+    "description": "to show popular options",
+    "context": "generic"
+  },
   "privacyPolicy": "سياسة الخصوصية",
+  "@privacyPolicy": {
+    "description": "to show privacy policy",
+    "context": "settings"
+  },
   "restore": "استعادة",
+  "@restore": {
+    "description": "to restore the existing subscription",
+    "context": "paywall"
+  },
   "restorePurchases": "استعادة المشتريات",
+  "@restorePurchases": {
+    "description": "Button text to restore in-app purchases"
+  },
   "save": "حفظ",
+  "@save": {
+    "description": "to save the image",
+    "context": "generic"
+  },
   "seeAllOptions": "عرض جميع الخيارات",
+  "@seeAllOptions": {
+    "description": "to see all options",
+    "context": "paywall"
+  },
   "seeOtherOptions": "عرض خيارات أخرى",
+  "@seeOtherOptions": {
+    "description": "button to see more subscription options",
+    "context": "paywall"
+  },
   "shortTerm": "مدى قصير",
+  "@shortTerm": {
+    "description": "SHORT TERM",
+    "context": "free trial page"
+  },
   "startFreeTrial": "ابدأ التجربة المجانية",
+  "@startFreeTrial": {
+    "description": "to start free trial for premium subscription",
+    "context": "paywall"
+  },
   "termsOfUse": "شروط الاستخدام",
+  "@termsOfUse": {
+    "description": "to show terms of use",
+    "context": "settings"
+  },
   "thenPerWeek": "ثم {price}/أسبوع",
+  "@thenPerWeek": {
+    "description": "Price per week after free trial",
+    "context": "plan screen",
+    "placeholders": {
+      "price": {"type": "String", "example": "9.99"}
+    }
+  },
   "trialDays": "تجربة لمدة {days} يومًا",
+  "@trialDays": {
+    "description": "trial option with number of days",
+    "context": "paywall",
+    "placeholders": {
+      "days": {"type": "int", "example": "3"}
+    }
+  },
   "unlimitedDownload": "تنزيل غير محدود",
+  "@unlimitedDownload": {
+    "description": "Unlimited Download",
+    "context": "free trial page"
+  },
   "unlockFullPower": "افتح جميع الميزات",
+  "@unlockFullPower": {
+    "description": "Unlock Full Power",
+    "context": "plan screen"
+  },
   "unlockFullPowerDescription": "قم بإلغاء قفل القوة الكاملة لتطبيق {appName} – أفضل تطبيق لتحرير الذكاء الاصطناعي.",
+  "@unlockFullPowerDescription": {
+    "description": "Description text for paywall",
+    "context": "plan screen",
+    "placeholders": {
+      "appName": {"type": "String", "example": "Remini"}
+    }
+  },
   "upgradeNow": "قم بالترقية الآن",
+  "@upgradeNow": {
+    "description": "Upgrade now!",
+    "context": "paywall buttons"
+  },
   "userReviews": "مراجعات المستخدمين",
+  "@userReviews": {
+    "description": "User Reviews",
+    "context": "free trial page"
+  },
   "week": "أسبوع",
+  "@week": {
+    "description": "week as a time unit",
+    "context": "paywall"
+  },
   "weekly": "أسبوعي",
+  "@weekly": {
+    "description": "weekly subscription period",
+    "context": "paywall"
+  },
   "weeklyPrice": "{price}/أسبوع",
+  "@weeklyPrice": {
+    "description": "Weekly price display",
+    "context": "plan screen",
+    "placeholders": {
+      "price": {"type": "String", "example": "$9.99 / week"}
+    }
+  },
   "weeksFreeTrial": "{weeks, plural, =1{أسبوع تجريبي مجاني} other{{weeks} أسابيع تجريبية مجانية}}",
+  "@weeksFreeTrial": {
+    "description": "Text showing free trial duration in weeks",
+    "context": "plan screen",
+    "placeholders": {
+      "weeks": {"type": "int", "example": "1"}
+    }
+  },
   "yearly": "سنوي",
-  "yearlyPrice": "{price}/سنة"
+  "@yearly": {
+    "description": "yearly subscription period",
+    "context": "paywall"
+  },
+  "yearlyPrice": "{price}/سنة",
+  "@yearlyPrice": {
+    "description": "Yearly price display",
+    "context": "plan screen",
+    "placeholders": {
+      "price": {"type": "String", "example": "$59.99"}
+    }
+  },
+  "getPremiumAccessFor": "احصل على وصول بريميوم لمدة {days} {period}",
+  "@getPremiumAccessFor": {
+    "description": "Premium erişim süresi metni",
+    "placeholders": {
+      "days": {},
+      "period": {}
+    }
+  },
+  "weeklyPremiumTitle": "بريميوم أسبوعي",
+  "weeklyPremiumDescription": "احصل على وصول بريميوم لمدة أسبوع",
+  "monthlyPremiumTitle": "بريميوم شهري",
+  "monthlyPremiumDescription": "احصل على وصول بريميوم لمدة شهر",
+  "yearlyPremiumTitle": "بريميوم سنوي",
+  "yearlyPremiumDescription": "أفضل قيمة - وفر 58%!"
 }

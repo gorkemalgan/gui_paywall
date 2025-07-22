@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Project imports:
 import '../extensions.dart';
+import '../my_localizations.dart';
 
 enum ProductPeriod {
   weekly(7, 'Weekly', 'per week'),
@@ -37,8 +38,8 @@ class PaywallProduct {
   final String? priceString;
   final ProductPeriod period;
   final int? freeTrialDays;
-  final String? title;
-  final String? description;
+  final Map<String, dynamic>? title;
+  final Map<String, dynamic>? description;
 
   const PaywallProduct({
     required this.storeId,
@@ -61,7 +62,13 @@ class PaywallProduct {
     return currency.toUpperCase();
   }
 
-  String get priceString_ => priceString ?? "${currency_.toUpperCase()} ${price.toStringAsFixed(2)}";
+  String get priceString_ {
+    if (priceString != null) return priceString!;
+    if (currency_.toUpperCase() == 'USD') {
+      return "\$${price.toStringAsFixed(2)}";
+    }
+    return "${currency_.toUpperCase()} ${price.toStringAsFixed(2)}";
+  }
 
   double priceForDays(int days) {
     if (period == ProductPeriod.lifetime) return price;
@@ -89,5 +96,27 @@ class PaywallProduct {
     double shortestWeeklyPrice = shortestProduct.priceForDays(7);
     if (shortestWeeklyPrice <= 0) return 0;
     return (shortestWeeklyPrice - thisWeeklyPrice) / shortestWeeklyPrice;
+  }
+}
+
+extension PaywallProductLocalization on PaywallProduct {
+  String getLocalizedTitle() => title != null ? parseLocalized(title!) : '';
+  String getLocalizedDescription() => description != null ? parseLocalized(description!) : '';
+}
+
+// Extension methods are used for ProductPeriod to provide localized UI strings.
+// This is the recommended way in Dart, since enums cannot contain methods that depend on BuildContext or localization.
+extension ProductPeriodExtension on ProductPeriod {
+  String localizedGetPremiumAccessFor(BuildContext context, int days) {
+    switch (this) {
+      case ProductPeriod.weekly:
+        return context.localizations.getPremiumAccessFor(days, context.localizations.weekly);
+      case ProductPeriod.monthly:
+        return context.localizations.getPremiumAccessFor(days, context.localizations.monthly);
+      case ProductPeriod.yearly:
+        return context.localizations.getPremiumAccessFor(days, context.localizations.yearly);
+      case ProductPeriod.lifetime:
+        return context.localizations.getPremiumAccessFor(days, context.localizations.lifetime);
+    }
   }
 }
