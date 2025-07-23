@@ -440,12 +440,14 @@
     "description": "Paywall subtitle for unlimited access",
     "context": "face lab paywall"
   },
-  "freeTrialEnabled": "Free Trial Enabled",
+  "freeTrialEnabled": "{days} day free trial enabled",
   "@freeTrialEnabled": {
-    "description": "Label for free trial toggle",
-    "context": "face lab paywall"
+    "description": "Label for free trial toggle with days",
+    "placeholders": {
+      "days": {}
+    }
   },
-  "noPaymentNow": "No payment required now",
+  "noPaymentNow": "No payment now",
   "@noPaymentNow": {
     "description": "Text indicating no payment is required at this moment",
     "context": "face lab paywall"

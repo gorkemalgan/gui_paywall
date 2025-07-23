@@ -14,6 +14,8 @@ class FaceLabPremiumScreen extends StatefulWidget {
 class _FaceLabPremiumScreenState extends State<FaceLabPremiumScreen> {
   bool _freeTrialEnabled = true;
 
+  String capitalizeEachWord(String text) => text.split(' ').map((w) => w.isNotEmpty ? w[0].toUpperCase() + w.substring(1) : '').join(' ');
+
   @override
   Widget build(BuildContext context) {
     // Lokalizasyonun çalışıp çalışmadığını terminalde görmek için:
@@ -94,7 +96,10 @@ class _FaceLabPremiumScreenState extends State<FaceLabPremiumScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(context.localizations.freeTrialEnabled, style: const TextStyle(color: Colors.white, fontSize: 14)),
+                    Text(
+                      capitalizeEachWord(context.localizations.freeTrialEnabled(3)),
+                      style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
                     GestureDetector(
                       onTap: () {
                         setState(() {
@@ -156,7 +161,10 @@ class _FaceLabPremiumScreenState extends State<FaceLabPremiumScreen> {
                 children: [
                   const Icon(Icons.check_circle, color: Colors.green, size: 16),
                   const SizedBox(width: 4),
-                  Text(context.localizations.noPaymentNow, style: const TextStyle(color: Colors.white, fontSize: 14)),
+                  Text(
+                    context.localizations.noPaymentNow,
+                    style: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
               const SizedBox(height: 16),

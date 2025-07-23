@@ -74,10 +74,12 @@
     "description": "Paywall için sınırsız erişim alt başlığı",
     "context": "face lab paywall"
   },
-  "freeTrialEnabled": "Ücretsiz Deneme Aktif",
+  "freeTrialEnabled": "{days} gün ücretsiz deneme aktif",
   "@freeTrialEnabled": {
-    "description": "Ücretsiz deneme anahtarı için etiket",
-    "context": "face lab paywall"
+    "description": "Gün sayısı ile ücretsiz deneme etiketi",
+    "placeholders": {
+      "days": {}
+    }
   },
   "noPaymentNow": "Şimdi ödeme gerekmiyor",
   "@noPaymentNow": {
