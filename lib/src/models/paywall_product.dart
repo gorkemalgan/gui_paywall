@@ -29,9 +29,50 @@ enum ProductPeriod {
         return context.localizations.lifetime;
     }
   }
+
+  String getTitle(BuildContext context) {
+    switch (this) {
+      case ProductPeriod.weekly:
+        return PaywallLocalizations.of(context)!.weeklyPremiumTitle;
+      case ProductPeriod.monthly:
+        return PaywallLocalizations.of(context)!.monthlyPremiumTitle;
+      case ProductPeriod.yearly:
+        return PaywallLocalizations.of(context)!.yearlyPremiumTitle;
+      case ProductPeriod.lifetime:
+        return '';
+    }
+  }
+
+  String getDescription(BuildContext context) {
+    switch (this) {
+      case ProductPeriod.weekly:
+        return PaywallLocalizations.of(context)!.weeklyPremiumDescription(1);
+      case ProductPeriod.monthly:
+        return PaywallLocalizations.of(context)!.monthlyPremiumDescription(1);
+      case ProductPeriod.yearly:
+        return PaywallLocalizations.of(context)!.yearlyPremiumDescription(58);
+      case ProductPeriod.lifetime:
+        return '';
+    }
+  }
+
+  String localizedGetPremiumAccessFor(BuildContext context, int days) {
+    switch (this) {
+      case ProductPeriod.weekly:
+        return context.localizations.getPremiumAccessFor(days, context.localizations.weekly);
+      case ProductPeriod.monthly:
+        return context.localizations.getPremiumAccessFor(days, context.localizations.monthly);
+      case ProductPeriod.yearly:
+        return context.localizations.getPremiumAccessFor(days, context.localizations.yearly);
+      case ProductPeriod.lifetime:
+        return context.localizations.getPremiumAccessFor(days, context.localizations.lifetime);
+    }
+  }
 }
 
 class PaywallProduct {
+  String getLocalizedTitle() => title ?? '';
+  String getLocalizedDescription() => description ?? '';
   final String storeId;
   final double price;
   final String currency;
@@ -90,53 +131,5 @@ class PaywallProduct {
     double shortestWeeklyPrice = shortestProduct.priceForDays(7);
     if (shortestWeeklyPrice <= 0) return 0;
     return (shortestWeeklyPrice - thisWeeklyPrice) / shortestWeeklyPrice;
-  }
-
-  String getTitle(BuildContext context) {
-    switch (period) {
-      case ProductPeriod.weekly:
-        return PaywallLocalizations.of(context)!.weeklyPremiumTitle;
-      case ProductPeriod.monthly:
-        return PaywallLocalizations.of(context)!.monthlyPremiumTitle;
-      case ProductPeriod.yearly:
-        return PaywallLocalizations.of(context)!.yearlyPremiumTitle;
-      case ProductPeriod.lifetime:
-        return '';
-    }
-  }
-
-  String getDescription(BuildContext context) {
-    switch (period) {
-      case ProductPeriod.weekly:
-        return PaywallLocalizations.of(context)!.weeklyPremiumDescription(1);
-      case ProductPeriod.monthly:
-        return PaywallLocalizations.of(context)!.monthlyPremiumDescription(1);
-      case ProductPeriod.yearly:
-        return PaywallLocalizations.of(context)!.yearlyPremiumDescription(58);
-      case ProductPeriod.lifetime:
-        return '';
-    }
-  }
-}
-
-extension PaywallProductLocalization on PaywallProduct {
-  String getLocalizedTitle() => title ?? '';
-  String getLocalizedDescription() => description ?? '';
-}
-
-// Extension methods are used for ProductPeriod to provide localized UI strings.
-// This is the recommended way in Dart, since enums cannot contain methods that depend on BuildContext or localization.
-extension ProductPeriodExtension on ProductPeriod {
-  String localizedGetPremiumAccessFor(BuildContext context, int days) {
-    switch (this) {
-      case ProductPeriod.weekly:
-        return context.localizations.getPremiumAccessFor(days, context.localizations.weekly);
-      case ProductPeriod.monthly:
-        return context.localizations.getPremiumAccessFor(days, context.localizations.monthly);
-      case ProductPeriod.yearly:
-        return context.localizations.getPremiumAccessFor(days, context.localizations.yearly);
-      case ProductPeriod.lifetime:
-        return context.localizations.getPremiumAccessFor(days, context.localizations.lifetime);
-    }
   }
 }
