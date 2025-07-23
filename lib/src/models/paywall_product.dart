@@ -62,8 +62,7 @@ class PaywallProduct {
     return currency.toUpperCase();
   }
 
-  String get priceString_ =>
-      priceString ?? (currency_.toUpperCase() == 'USD' ? "\$${price.toStringAsFixed(2)}" : "${currency_.toUpperCase()} ${price.toStringAsFixed(2)}");
+  String get priceString_ => priceString ?? "${currency_.toUpperCase()} ${price.toStringAsFixed(2)}";
 
   double priceForDays(int days) {
     if (period == ProductPeriod.lifetime) return price;
