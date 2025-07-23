@@ -471,7 +471,7 @@
   },
   "getPremiumAccessFor": "Get premium access for {days} {period}",
   "@getPremiumAccessFor": {
-    "description": "Premium erişim süresi metni",
+    "description": "Premium access duration text",
     "placeholders": {
       "days": {},
       "period": {}
