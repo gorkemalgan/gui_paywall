@@ -66,7 +66,7 @@
   "yearlyPrice": "{price}/anno",
   "faceLabPremium": "FaceLab Premium",
   "@faceLabPremium": {
-    "description": "FaceLab paywall title",
+    "description": "FaceLab Premium title",
     "context": "face lab paywall"
   },
   "unlimitedAccess": "Unlimited full access",

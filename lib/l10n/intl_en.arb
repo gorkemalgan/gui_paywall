@@ -429,5 +429,25 @@
         "example": "$59.99"
       }
     }
+  },
+  "faceLabPremium": "FaceLab Premium",
+  "@faceLabPremium": {
+    "description": "FaceLab Premium başlığı",
+    "context": "face lab paywall"
+  },
+  "unlimitedAccess": "Unlimited Access",
+  "@unlimitedAccess": {
+    "description": "Paywall subtitle for unlimited access",
+    "context": "face lab paywall"
+  },
+  "freeTrialEnabled": "Free Trial Enabled",
+  "@freeTrialEnabled": {
+    "description": "Label for free trial toggle",
+    "context": "face lab paywall"
+  },
+  "noPaymentNow": "No payment required now",
+  "@noPaymentNow": {
+    "description": "Text indicating no payment is required at this moment",
+    "context": "face lab paywall"
   }
 }
