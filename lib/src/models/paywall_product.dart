@@ -62,13 +62,8 @@ class PaywallProduct {
     return currency.toUpperCase();
   }
 
-  String get priceString_ {
-    if (priceString != null) return priceString!;
-    if (currency_.toUpperCase() == 'USD') {
-      return "\$${price.toStringAsFixed(2)}";
-    }
-    return "${currency_.toUpperCase()} ${price.toStringAsFixed(2)}";
-  }
+  String get priceString_ =>
+      priceString ?? (currency_.toUpperCase() == 'USD' ? "\$${price.toStringAsFixed(2)}" : "${currency_.toUpperCase()} ${price.toStringAsFixed(2)}");
 
   double priceForDays(int days) {
     if (period == ProductPeriod.lifetime) return price;
@@ -97,6 +92,32 @@ class PaywallProduct {
     if (shortestWeeklyPrice <= 0) return 0;
     return (shortestWeeklyPrice - thisWeeklyPrice) / shortestWeeklyPrice;
   }
+
+  String getTitle(BuildContext context) {
+    switch (period) {
+      case ProductPeriod.weekly:
+        return PaywallLocalizations.of(context)!.weeklyPremiumTitle;
+      case ProductPeriod.monthly:
+        return PaywallLocalizations.of(context)!.monthlyPremiumTitle;
+      case ProductPeriod.yearly:
+        return PaywallLocalizations.of(context)!.yearlyPremiumTitle;
+      case ProductPeriod.lifetime:
+        return '';
+    }
+  }
+
+  String getDescription(BuildContext context) {
+    switch (period) {
+      case ProductPeriod.weekly:
+        return PaywallLocalizations.of(context)!.weeklyPremiumDescription(1);
+      case ProductPeriod.monthly:
+        return PaywallLocalizations.of(context)!.monthlyPremiumDescription(1);
+      case ProductPeriod.yearly:
+        return PaywallLocalizations.of(context)!.yearlyPremiumDescription(58);
+      case ProductPeriod.lifetime:
+        return '';
+    }
+  }
 }
 
 extension PaywallProductLocalization on PaywallProduct {
@@ -117,36 +138,6 @@ extension ProductPeriodExtension on ProductPeriod {
         return context.localizations.getPremiumAccessFor(days, context.localizations.yearly);
       case ProductPeriod.lifetime:
         return context.localizations.getPremiumAccessFor(days, context.localizations.lifetime);
-    }
-  }
-}
-
-extension ProductPeriodTitleDescriptionExtension on ProductPeriod {
-  String getTitle(BuildContext context) {
-    switch (this) {
-      case ProductPeriod.weekly:
-        return PaywallLocalizations.of(context)!.weeklyPremiumTitle;
-      case ProductPeriod.monthly:
-        return PaywallLocalizations.of(context)!.monthlyPremiumTitle;
-      case ProductPeriod.yearly:
-        return PaywallLocalizations.of(context)!.yearlyPremiumTitle;
-      case ProductPeriod.lifetime:
-        // If there is no title for lifetime, we can return empty or a string.
-        return '';
-    }
-  }
-
-  String getDescription(BuildContext context) {
-    switch (this) {
-      case ProductPeriod.weekly:
-        return PaywallLocalizations.of(context)!.weeklyPremiumDescription;
-      case ProductPeriod.monthly:
-        return PaywallLocalizations.of(context)!.monthlyPremiumDescription;
-      case ProductPeriod.yearly:
-        return PaywallLocalizations.of(context)!.yearlyPremiumDescription;
-      case ProductPeriod.lifetime:
-        // If there is no description for lifetime, we can return empty or a string.
-        return '';
     }
   }
 }

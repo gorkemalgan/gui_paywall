@@ -469,14 +469,6 @@
       }
     }
   },
-  "getPremiumAccessFor": "Get premium access for {days} {period}",
-  "@getPremiumAccessFor": {
-    "description": "Premium access duration text",
-    "placeholders": {
-      "days": {},
-      "period": {}
-    }
-  },
   "weeklyPremiumTitle": "Weekly Premium",
   "weeklyPremiumDescription": "Get premium access for {weekCount} week",
   "@weeklyPremiumDescription": {
@@ -500,11 +492,11 @@
     }
   },
   "yearlyPremiumTitle": "Yearly Premium",
-  "yearlyPremiumDescription": "Best value - Save {percent}%!",
+  "yearlyPremiumDescription": "Get premium access for {yearCount} year",
   "@yearlyPremiumDescription": {
-    "description": "Best value - Save X%",
+    "description": "Get premium access for X years",
     "placeholders": {
-      "percent": {
+      "yearCount": {
         "type": "int",
         "example": "58"
       }
