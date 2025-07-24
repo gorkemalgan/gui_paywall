@@ -82,5 +82,19 @@
   "@startEditingSeeMagicHappen": {
     "description": "Plan seçim ekranı başlığı, choose your plan alternatifi",
     "context": "plan screen"
-  }
+  },
+  "getPremiumAccessFor": "{days} {period} boyunca premium erişim elde et",
+  "@getPremiumAccessFor": {
+    "description": "Premium erişim süresi metni",
+    "placeholders": {
+      "days": {},
+      "period": {}
+    }
+  },
+  "weeklyPremiumTitle": "Haftalık Premium",
+  "weeklyPremiumDescription": "1 hafta premium erişim elde et",
+  "monthlyPremiumTitle": "Aylık Premium",
+  "monthlyPremiumDescription": "1 ay premium erişim elde et",
+  "yearlyPremiumTitle": "Yıllık Premium",
+  "yearlyPremiumDescription": "En iyi değer - %58 tasarruf!"
 }

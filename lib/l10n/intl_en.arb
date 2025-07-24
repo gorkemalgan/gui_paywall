@@ -468,5 +468,38 @@
         "type": "String"
       }
     }
+  },
+  "weeklyPremiumPlanTitle": "Weekly Premium",
+  "weeklyPremiumPlanDescription": "Get premium access for {weekCount} week",
+  "@weeklyPremiumPlanDescription": {
+    "description": "Get premium access for X weeks",
+    "placeholders": {
+      "weekCount": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "monthlyPremiumPlanTitle": "Monthly Premium",
+  "monthlyPremiumPlanDescription": "Get premium access for {monthCount} month",
+  "@monthlyPremiumPlanDescription": {
+    "description": "Get premium access for X months",
+    "placeholders": {
+      "monthCount": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "yearlyPremiumPlanTitle": "Yearly Premium",
+  "yearlyPremiumPlanDescription": "Best value - Save 58%!",
+  "@yearlyPremiumPlanDescription": {
+    "description": "Get premium access for X years",
+    "placeholders": {
+      "yearCount": {
+        "type": "int",
+        "example": "58"
+      }
+    }
   }
 }
