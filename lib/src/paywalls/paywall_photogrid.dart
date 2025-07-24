@@ -42,37 +42,52 @@ class PaywallPhotoGrid extends StatelessWidget {
         SafeArea(
           child: Column(
             children: [
-              const SizedBox(height: 390), // Üstten boşluk, başlığı aşağıya alır
-              Text('PhotoGrid VIP✨', style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
-              const SizedBox(height: 8),
-              const Text('Image Enhancer', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
-              const SizedBox(height: 16),
-              const Text('3 days free, then \$33.99/year'),
-              const SizedBox(height: 90),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min, // Butonlar kadar yer kaplasın
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        // Abonelik başlat
-                      },
-                      style: ElevatedButton.styleFrom(backgroundColor: Colors.pinkAccent, minimumSize: const Size.fromHeight(48)),
-                      child: const Text('Try It Free'),
-                    ),
-                    const SizedBox(height: 12),
-                    OutlinedButton(
-                      onPressed: () {
-                        // Aylık abonelik başlat
-                      },
-                      style: OutlinedButton.styleFrom(minimumSize: const Size.fromHeight(48)),
-                      child: const Text('\$4.99 /month'),
-                    ),
-                    const SizedBox(height: 4),
-                    // Footer'ı ekle
-                    PaywallFullFooter(paywallConfig: paywallConfig),
-                  ],
+              Expanded(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 390), // Üstten boşluk, başlığı aşağıya alır
+                      Text('PhotoGrid VIP✨', style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 8),
+                      const Text('Image Enhancer', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                      const SizedBox(height: 16),
+                      const Text('3 days free, then \$33.99/year'),
+                      const SizedBox(height: 100),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min, // Butonlar kadar yer kaplasın
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                // Abonelik başlat
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.pinkAccent,
+                                minimumSize: const Size.fromHeight(60),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                              ),
+                              child: const Text('Try It Free'),
+                            ),
+                            const SizedBox(height: 12),
+                            OutlinedButton(
+                              onPressed: () {
+                                // Aylık abonelik başlat
+                              },
+                              style: OutlinedButton.styleFrom(
+                                minimumSize: const Size.fromHeight(60),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                              ),
+                              child: const Text('\$4.99 /month'),
+                            ),
+                            const SizedBox(height: 12),
+                          ],
+                        ),
+                      ),
+                      PaywallFullFooter(paywallConfig: paywallConfig),
+                    ],
+                  ),
                 ),
               ),
             ],
