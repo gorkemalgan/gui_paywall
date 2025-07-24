@@ -33,11 +33,11 @@ enum ProductPeriod {
   String getTitle(BuildContext context) {
     switch (this) {
       case ProductPeriod.weekly:
-        return PaywallLocalizations.of(context)!.weeklyPremiumTitle;
+        return PaywallLocalizations.of(context)!.weeklyPremiumPlanTitle;
       case ProductPeriod.monthly:
-        return PaywallLocalizations.of(context)!.monthlyPremiumTitle;
+        return PaywallLocalizations.of(context)!.monthlyPremiumPlanTitle;
       case ProductPeriod.yearly:
-        return PaywallLocalizations.of(context)!.yearlyPremiumTitle;
+        return PaywallLocalizations.of(context)!.yearlyPremiumPlanTitle;
       case ProductPeriod.lifetime:
         return '';
     }
@@ -46,26 +46,26 @@ enum ProductPeriod {
   String getDescription(BuildContext context) {
     switch (this) {
       case ProductPeriod.weekly:
-        return PaywallLocalizations.of(context)!.weeklyPremiumDescription(1);
+        return PaywallLocalizations.of(context)!.weeklyPremiumPlanDescription(1);
       case ProductPeriod.monthly:
-        return PaywallLocalizations.of(context)!.monthlyPremiumDescription(1);
+        return PaywallLocalizations.of(context)!.monthlyPremiumPlanDescription(1);
       case ProductPeriod.yearly:
-        return PaywallLocalizations.of(context)!.yearlyPremiumDescription(58);
+        return PaywallLocalizations.of(context)!.yearlyPremiumPlanDescription(58);
       case ProductPeriod.lifetime:
         return '';
     }
   }
 
-  String localizedGetPremiumAccessFor(BuildContext context, int days) {
+  String localizedGetPremiumAccessFor(BuildContext context, int count) {
     switch (this) {
       case ProductPeriod.weekly:
-        return context.localizations.getPremiumAccessFor(days, context.localizations.weekly);
+        return PaywallLocalizations.of(context)!.weeklyPremiumPlanDescription(count);
       case ProductPeriod.monthly:
-        return context.localizations.getPremiumAccessFor(days, context.localizations.monthly);
+        return PaywallLocalizations.of(context)!.monthlyPremiumPlanDescription(count);
       case ProductPeriod.yearly:
-        return context.localizations.getPremiumAccessFor(days, context.localizations.yearly);
+        return PaywallLocalizations.of(context)!.yearlyPremiumPlanDescription(count);
       case ProductPeriod.lifetime:
-        return context.localizations.getPremiumAccessFor(days, context.localizations.lifetime);
+        return context.localizations.lifetime;
     }
   }
 }

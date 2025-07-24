@@ -469,9 +469,9 @@
       }
     }
   },
-  "weeklyPremiumTitle": "Weekly Premium",
-  "weeklyPremiumDescription": "Get premium access for {weekCount} week",
-  "@weeklyPremiumDescription": {
+  "weeklyPremiumPlanTitle": "Weekly Premium",
+  "weeklyPremiumPlanDescription": "Get premium access for {weekCount} week",
+  "@weeklyPremiumPlanDescription": {
     "description": "Get premium access for X weeks",
     "placeholders": {
       "weekCount": {
@@ -480,9 +480,9 @@
       }
     }
   },
-  "monthlyPremiumTitle": "Monthly Premium",
-  "monthlyPremiumDescription": "Get premium access for {monthCount} month",
-  "@monthlyPremiumDescription": {
+  "monthlyPremiumPlanTitle": "Monthly Premium",
+  "monthlyPremiumPlanDescription": "Get premium access for {monthCount} month",
+  "@monthlyPremiumPlanDescription": {
     "description": "Get premium access for X months",
     "placeholders": {
       "monthCount": {
@@ -491,9 +491,9 @@
       }
     }
   },
-  "yearlyPremiumTitle": "Yearly Premium",
-  "yearlyPremiumDescription": "Get premium access for {yearCount} year",
-  "@yearlyPremiumDescription": {
+  "yearlyPremiumPlanTitle": "Yearly Premium",
+  "yearlyPremiumPlanDescription": "Best value - Save 58%!",
+  "@yearlyPremiumPlanDescription": {
     "description": "Get premium access for X years",
     "placeholders": {
       "yearCount": {
