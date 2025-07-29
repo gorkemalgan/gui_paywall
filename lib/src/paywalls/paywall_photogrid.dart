@@ -24,7 +24,7 @@ class VipBadge extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          'VIP', // TODO: Use context.localizations.vip when available
+          context.localizations.vip,
           style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white, fontWeight: FontWeight.bold, letterSpacing: 1.2, fontSize: 13),
         ),
         //const SizedBox(width: 3),
@@ -73,13 +73,13 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
   }
 
   void _updateLocalizedTitles(BuildContext context) {
-    // Use existing localization keys for testing
-    screenData[0]['title'] = context.localizations.adFree; // Test with existing key
-    screenData[1]['title'] = context.localizations.appOverview; // Test with existing key
-    screenData[2]['title'] = context.localizations.exclusiveFeatures; // Test with existing key
-    screenData[3]['title'] = context.localizations.hdQuality; // Test with existing key
-    screenData[4]['title'] = context.localizations.unlimitedDownload; // Test with existing key
-    screenData[5]['title'] = context.localizations.userReviews; // Test with existing key
+    // Use proper localization keys for feature titles
+    screenData[0]['title'] = context.localizations.imageEnhancer;
+    screenData[1]['title'] = context.localizations.photoEditor;
+    screenData[2]['title'] = context.localizations.aiFilter;
+    screenData[3]['title'] = context.localizations.smartRetouch;
+    screenData[4]['title'] = context.localizations.photoCollage;
+    screenData[5]['title'] = context.localizations.petPhotography;
   }
 
   @override
@@ -218,9 +218,9 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'PhotoGrid',
+                                context.localizations.photoGrid,
                                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
-                              ), // TODO: Use context.localizations.photoGrid
+                              ),
                               const VipBadge(),
                             ],
                           ),
@@ -257,7 +257,7 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
                             child: Column(
                               mainAxisSize: MainAxisSize.min, // Only take up as much space as the buttons
                               children: [
-                                Text('3 days free, then \$33.99/year'), // TODO: Use context.localizations.freeTrialThenYearly('\$33.99')
+                                Text(context.localizations.freeTrialThenYearly('\$33.99')),
                                 const SizedBox(height: 16),
                                 ElevatedButton(
                                   onPressed: () {},
@@ -266,7 +266,7 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
                                     minimumSize: const Size.fromHeight(60),
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                                   ),
-                                  child: const Text('Try It Free'), // TODO: Use context.localizations.tryItFree
+                                  child: Text(context.localizations.tryItFree),
                                 ),
                                 const SizedBox(height: 12),
                                 OutlinedButton(
@@ -297,7 +297,7 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Material(
-                    color: Colors.black.withValues(alpha: 47),
+                    color: Colors.white.withOpacity(0.85),
                     borderRadius: BorderRadius.circular(20),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(20),
@@ -306,7 +306,7 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
                         width: 30,
                         height: 30,
                         alignment: Alignment.center,
-                        child: const Icon(Icons.close, color: Colors.white70, size: 20),
+                        child: const Icon(Icons.close, color: Colors.black54, size: 20),
                       ),
                     ),
                   ),
