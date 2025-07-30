@@ -95,7 +95,7 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
         setState(() {
           currentIndex = (currentIndex + 1) % screenData.length;
         });
-        print('Auto slide to: ${screenData[currentIndex]['title']} - ${screenData[currentIndex]['background']}');
+        widget.paywallConfig.onDebug('Auto slide to: ${screenData[currentIndex]['title']} - ${screenData[currentIndex]['background']}');
       }
     });
   }
@@ -107,7 +107,7 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
     setState(() {
       currentIndex = (currentIndex + 1) % screenData.length;
     });
-    print('Next screen: ${screenData[currentIndex]['title']} - ${screenData[currentIndex]['background']}');
+    widget.paywallConfig.onDebug('Next screen: ${screenData[currentIndex]['title']} - ${screenData[currentIndex]['background']}');
     _animationController.forward().then((_) {
       _animationController.reverse();
     });
@@ -127,7 +127,7 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
     setState(() {
       currentIndex = (currentIndex - 1 + screenData.length) % screenData.length;
     });
-    print('Previous screen: ${screenData[currentIndex]['title']} - ${screenData[currentIndex]['background']}');
+    widget.paywallConfig.onDebug('Previous screen: ${screenData[currentIndex]['title']} - ${screenData[currentIndex]['background']}');
     _animationController.forward().then((_) {
       _animationController.reverse();
     });
@@ -297,7 +297,7 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Material(
-                    color: Colors.white.withOpacity(0.85),
+                    color: Colors.white.withValues(alpha: 0.85),
                     borderRadius: BorderRadius.circular(20),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(20),
