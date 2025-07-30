@@ -136,6 +136,8 @@ class PaywallListScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               _buildPaywallButton(context, 'Video Up!', () => VideoUpScreen(paywall: paywallConfig, image: Image.asset('assets/images/woman.jpeg'))),
+              const SizedBox(height: 16),
+              _buildPaywallButton(context, 'Photo Grid', () => PaywallPhotoGrid(paywallConfig: _createMockPaywallConfig())),
             ],
           ),
         ),
