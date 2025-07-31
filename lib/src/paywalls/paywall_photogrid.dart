@@ -258,17 +258,15 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
                                 duration: const Duration(milliseconds: 600),
                                 curve: Curves.easeInOutCubic,
                                 tween: Tween<double>(begin: currentIndex == index ? 1.0 : 0.0, end: currentIndex == index ? 1.0 : 0.0),
-                                builder: (context, value, child) {
-                                  return Container(
-                                    width: 6 + (value * 6),
-                                    height: 6,
-                                    margin: const EdgeInsets.symmetric(horizontal: 3),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Color.lerp(Colors.grey.withValues(alpha: 0.5), Colors.black, value),
-                                    ),
-                                  );
-                                },
+                                builder: (context, value, child) => Container(
+                                  width: 6 + (value * 6),
+                                  height: 6,
+                                  margin: const EdgeInsets.symmetric(horizontal: 3),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color.lerp(Colors.grey.withValues(alpha: 0.5), Colors.black, value),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
