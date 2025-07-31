@@ -200,7 +200,7 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                     colors: [Colors.white, Colors.white, Colors.transparent],
-                    stops: [0.0, 0.2, 1.0],
+                    stops: [0.0, 0.4, 1.0],
                   ),
                 ),
               ),
@@ -281,14 +281,33 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
                               children: [
                                 Text(context.localizations.freeTrialThenYearly('\$33.99')),
                                 const SizedBox(height: 16),
-                                ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.pinkAccent,
-                                    minimumSize: const Size.fromHeight(60),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                Container(
+                                  width: double.infinity,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                      colors: [
+                                        Color(0xFFFF6B35), // Orange
+                                        Color(0xFFE91E63), // Pink
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: Text(context.localizations.tryItFree),
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: InkWell(
+                                      borderRadius: BorderRadius.circular(8),
+                                      onTap: () {},
+                                      child: Center(
+                                        child: Text(
+                                          context.localizations.tryItFree,
+                                          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                                 const SizedBox(height: 12),
                                 OutlinedButton(
@@ -296,8 +315,15 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
                                   style: OutlinedButton.styleFrom(
                                     minimumSize: const Size.fromHeight(60),
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                    side: const BorderSide(color: Color(0xFFE91E63), width: 2), // Pink border
                                   ),
-                                  child: Text(context.localizations.monthlyPrice('\$4.99')),
+                                  child: Text(
+                                    context.localizations.monthlyPrice('\$4.99'),
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFFE91E63), // Pink color
+                                    ),
+                                  ),
                                 ),
                                 const SizedBox(height: 0),
                               ],
