@@ -12,12 +12,19 @@ class VipBadge extends StatelessWidget {
     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
     decoration: BoxDecoration(
       gradient: LinearGradient(
-        colors: [const Color(0xFFFFC72C), Colors.white.withValues(alpha: 0.7)],
-        begin: Alignment.centerLeft,
-        end: Alignment.centerRight,
+        colors: [
+          const Color(0xFFFFD700), // Altın sarısı
+          const Color(0xFFFFA500), // Turuncu
+          const Color(0xFFFF8C00), // Koyu turuncu
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
       ),
       borderRadius: BorderRadius.circular(6),
-      boxShadow: [BoxShadow(color: Colors.orange.withValues(alpha: 0.3), blurRadius: 4, offset: const Offset(1, 2))],
+      boxShadow: [
+        BoxShadow(color: Colors.orange.withValues(alpha: 0.4), blurRadius: 8, offset: const Offset(0, 2), spreadRadius: 1),
+        BoxShadow(color: Colors.yellow.withValues(alpha: 0.3), blurRadius: 4, offset: const Offset(0, 1)),
+      ],
     ),
     child: Row(
       mainAxisSize: MainAxisSize.min,
@@ -25,10 +32,17 @@ class VipBadge extends StatelessWidget {
       children: [
         Text(
           context.localizations.vip,
-          style: Theme.of(context).textTheme.labelLarge?.copyWith(color: Colors.white, fontWeight: FontWeight.bold, letterSpacing: 1.2, fontSize: 13),
+          style: Theme.of(context).textTheme.labelLarge?.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.w900,
+            fontStyle: FontStyle.italic,
+            letterSpacing: 1.2,
+            fontSize: 15,
+            shadows: [Shadow(color: Colors.black.withValues(alpha: 0.3), offset: const Offset(0, 1), blurRadius: 2)],
+          ),
         ),
-        //const SizedBox(width: 3),
-        //const Text('✨', style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+        const SizedBox(width: 2),
+        const Text('✨', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
       ],
     ),
   );
@@ -221,6 +235,7 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
                                 context.localizations.photoGrid,
                                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
                               ),
+                              const SizedBox(width: 12),
                               const VipBadge(),
                             ],
                           ),
@@ -239,14 +254,21 @@ class _PaywallPhotoGridState extends State<PaywallPhotoGrid> with TickerProvider
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(
                               screenData.length,
-                              (index) => Container(
-                                width: 8,
-                                height: 8,
-                                margin: const EdgeInsets.symmetric(horizontal: 4),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: currentIndex == index ? Colors.black : Colors.grey.withValues(alpha: 0.5),
-                                ),
+                              (index) => TweenAnimationBuilder<double>(
+                                duration: const Duration(milliseconds: 600),
+                                curve: Curves.easeInOutCubic,
+                                tween: Tween<double>(begin: currentIndex == index ? 1.0 : 0.0, end: currentIndex == index ? 1.0 : 0.0),
+                                builder: (context, value, child) {
+                                  return Container(
+                                    width: 6 + (value * 6),
+                                    height: 6,
+                                    margin: const EdgeInsets.symmetric(horizontal: 3),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Color.lerp(Colors.grey.withValues(alpha: 0.5), Colors.black, value),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ),
