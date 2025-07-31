@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Project imports:
 import '../extensions.dart';
+import 'package:gui_paywall/generated/intl/messages.dart';
 
 enum ProductPeriod {
   weekly(7, 'Weekly', 'per week'),
@@ -28,9 +29,50 @@ enum ProductPeriod {
         return context.localizations.lifetime;
     }
   }
+
+  String getTitle(BuildContext context) {
+    switch (this) {
+      case ProductPeriod.weekly:
+        return PaywallLocalizations.of(context)!.weeklyPremiumPlanTitle;
+      case ProductPeriod.monthly:
+        return PaywallLocalizations.of(context)!.monthlyPremiumPlanTitle;
+      case ProductPeriod.yearly:
+        return PaywallLocalizations.of(context)!.yearlyPremiumPlanTitle;
+      case ProductPeriod.lifetime:
+        return '';
+    }
+  }
+
+  String getDescription(BuildContext context) {
+    switch (this) {
+      case ProductPeriod.weekly:
+        return PaywallLocalizations.of(context)!.weeklyPremiumPlanDescription(1);
+      case ProductPeriod.monthly:
+        return PaywallLocalizations.of(context)!.monthlyPremiumPlanDescription(1);
+      case ProductPeriod.yearly:
+        return PaywallLocalizations.of(context)!.yearlyPremiumPlanDescription(58);
+      case ProductPeriod.lifetime:
+        return '';
+    }
+  }
+
+  String localizedGetPremiumAccessFor(BuildContext context, int count) {
+    switch (this) {
+      case ProductPeriod.weekly:
+        return PaywallLocalizations.of(context)!.weeklyPremiumPlanDescription(count);
+      case ProductPeriod.monthly:
+        return PaywallLocalizations.of(context)!.monthlyPremiumPlanDescription(count);
+      case ProductPeriod.yearly:
+        return PaywallLocalizations.of(context)!.yearlyPremiumPlanDescription(count);
+      case ProductPeriod.lifetime:
+        return context.localizations.lifetime;
+    }
+  }
 }
 
 class PaywallProduct {
+  String getLocalizedTitle() => title ?? '';
+  String getLocalizedDescription() => description ?? '';
   final String storeId;
   final double price;
   final String currency;

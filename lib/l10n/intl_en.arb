@@ -468,5 +468,94 @@
         "type": "String"
       }
     }
+  },
+  "weeklyPremiumPlanTitle": "Weekly Premium",
+  "weeklyPremiumPlanDescription": "Get premium access for {weekCount} week",
+  "@weeklyPremiumPlanDescription": {
+    "description": "Get premium access for X weeks",
+    "placeholders": {
+      "weekCount": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "monthlyPremiumPlanTitle": "Monthly Premium",
+  "monthlyPremiumPlanDescription": "Get premium access for {monthCount} month",
+  "@monthlyPremiumPlanDescription": {
+    "description": "Get premium access for X months",
+    "placeholders": {
+      "monthCount": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "yearlyPremiumPlanTitle": "Yearly Premium",
+  "yearlyPremiumPlanDescription": "Best value - Save 58%!",
+  "@yearlyPremiumPlanDescription": {
+    "description": "Get premium access for X years",
+    "placeholders": {
+      "yearCount": {
+        "type": "int",
+        "example": "58"
+      }
+    }
+  },
+  "vip": "VIP",
+  "@vip": {
+    "description": "VIP badge text",
+    "context": "paywall"
+  },
+  "photoGrid": "PhotoGrid",
+  "@photoGrid": {
+    "description": "App name for PhotoGrid paywall",
+    "context": "paywall"
+  },
+  "imageEnhancer": "Image Enhancer",
+  "@imageEnhancer": {
+    "description": "Feature title for image enhancement",
+    "context": "paywall"
+  },
+  "photoEditor": "Photo Editor",
+  "@photoEditor": {
+    "description": "Feature title for photo editing",
+    "context": "paywall"
+  },
+  "aiFilter": "AI Filter",
+  "@aiFilter": {
+    "description": "Feature title for AI filtering",
+    "context": "paywall"
+  },
+  "smartRetouch": "Smart Retouch",
+  "@smartRetouch": {
+    "description": "Feature title for smart retouching",
+    "context": "paywall"
+  },
+  "photoCollage": "Photo Collage",
+  "@photoCollage": {
+    "description": "Feature title for photo collage",
+    "context": "paywall"
+  },
+  "petPhotography": "Pet Photography",
+  "@petPhotography": {
+    "description": "Feature title for pet photography",
+    "context": "paywall"
+  },
+  "freeTrialThenYearly": "3 days free, then {price}/year",
+  "@freeTrialThenYearly": {
+    "description": "Free trial followed by yearly price",
+    "context": "paywall",
+    "placeholders": {
+      "price": {
+        "type": "String",
+        "example": "$33.99"
+      }
+    }
+  },
+  "tryItFree": "Try It Free",
+  "@tryItFree": {
+    "description": "Button text to start free trial",
+    "context": "paywall"
   }
 }

@@ -14,7 +14,7 @@ Future<void> main() async {
     await DesktopWindow.setWindowSize(windowSize);
   }
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
     title: 'GUI Paywall Example',
+    locale: const Locale('en'),
     theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple), useMaterial3: true),
     localizationsDelegates: const [
       PaywallLocalizations.delegate,
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       GlobalWidgetsLocalizations.delegate,
       GlobalCupertinoLocalizations.delegate,
     ],
-    supportedLocales: const [Locale('en')],
+    supportedLocales: PaywallLocalizations.supportedLocales,
     home: const PaywallListScreen(),
   );
 }
@@ -38,37 +39,11 @@ class MyApp extends StatelessWidget {
 class PaywallListScreen extends StatelessWidget {
   const PaywallListScreen({super.key});
 
-  PaywallConfig _createMockPaywallConfig() {
+  PaywallConfig _createMockPaywallConfig(BuildContext context) {
     final products = [
-      const PaywallProduct(
-        storeId: 'weekly_sub',
-        price: 4.99,
-        currency: 'USD',
-        priceString: '\$4.99',
-        period: ProductPeriod.weekly,
-        title: 'Weekly Premium',
-        description: 'Get premium access for 1 week',
-      ),
-      const PaywallProduct(
-        storeId: 'monthly_sub',
-        price: 9.99,
-        currency: 'USD',
-        priceString: '\$9.99',
-        period: ProductPeriod.monthly,
-        title: 'Monthly Premium',
-        description: 'Get premium access for 1 month',
-        freeTrialDays: 3,
-      ),
-      const PaywallProduct(
-        storeId: 'yearly_sub',
-        price: 49.99,
-        currency: 'USD',
-        priceString: '\$49.99',
-        period: ProductPeriod.yearly,
-        title: 'Yearly Premium',
-        description: 'Best value - Save 58%!',
-        freeTrialDays: 7,
-      ),
+      PaywallProduct(storeId: 'weekly_sub', price: 4.99, currency: 'USD', priceString: '\$4.99', period: ProductPeriod.weekly),
+      PaywallProduct(storeId: 'monthly_sub', price: 9.99, currency: 'USD', priceString: '\$9.99', period: ProductPeriod.monthly, freeTrialDays: 3),
+      PaywallProduct(storeId: 'yearly_sub', price: 49.99, currency: 'USD', priceString: '\$49.99', period: ProductPeriod.yearly, freeTrialDays: 7),
     ];
 
     return PaywallConfig(
@@ -99,7 +74,7 @@ class PaywallListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final paywallConfig = _createMockPaywallConfig();
+    final paywallConfig = _createMockPaywallConfig(context);
 
     return Scaffold(
       appBar: AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary, title: Text(PaywallLocalizations.of(context)!.paywallExamples)),
@@ -161,6 +136,8 @@ class PaywallListScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               _buildPaywallButton(context, 'Video Up!', () => VideoUpScreen(paywall: paywallConfig, image: Image.asset('assets/images/woman.jpeg'))),
+              const SizedBox(height: 16),
+              _buildPaywallButton(context, 'Photo Grid', () => PaywallPhotoGrid(paywallConfig: _createMockPaywallConfig(context))),
             ],
           ),
         ),
