@@ -9,10 +9,50 @@ class FaceLabPremiumScreen extends PaywallBase {
 
   @override
   PaywallConfig validateConfiguration() {
-    // Basit validasyon örneği, istersen detaylandırabilirsin
+    // 1. Temel product kontrolü
     if (paywall.products.isEmpty) {
       paywall.onError('FaceLabPremiumScreen requires at least one product');
+      return paywall;
     }
+
+    // 2. Product pairing kontrolü (eğer varsa)
+    if (paywall.products.length > 3) {
+      paywall.onWarning('Too many products (${paywall.products.length}). Consider limiting to 3 for better UX.');
+    }
+
+    // 3. Trial/trialsız eşlemede tutarlılık kontrolü
+    final productsWithTrial = paywall.products.where((p) => p.haveFreeTrial).toList();
+    final productsWithoutTrial = paywall.products.where((p) => !p.haveFreeTrial).toList();
+
+    if (productsWithTrial.isNotEmpty && productsWithoutTrial.isNotEmpty) {
+      // Karışık trial durumu - tutarlılık kontrolü
+      final firstTrialProduct = productsWithTrial.first;
+      final firstNonTrialProduct = productsWithoutTrial.first;
+
+      // Aynı period ve currency kontrolü
+      if (firstTrialProduct.period != firstNonTrialProduct.period) {
+        paywall.onWarning('Mixed trial products have different periods. This may confuse users.');
+      }
+
+      if (firstTrialProduct.currency != firstNonTrialProduct.currency) {
+        paywall.onWarning('Mixed trial products have different currencies. This may cause issues.');
+      }
+
+      // Fiyat tutarlılığı kontrolü (trial'lı product daha pahalı olmalı)
+      if (firstTrialProduct.price <= firstNonTrialProduct.price) {
+        paywall.onWarning(
+          'Trial product price (${firstTrialProduct.price}) should be higher than non-trial product (${firstNonTrialProduct.price}).',
+        );
+      }
+    }
+
+    // 4. Free trial desteği hesapla
+    final supportsFreeTrial = paywall.products.any((product) => product.haveFreeTrial);
+
+    if (!supportsFreeTrial) {
+      paywall.onLog('No products support free trial. Free trial toggle will be disabled.');
+    }
+
     return paywall;
   }
 
@@ -22,8 +62,25 @@ class FaceLabPremiumScreen extends PaywallBase {
 
 class _FaceLabPremiumScreenState extends State<FaceLabPremiumScreen> with PaywallSanityCheck<FaceLabPremiumScreen> {
   bool _freeTrialEnabled = true;
+  bool _supportsFreeTrial = false;
 
   String capitalizeEachWord(String text) => text.split(' ').map((w) => w.isNotEmpty ? w[0].toUpperCase() + w.substring(1) : '').join(' ');
+
+  @override
+  void initState() {
+    super.initState();
+    _calculateFreeTrialSupport();
+  }
+
+  void _calculateFreeTrialSupport() {
+    // En az bir product'ın free trial'ı var mı kontrol et
+    _supportsFreeTrial = paywall.products.any((product) => product.haveFreeTrial);
+
+    // Eğer free trial desteklenmiyorsa, toggle'ı kapat
+    if (!_supportsFreeTrial) {
+      _freeTrialEnabled = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -90,47 +147,48 @@ class _FaceLabPremiumScreenState extends State<FaceLabPremiumScreen> with Paywal
                   ),
                 ),
                 const SizedBox(height: 18),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 30),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  decoration: BoxDecoration(color: Colors.grey[900], borderRadius: BorderRadius.circular(32)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        capitalizeEachWord(context.localizations.freeTrialEnabled(3)),
-                        style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _freeTrialEnabled = !_freeTrialEnabled;
-                          });
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          width: 44,
-                          height: 26,
-                          padding: const EdgeInsets.all(3),
-                          decoration: BoxDecoration(
-                            color: _freeTrialEnabled ? Colors.deepPurple : Colors.grey[700],
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: AnimatedAlign(
+                if (_supportsFreeTrial)
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 30),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    decoration: BoxDecoration(color: Colors.grey[900], borderRadius: BorderRadius.circular(32)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          capitalizeEachWord(context.localizations.freeTrialEnabled(3)),
+                          style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _freeTrialEnabled = !_freeTrialEnabled;
+                            });
+                          },
+                          child: AnimatedContainer(
                             duration: const Duration(milliseconds: 200),
-                            alignment: _freeTrialEnabled ? Alignment.centerRight : Alignment.centerLeft,
-                            curve: Curves.easeInOut,
-                            child: Container(
-                              width: 20,
-                              height: 20,
-                              decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                            width: 44,
+                            height: 26,
+                            padding: const EdgeInsets.all(3),
+                            decoration: BoxDecoration(
+                              color: _freeTrialEnabled ? Colors.deepPurple : Colors.grey[700],
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: AnimatedAlign(
+                              duration: const Duration(milliseconds: 200),
+                              alignment: _freeTrialEnabled ? Alignment.centerRight : Alignment.centerLeft,
+                              curve: Curves.easeInOut,
+                              child: Container(
+                                width: 20,
+                                height: 20,
+                                decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
                 const SizedBox(height: 16),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -145,7 +203,15 @@ class _FaceLabPremiumScreenState extends State<FaceLabPremiumScreen> with Paywal
                       color: Colors.transparent,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(16),
-                        onTap: () {},
+                        onTap: () {
+                          // Gerçek purchase akışı
+                          if (paywall.products.isNotEmpty) {
+                            final selectedProduct = paywall.products.first;
+                            paywall.purchase(selectedProduct, context);
+                          } else {
+                            paywall.onError('No products available for purchase');
+                          }
+                        },
                         child: Center(
                           child: Text(
                             context.localizations.startFreeTrial,
@@ -170,7 +236,7 @@ class _FaceLabPremiumScreenState extends State<FaceLabPremiumScreen> with Paywal
                 ),
                 const SizedBox(height: 40),
                 // Footer en sonda, scroll ile görünür
-                PaywallFullFooter(paywallConfig: widget.paywall, isFreeTrial: true),
+                PaywallFullFooter(paywallConfig: widget.paywall, isFreeTrial: _freeTrialEnabled),
 
                 // TEST: Fazladan boşluk ekle, scroll olup olmadığını gör
                 const SizedBox(height: 24),
@@ -190,7 +256,7 @@ class _FaceLabPremiumScreenState extends State<FaceLabPremiumScreen> with Paywal
                 borderRadius: BorderRadius.circular(20),
                 child: InkWell(
                   borderRadius: BorderRadius.circular(20),
-                  onTap: () => Navigator.of(context).pop(),
+                  onTap: () => widget.paywall.close(context),
                   child: Container(
                     width: 30,
                     height: 30,
