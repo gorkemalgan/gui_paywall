@@ -8,12 +8,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:gui_paywall/src/models/paywall_config.dart';
 import 'package:gui_paywall/src/paywalls/face_lab.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MaterialApp(debugShowCheckedModeBanner: false, home: FaceLabPremiumScreen()));
+    final mockPaywall = PaywallConfig(
+      appName: 'Test',
+      name: 'test',
+      debugMode: false,
+      isPro: () => false,
+      products: const [],
+      onAnalyticsEvent: (event, {parameters}) async {},
+      onDebug: (msg) {},
+      onLog: (msg) {},
+      onWarning: (msg) {},
+      onError: (msg) {},
+      onPurchase: (product) async => false,
+      onRestore: () async => false,
+      onTermsOfUse: () {},
+      onPrivacyPolicy: () {},
+      processUI: <T>(action) async => await action(),
+      processNoProgress: <T>(action) async => await action(),
+    );
+    await tester.pumpWidget(MaterialApp(debugShowCheckedModeBanner: false, home: FaceLabPremiumScreen(paywall: mockPaywall)));
 
     // The rest of the test is for a counter app, which does not exist in FaceLabPremiumScreen.
     // You may want to update or remove these lines based on your actual UI.

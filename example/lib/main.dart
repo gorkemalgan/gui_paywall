@@ -160,11 +160,7 @@ class PaywallListScreen extends StatelessWidget {
                 () => PaywallRemini(paywall: paywallConfig, image: Image.asset('assets/images/woman.jpeg')),
               ),
               const SizedBox(height: 16),
-              _buildPaywallButton(
-                context,
-                'Face Lab Paywall',
-                () => FaceLabPremiumScreen(image: Image.asset('assets/images/woman_facelabb.jpg', fit: BoxFit.cover)),
-              ),
+              _buildPaywallButton(context, 'Face Lab Paywall', () => FaceLabPremiumScreen(paywall: paywallConfig)),
               // () => FaceLab(paywall: paywallConfig, image: Image.asset('assets/free_trial/women_facelabb.jpg')),
             ],
           ),
